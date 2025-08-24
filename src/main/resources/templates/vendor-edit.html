@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Vendor - Edit</title>
+    <meta name="description" content="EWDJ Exam Assignment EP 3:
+A Spring Boot application for managing food truck festivals. The application allows the management of festivals and vendors.">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="/assets/css/bss-overrides.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bs-init.js"></script>
+    <script src="/assets/js/theme.js"></script>
+</head>
+
+<body style="background-color: #f0f2f5;" id="page-top">
+    <div id="wrapper">
+        <nav class="navbar align-items-start p-0 sidebar sidebar-dark accordion bg-gradient-primary navbar-dark">
+		    <div class="container-fluid d-flex flex-column p-0">
+		        <a class="navbar-brand d-flex justify-content-center align-items-center m-0 sidebar-brand" href="#">
+		            <div class="sidebar-brand-icon">
+		                <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+		                    <i class="fas fa-pepper-hot"></i>
+		                </div>
+		            </div>
+		            <div class="mx-3 sidebar-brand-text"><span>FOODIE APP</span></div>
+		        </a>
+		        <hr class="my-0 sidebar-divider">
+				<ul class="navbar-nav text-light fs-5" id="accordionSidebar">
+				    <li class="nav-item">
+				        <a class="nav-link d-flex align-items-center" th:href="@{/dashboard}">
+				            <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+				                <i class="fas fa-tachometer-alt fa-xl"></i>
+				            </div>
+				            <span class="fs-6">Dashboard</span>
+				        </a>
+				    </li>
+				    <li class="nav-item">
+				        <a class="nav-link d-flex align-items-center" th:href="@{/festivals}">
+				            <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+				                <i class="fas fa-calendar-alt fa-xl"></i>
+				            </div>
+				            <span class="fs-6">Festival</span>
+				        </a>
+				    </li>
+				    <li class="nav-item">
+				        <a class="nav-link active d-flex align-items-center" th:href="@{/vendors}">
+				            <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+				                <i class="fas fa-truck fa-xl"></i>
+				            </div>
+				            <span class="fs-6">Vendor</span>
+				        </a>
+				    </li>
+				    <li class="nav-item">
+				        <a class="nav-link d-flex align-items-center" th:href="@{/addresses}">
+				            <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+				                <i class="fa-solid fa-map-location-dot"></i></i>
+				            </div>
+				            <span class="fs-6">Addresses</span>
+				        </a>
+				    </li>
+				    <li class="nav-item">
+				        <a class="nav-link d-flex align-items-center" th:href="@{/profile}">
+				            <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+				                <i class="fas fa-user fa-xl"></i>
+				            </div>
+				            <span class="fs-6">Profile</span>
+				        </a>
+				    </li>
+				</ul>
+		    </div>
+		</nav>
+        <div class="d-flex flex-column" id="content-wrapper" style="margin-left: 224px;">
+            <div id="content" style="background-color: #f0f2f5;">
+            
+				<nav class="navbar navbar-expand bg-white shadow topbar p-2 fixed-top" style="z-index: 1030; margin-left: 224px;">
+				    <div class="container-fluid">
+				        <h3 class="m-0">Dashboard &gt; Vendor overview &gt; <span th:text="${vendor.name}">Vendor name</span></h3>
+                            <ul class="navbar-nav flex-nowrap ms-auto">
+                                <div class="d-none d-sm-block topbar-divider"></div>
+                                <li class="nav-item dropdown no-arrow">
+                                    <div class="nav-item dropdown no-arrow">
+                                        <a class="dropdown-toggle nav-link p-0" aria-expanded="false" data-bs-toggle="dropdown" href="#">
+                                        <span class="d-none d-lg-inline me-2 text-gray-900 large">Valerie Luna</span>
+                                        <img class="border rounded-circle img-profile" src="/assets/img/avatars/avatar1.jpeg" style="width:28%; height: auto;">
+                                        </a>
+                                        <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                                            <a class="dropdown-item"  th:href="@{/profile}"><i class="fas fa-user me-2 fa-sm fa-fw text-gray-400"></i>&nbsp;Profile</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2 fa-sm fa-fw text-gray-400"></i>&nbsp;Logout</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    
+                    <div class="container-fluid pt-4 mt-5" style="margin-right: 320px; background-color: #f0f2f5;">
+                        <div class="card border-0 shadow-md m-4 p-1">
+                            <div class="card-body d-flex align-items-center justify-content-between">
+                                <h3 class="text-dark mb-0 fw-bold" th:text="${vendor.name}">Vendor Name</h3>
+                                <div class="d-flex gap-2">
+                                    <a href="javascript:history.back()" class="btn btn-primary fw-semibold fs-6">Return</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-0 shadow-md m-4 p-2">
+                            <form th:action="@{/updateVendor}" th:object="${vendor}" method="post">
+							    <div class="card-body">
+							        <input type="hidden" th:field="*{id}" />
+							
+							        <div class="row">
+							            <!-- General Info -->
+							            <div class="col-md-5">
+							                <h4 class="mb-4 fw-bold text-dark">General info</h4>
+							
+							                <p class="mb-2">
+							                    <strong class="text-dark">Name:</strong>
+							                    <input type="text" class="form-control" th:field="*{name}" placeholder="e.g. Vendor Name">
+							                </p>
+							                <p class="mb-2">
+											    <strong class="text-dark">Category:</strong>
+											    <select class="form-select" th:field="*{category.id}">
+											        <option value="" disabled selected>Select a category</option>
+											        <option th:each="category : ${categories}"
+											                th:value="${category.id}"
+											                th:text="${category.name}">
+											        </option>
+											    </select>
+											</p>
+							                <p class="mb-2">
+							                    <strong class="text-dark">Rating:</strong>
+							                    <input type="number" class="form-control" th:field="*{vendorRating}" step="1" min="0" max="5" placeholder="e.g. 3">
+							                </p>
+							                <p class="mb-2">
+							                    <strong class="text-dark">Description:</strong>
+							                    <input type="text" class="form-control" th:field="*{description}" placeholder="e.g. Italian pastas">
+							                </p>
+							                <p class="mb-2">
+							                    <strong class="text-dark">Phone Number:</strong>
+							                    <input type="text" class="form-control" th:field="*{phoneNumber}" placeholder="e.g. 32478683011">
+							                </p>
+							                <p class="mb-2">
+							                    <strong class="text-dark">E-mail:</strong>
+							                    <input type="email" class="form-control" th:field="*{email}" placeholder="e.g. example@email.com">
+							                </p>
+							                <p class="mb-2">
+							                    <strong class="text-dark">Website:</strong>
+							                    <input type="text" class="form-control" th:field="*{website}" placeholder="e.g. www.example.com">
+							                </p>
+							            </div>
+							
+							            <!-- Address Tabs -->
+							            <div class="col-md-7">
+										    <div class="d-flex justify-content-between align-items-end mb-4">
+										        <h4 class="text-dark fw-bold mb-0">Address</h4>
+										    </div>
+										
+										    <!-- Existing Address Tab -->
+										    <div class="tab-pane fade show active" id="existing" role="tabpanel" aria-labelledby="existing-tab">
+										        <div class="mb-3">
+										            <label for="addressSearch" class="form-label fw-bold text-dark m-0">Search Address:</label>
+										            <input type="text" id="addressSearch" class="form-control" placeholder="Search by name, street, or place...">
+										        </div>
+										
+										        <div class="table-responsive mt-2" style="max-height: 396px; overflow-y: auto;">
+										            <table class="table table-hover my-0" id="dataTable">
+										                <thead class="table-light border-light">
+										                    <tr>
+										                        <th>Select</th>
+										                        <th>Name</th>
+										                        <th>Street</th>
+										                        <th>Number</th>
+										                        <th>Place</th>
+										                        <th>Postcode</th>
+										                    </tr>
+										                </thead>
+										                <tbody id="addressTableBody">
+										                    <tr th:each="address : ${addresses}">
+										                        <td>
+										                            <input type="radio" th:field="*{address.id}" th:value="${address.id}" />
+										                        </td>
+										                        <td th:text="${address.name}"></td>
+										                        <td th:text="${address.street}"></td>
+										                        <td th:text="${address.number}"></td>
+										                        <td th:text="${address.place}"></td>
+										                        <td th:text="${address.postcode}"></td>
+										                    </tr>
+										                </tbody>
+										            </table>
+										        </div>
+										    </div>
+										</div>
+							        </div> 
+							
+							        <!-- Submit Buttons -->
+							        <div class="mt-4 text-end">
+							            <a href="javascript:history.back()" class="btn btn-danger fw-semibold fs-6 text-white me-2">Discard changes</a>
+							            <button class="btn btn-success fw-semibold fs-6 text-white" type="submit">Save changes</button>
+							        </div>
+							    </div>
+							</form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+		    document.addEventListener("DOMContentLoaded", function () {
+		        const searchInput = document.getElementById("addressSearch");
+		        const tableRows = document.querySelectorAll("#addressTableBody tr");
+		
+		        searchInput.addEventListener("input", function () {
+		            const query = searchInput.value.toLowerCase();
+		            tableRows.forEach(row => {
+		                const text = row.innerText.toLowerCase();
+		                row.style.display = text.includes(query) ? "" : "none";
+		            });
+		        });
+		    });
+		</script>
+		
+	</body>
+</html>

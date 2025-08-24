@@ -1,0 +1,32 @@
+// Override the breakpoint variables BEFORE importing Bootstrap
+
+$grid-breakpoints: map-merge(
+  (
+    xxxl: 1600px
+  ),
+  (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px
+  )
+);
+
+// Optional: Add custom container max-widths
+$container-max-widths: map-merge(
+  (
+    xxxl: 1540px
+  ),
+  (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1320px
+  )
+);
+
+// Import Bootstrap SCSS (you must have Bootstrap source available)
+@import "bootstrap";

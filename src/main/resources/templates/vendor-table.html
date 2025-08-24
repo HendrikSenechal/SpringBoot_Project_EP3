@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Vendors</title>
+    <meta name="description" content="EWDJ Exam Assignment EP 3:
+A Spring Boot application for managing food truck festivals. The application allows the management of festivals and vendors.">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/bss-overrides.css">
+    
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
+    <script src="assets/js/theme.js"></script>
+</head>
+
+<body style="background-color: #f0f2f5;" id="page-top">
+    <div id="wrapper">
+        <nav class="navbar align-items-start p-0 sidebar sidebar-dark accordion bg-gradient-primary navbar-dark">
+		    <div class="container-fluid d-flex flex-column p-0">
+		        <a class="navbar-brand d-flex justify-content-center align-items-center m-0 sidebar-brand" href="#">
+		            <div class="sidebar-brand-icon">
+		                <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+		                    <i class="fas fa-pepper-hot"></i>
+		                </div>
+		            </div>
+		            <div class="mx-3 sidebar-brand-text"><span>FOODIE APP</span></div>
+		        </a>
+		        <hr class="my-0 sidebar-divider">
+				<ul class="navbar-nav text-light fs-5" id="accordionSidebar">
+				    <li class="nav-item">
+				        <a class="nav-link d-flex align-items-center" th:href="@{/dashboard}">
+				            <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+				                <i class="fas fa-tachometer-alt fa-xl"></i>
+				            </div>
+				            <span class="fs-6">Dashboard</span>
+				        </a>
+				    </li>
+				    <li class="nav-item">
+				        <a class="nav-link d-flex align-items-center" th:href="@{/festivals}">
+				            <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+				                <i class="fas fa-calendar-alt fa-xl"></i>
+				            </div>
+				            <span class="fs-6">Festival</span>
+				        </a>
+				    </li>
+				    <li class="nav-item">
+				        <a class="nav-link active d-flex align-items-center" th:href="@{/vendors}">
+				            <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+				                <i class="fas fa-truck fa-xl"></i>
+				            </div>
+				            <span class="fs-6">Vendor</span>
+				        </a>
+				    </li>
+				    <li class="nav-item">
+				        <a class="nav-link d-flex align-items-center" th:href="@{/addresses}">
+				            <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+				                <i class="fa-solid fa-map-location-dot"></i></i>
+				            </div>
+				            <span class="fs-6">Addresses</span>
+				        </a>
+				    </li>
+				    <li class="nav-item">
+				        <a class="nav-link d-flex align-items-center" th:href="@{/profile}">
+				            <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+				                <i class="fas fa-user fa-xl"></i>
+				            </div>
+				            <span class="fs-6">Profile</span>
+				        </a>
+				    </li>
+				</ul>
+		    </div>
+		</nav>
+
+
+
+        <div class="d-flex flex-column" id="content-wrapper" style="margin-left: 224px;">
+            <div id="content">
+				<nav class="navbar navbar-expand bg-white shadow topbar p-2 fixed-top" style="z-index: 1030; margin-left: 224px;">
+				    <div class="container-fluid">
+				        <h3 class="m-0">Dashboard &gt; Vendor overview</h3>
+				        <ul class="navbar-nav flex-nowrap ms-auto">
+				            <div class="d-none d-sm-block topbar-divider"></div>
+				            <li class="nav-item dropdown no-arrow">
+				                <div class="nav-item dropdown no-arrow">
+				                    <a class="dropdown-toggle nav-link p-0" aria-expanded="false" data-bs-toggle="dropdown" href="#">
+				                        <span class="d-none d-lg-inline me-2 text-gray-900 large">Valerie Luna</span>
+				                        <img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg" style="width:28%; height: auto;">
+				                    </a>
+				                    <div class="dropdown-menu border-0 shadow dropdown-menu-end animated--grow-in">
+				                        <a class="dropdown-item"  th:href="@{/profile}"><i class="fas fa-user me-2 fa-sm fa-fw text-gray-400"></i>&nbsp;Profile</a>
+				                        <!-- <a class="dropdown-item" href="#"><i class="fas fa-cogs me-2 fa-sm fa-fw text-gray-400"></i>&nbsp;Settings</a> -->
+				                        <div class="dropdown-divider"></div>
+				                        <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2 fa-sm fa-fw text-gray-400"></i>&nbsp;Logout</a>
+				                    </div>
+				                </div>
+				            </li>
+				        </ul>
+				    </div>
+				</nav>
+
+				<div class="container-fluid pt-4 mt-5" >
+                    <div class="card border-0 shadow-md m-4 p-2">
+					  <div class="card-body">
+					    <div class="row g-3">
+					      
+					      <!-- Layout for md only -->
+					      <div class="d-none d-md-block d-xl-none">
+					        <div class="row g-3">
+					          <!-- Search Row -->
+					          <div class="col-12">
+					            <label class="form-label fw-bold fs-6 text-dark">What are you looking for?</label>
+					            <div class="input-group">
+					              <input class="form-control bg-light border-0 fs-6" type="text" placeholder="Search for category, name, company, etc.">
+					              <span class="input-group-text bg-primary text-white">
+					                <i class="fas fa-search"></i>
+					              </span>
+					            </div>
+					          </div>
+					
+					          <!-- Filters and Button -->
+					          <div class="col-12 col-md-3">
+					            <label class="form-label fw-bold fs-6 text-dark">Category</label>
+					            <select class="form-select fs-6">
+					              <option selected>All</option>
+					              <option value="1">Category A</option>
+					              <option value="2">Category B</option>
+					            </select>
+					          </div>
+					
+					          <div class="col-12 col-md-3">
+					            <label class="form-label fw-bold fs-6 text-dark">Status</label>
+					            <select class="form-select fs-6">
+					              <option selected>All</option>
+					              <option value="1">Active</option>
+					              <option value="2">Inactive</option>
+					            </select>
+					          </div>
+					
+					          <div class="col-12 col-md-3 d-grid">
+					            <label class="form-label invisible">Filter</label>
+					            <button class="btn btn-primary fw-semibold fs-6">Filter</button>
+					          </div>
+					          <div class="col-12 col-md-3 d-grid">
+					            <label class="form-label invisible">Filter</label>
+								<a class="btn btn-secondary w-100" th:href="@{/vendors/new}">New</a>
+					          </div>
+					        </div>
+					      </div>
+					
+					      <!-- Layout for xs, sm, lg, xl, xxl -->
+					      <div class="d-block d-md-none d-xl-block"> 
+							  <div class="row g-3 align-items-end">
+								  <!-- Search input -->
+								  <div class="col-12 col-md-6 col-lg-4">
+								    <label class="form-label fw-bold fs-6 text-dark" style="margin-bottom: 8px">What are you looking for?</label>
+								    <div class="input-group">
+								      <input class="form-control bg-light border-0 fs-6" type="text" placeholder="Search for category, name, company, etc." style="margin-bottom: 2px">
+								      <span class="input-group-text bg-primary text-white">
+								        <i class="fas fa-search"></i>
+								      </span>
+								    </div>
+								  </div>
+								
+								  <!-- Category select -->
+								  <div class="col-12 col-sm-6 col-md-6 col-lg-2">
+								    <label class="form-label fw-bold fs-6 text-dark">Category</label>
+								    <select class="form-select fs-6">
+								      <option selected>All</option>
+								      <option value="1">Category A</option>
+								      <option value="2">Category B</option>
+								    </select>
+								  </div>
+								
+								  <!-- Status select -->
+								  <div class="col-12 col-sm-6 col-md-6 col-lg-2">
+								    <label class="form-label fw-bold fs-6 text-dark">Status</label>
+								    <select class="form-select fs-6">
+								      <option selected>All</option>
+								      <option value="1">Active</option>
+								      <option value="2">Inactive</option>
+								    </select>
+								  </div>
+								
+								  <!-- Filter button -->
+								  <div class="col-lg-2"> 
+									  <label class="form-label d-none d-lg-block invisible">Filter</label>
+									  <button class="btn btn-primary w-100">Filter</button>
+									</div>
+									<div class="col-lg-2">
+									  <label class="form-label d-none d-lg-block invisible">New</label>
+									  <a class="btn btn-secondary w-100" th:href="@{/vendors/new}">New</a>
+									</div>
+								</div>
+							</div>
+					    </div>
+							</div>
+					    </div>
+
+
+                    <div class="card border-0 shadow-md mt-4 ms-4 me-4 p-2" style="margin-bottom: 31px;">
+					  <div class="card-body px-0">
+					    
+					    <!-- Header Row -->
+					    <div class="row align-items-center px-3">
+					      <!-- Search Form -->
+					      <div class="col-md-6">
+					        <form>
+					          <div class="input-group">
+					            <h3 class="text-dark fw-bold">Vendor overview</h3>
+					          </div>
+					        </form>
+					      </div>
+					
+					      <!-- Pagination (top right) -->
+					      <div class="col-md-6 text-end d-none d-lg-block">
+					        <nav class="d-flex justify-content-end dataTables_paginate paging_simple_numbers">
+					          <ul class="pagination mb-0">
+					            <li class="page-item disabled">
+					              <a class="page-link" href="#"><span>«</span></a>
+					            </li>
+					            <li class="page-item active">
+					              <a class="page-link" href="#">1</a>
+					            </li>
+					            <li class="page-item d-none d-sm-block">
+					              <a class="page-link" href="#">2</a>
+					            </li>
+					            <li class="page-item d-none d-sm-block">
+					              <a class="page-link" href="#">3</a>
+					            </li>
+					            <li class="page-item">
+					              <a class="page-link" href="#"><span>»</span></a>
+					            </li>
+					          </ul>
+					        </nav>
+					      </div>
+					    </div>
+
+					
+					    <!-- Table -->
+					    <div class="table-responsive mt-2 px-3">
+							<table class="table table-hover my-0" id="dataTable">
+							  <thead>
+							    <tr>
+							      <th class="fs-6 text-dark">Name</th>
+							      <th class="d-none d-xl-table-cell text-dark">E-mail</th>
+							      <th class="d-none d-xl-table-cell text-dark">Phone number</th>
+							      <th class="d-none d-md-table-cell text-dark">Location</th>
+							      <th class="d-none d-lg-table-cell text-dark">Rating</th>
+							      <th class="d-none d-md-table-cell text-dark" style="width: 80px;"></th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							    <tr th:each="vendor : ${vendors}"
+							        th:data-href="@{/vendors/{id}(id=${vendor.id})}"
+							        onclick="window.location=this.getAttribute('data-href')"
+							        style="cursor: pointer;">
+							      <td class="text-secondary" th:text="${vendor.name}">Foodtruck</td>
+							      <td class="d-none d-xl-table-cell text-secondary" th:text="${vendor.email}">vendor@example.com</td>
+							      <td class="d-none d-xl-table-cell text-secondary" th:text="'+' + ${vendor.phoneNumber}">+32478683011</td>
+							      <td class="d-none d-md-table-cell text-secondary" th:text="${vendor.address?.place}">Location</td>
+							      <td class="d-none d-lg-table-cell text-secondary" th:text="${vendor.vendorRating}">7</td>
+									<td class="d-none d-md-table-cell text-muted align-middle text-secondary" style="padding-top: 2px; padding-bottom: 2px;">
+									  <div class="">
+									    <a th:href="@{/vendors/edit/{id}(id=${vendor.id})}"
+										   class="btn btn-primary fw-semibold fs-6 w-100 h-100 py-1"
+										   onclick="event.stopPropagation();">
+										  Edit
+										</a>
+									  </div>
+									</td>
+							    </tr>
+							  </tbody>
+							</table>
+					    </div>
+					
+					    <!-- Footer Row: Info and Pagination -->
+					    <div class="row mt-3 px-3">
+					      <!-- Info -->
+					      <div class="col-md-6 align-self-center d-none d-md-block">
+					        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+					          Showing 1 to 10 of 27
+					        </p>
+					      </div>
+					
+					      <!-- Pagination -->
+					      <div class="col-md">
+					        <nav class="d-flex justify-content-end dataTables_paginate paging_simple_numbers">
+					          <ul class="pagination mb-0">
+					            <li class="page-item disabled">
+					              <a class="page-link" href="#"><span>«</span></a>
+					            </li>
+					            <li class="page-item active">
+					              <a class="page-link" href="#">1</a>
+					            </li>
+					            <li class="page-item d-none d-sm-block">
+					              <a class="page-link" href="#">2</a>
+					            </li>
+					            <li class="page-item d-none d-sm-block">
+					              <a class="page-link" href="#">3</a>
+					            </li>
+					            <li class="page-item">
+					              <a class="page-link" href="#"><span>»</span></a>
+					            </li>
+					          </ul>
+					        </nav>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

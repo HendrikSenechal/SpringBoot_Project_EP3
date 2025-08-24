@@ -1,0 +1,11 @@
+name,firstName,email,phoneNumber,password
+Smith,John,john.smith@example.com,32478123456,pass123
+Doe,Jane,jane.doe@example.com,32477123456,secure456
+Brown,Bob,bob.brown@example.com,32476123456,password789
+Johnson,Alice,alice.johnson@example.com,32475123456,myPass321
+Williams,Mike,mike.williams@example.com,32474123456,adminPass
+Davis,Susan,susan.davis@example.com,32473123456,userPass
+Miller,James,james.miller@example.com,32472123456,passWord1
+Wilson,Emily,emily.wilson@example.com,32471123456,passWord2
+Moore,Chris,chris.moore@example.com,32470123456,passWord3
+Taylor,Karen,karen.taylor@example.com,32469123456,passWord4

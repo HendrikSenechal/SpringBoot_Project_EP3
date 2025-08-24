@@ -1,0 +1,446 @@
+2025-08-24T10:34:52.870+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] c.s.SpringBootProjectEp3Application      : Starting SpringBootProjectEp3Application using Java 21.0.6 with PID 162304 (G:\Toegepaste Informatica\TI 2 - 2024-25\S2 - Enterprise Web Development Java\ExamenOpdracht - EP3\Project\SpringBoot_Project_EP3\target\classes started by hendr in G:\Toegepaste Informatica\TI 2 - 2024-25\S2 - Enterprise Web Development Java\ExamenOpdracht - EP3\Project\SpringBoot_Project_EP3)
+2025-08-24T10:34:52.873+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] c.s.SpringBootProjectEp3Application      : No active profile set, falling back to 1 default profile: "default"
+2025-08-24T10:34:52.914+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\hendr\.m2\repository\com\sun\xml\bind\jaxb-xjc\4.0.5\jaxb-xjc-4.0.5.jar referenced one or more files that do not exist: file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-xjc/4.0.5/jaxb-core.jar,file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-xjc/4.0.5/jaxb-impl.jar
+2025-08-24T10:34:52.915+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\hendr\.m2\repository\com\sun\xml\bind\jaxb-core\4.0.5\jaxb-core-4.0.5.jar referenced one or more files that do not exist: file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.activation-api.jar,file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.xml.bind-api.jar
+2025-08-24T10:34:52.915+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-24T10:34:52.915+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-24T10:34:53.479+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-24T10:34:53.496+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 JPA repository interfaces.
+2025-08-24T10:34:53.939+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-08-24T10:34:53.951+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-24T10:34:53.951+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-24T10:34:54.065+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-08-24T10:34:54.069+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-24T10:34:54.069+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1153 ms
+2025-08-24T10:34:54.199+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-24T10:34:54.257+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-08-24T10:34:54.290+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-24T10:34:54.531+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-24T10:34:54.555+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-24T10:34:54.872+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2079d182
+2025-08-24T10:34:54.874+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-24T10:34:54.930+02:00  WARN 162304 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-24T10:34:54.931+02:00  WARN 162304 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-24T10:34:54.943+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-24T10:34:55.179+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-24T10:34:55.184+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-24T10:34:57.970+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] c.s.SpringBootProjectEp3Application      : Starting SpringBootProjectEp3Application using Java 21.0.6 with PID 61488 (G:\Toegepaste Informatica\TI 2 - 2024-25\S2 - Enterprise Web Development Java\ExamenOpdracht - EP3\Project\SpringBoot_Project_EP3\target\classes started by hendr in G:\Toegepaste Informatica\TI 2 - 2024-25\S2 - Enterprise Web Development Java\ExamenOpdracht - EP3\Project\SpringBoot_Project_EP3)
+2025-08-24T10:34:57.973+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] c.s.SpringBootProjectEp3Application      : No active profile set, falling back to 1 default profile: "default"
+2025-08-24T10:34:57.979+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] repository.AddressDaoJpa                 : AddressDaoJpa initialized
+2025-08-24T10:34:57.982+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] repository.CategoryDaoJpa                : CategoryDaoJpa initialized
+2025-08-24T10:34:57.983+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] repository.VendorDaoJpa                  : VendorDaoJpa initialized
+2025-08-24T10:34:57.986+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] repository.FestivalDaoJpa                : FestivalDaoJpa initialized
+2025-08-24T10:34:58.001+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\hendr\.m2\repository\com\sun\xml\bind\jaxb-xjc\4.0.5\jaxb-xjc-4.0.5.jar referenced one or more files that do not exist: file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-xjc/4.0.5/jaxb-core.jar,file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-xjc/4.0.5/jaxb-impl.jar
+2025-08-24T10:34:58.002+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\hendr\.m2\repository\com\sun\xml\bind\jaxb-core\4.0.5\jaxb-core-4.0.5.jar referenced one or more files that do not exist: file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.activation-api.jar,file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.xml.bind-api.jar
+2025-08-24T10:34:58.002+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-24T10:34:58.002+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-24T10:34:58.010+02:00  WARN 162304 --- [SpringBoot_Project_EP3] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-24T10:34:58.289+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-08-24T10:34:58.326+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-08-24T10:34:58.332+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] c.s.SpringBootProjectEp3Application      : Started SpringBootProjectEp3Application in 5.8 seconds (process running for 6.468)
+2025-08-24T10:34:58.334+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] repository.AddressDaoJpa                 : AddressDaoJpa initialized
+2025-08-24T10:34:58.334+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] repository.CategoryDaoJpa                : CategoryDaoJpa initialized
+2025-08-24T10:34:58.334+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] repository.FestivalDaoJpa                : FestivalDaoJpa initialized
+2025-08-24T10:34:58.335+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] repository.RegistrationDaoJpa            : RegistrationDaoJpa initialized
+2025-08-24T10:34:58.335+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] repository.UserDaoJpa                    : UserDaoJpa initialized
+2025-08-24T10:34:58.335+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] repository.VendorDaoJpa                  : VendorDaoJpa initialized
+2025-08-24T10:34:58.335+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : !!! Started populating database
+2025-08-24T10:34:58.402+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-24T10:34:58.415+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JPA repository interfaces.
+2025-08-24T10:34:58.747+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-08-24T10:34:58.757+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-24T10:34:58.757+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-24T10:34:58.853+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-08-24T10:34:58.857+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-24T10:34:58.857+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 855 ms
+2025-08-24T10:34:58.968+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-24T10:34:58.999+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-08-24T10:34:59.019+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-24T10:34:59.198+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-24T10:34:59.216+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-24T10:34:59.426+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@660cc7fd
+2025-08-24T10:34:59.428+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-24T10:34:59.465+02:00  WARN 61488 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-24T10:34:59.465+02:00  WARN 61488 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-24T10:34:59.475+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-24T10:34:59.664+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-24T10:34:59.668+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-24T10:35:00.333+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Addresses populated
+2025-08-24T10:35:00.334+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Categories populated
+2025-08-24T10:35:00.335+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Users populated
+2025-08-24T10:35:00.344+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Vendors populated
+2025-08-24T10:35:00.351+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Festivals populated
+2025-08-24T10:35:00.359+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Registrations populated
+2025-08-24T10:35:00.375+02:00 ERROR 162304 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Error while populating databasejakarta.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 4.0.2.v202306161219): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLSyntaxErrorException: Table 'ewdj.address' doesn't exist
+Error Code: 1146
+Call: INSERT INTO address (ADDITION, COUNTRY, NAME, NUMBER, PLACE, POSTCODE, STREET) VALUES (?, ?, ?, ?, ?, ?, ?)
+	bind => [7 parameters bound]
+Query: InsertObjectQuery(Address(name=Stadscentrum, country=Belgium, place=Mons, postcode=7000, street=Grand Rue, number=66, addition=))
+2025-08-24T10:35:02.492+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] repository.AddressDaoJpa                 : AddressDaoJpa initialized
+2025-08-24T10:35:02.496+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] repository.CategoryDaoJpa                : CategoryDaoJpa initialized
+2025-08-24T10:35:02.497+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] repository.VendorDaoJpa                  : VendorDaoJpa initialized
+2025-08-24T10:35:02.500+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] repository.FestivalDaoJpa                : FestivalDaoJpa initialized
+2025-08-24T10:35:02.521+02:00  WARN 61488 --- [SpringBoot_Project_EP3] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-24T10:35:02.729+02:00  WARN 61488 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2025-08-24T10:35:02.743+02:00  WARN 61488 --- [SpringBoot_Project_EP3] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-08-24T10:35:02.744+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-24T10:35:02.746+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-24T10:35:02.749+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-24T10:35:02.758+02:00  INFO 61488 --- [SpringBoot_Project_EP3] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-08-24T10:35:02.778+02:00 ERROR 61488 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-08-24T10:35:34.125+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-24T10:35:34.125+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-24T10:35:34.125+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-08-24T10:35:40.399+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-10] repository.FestivalDaoJpa                : Fetching all festivals
+2025-08-24T10:35:40.403+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-10] repository.FestivalDaoJpa                : Fetched 0 festivals
+2025-08-24T10:35:41.668+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-2] repository.VendorDaoJpa                  : Started fetching all vendors
+2025-08-24T10:35:41.671+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-2] repository.VendorDaoJpa                  : Fetched 0 vendors
+2025-08-24T10:35:42.319+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-6] repository.AddressDaoJpa                 : Started fetching all addresses
+2025-08-24T10:35:42.322+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-6] repository.AddressDaoJpa                 : Fetched 0 addresses
+2025-08-24T10:35:47.058+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-8] repository.FestivalDaoJpa                : Fetching all festivals
+2025-08-24T10:35:47.059+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-8] repository.FestivalDaoJpa                : Fetched 0 festivals
+2025-08-24T10:35:48.812+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-2] repository.CategoryDaoJpa                : Fetching all categories
+2025-08-24T10:35:48.814+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-2] repository.CategoryDaoJpa                : Fetched 0 categories
+2025-08-24T10:35:48.814+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-2] repository.AddressDaoJpa                 : Started fetching all addresses
+2025-08-24T10:35:48.815+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-2] repository.AddressDaoJpa                 : Fetched 0 addresses
+2025-08-24T10:35:48.815+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-2] repository.VendorDaoJpa                  : Started fetching all vendors
+2025-08-24T10:35:48.816+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-2] repository.VendorDaoJpa                  : Fetched 0 vendors
+2025-08-24T10:38:16.236+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [RMI TCP Connection(13)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2025-08-24T10:38:16.237+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [RMI TCP Connection(13)-127.0.0.1] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-24T10:38:16.248+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-08-24T10:38:16.252+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [RMI TCP Connection(13)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-24T10:38:16.254+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [RMI TCP Connection(13)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-24T10:38:16.257+02:00  INFO 162304 --- [SpringBoot_Project_EP3] [RMI TCP Connection(13)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-24T10:38:18.386+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] c.s.SpringBootProjectEp3Application      : Starting SpringBootProjectEp3Application using Java 21.0.6 with PID 164512 (G:\Toegepaste Informatica\TI 2 - 2024-25\S2 - Enterprise Web Development Java\ExamenOpdracht - EP3\Project\SpringBoot_Project_EP3\target\classes started by hendr in G:\Toegepaste Informatica\TI 2 - 2024-25\S2 - Enterprise Web Development Java\ExamenOpdracht - EP3\Project\SpringBoot_Project_EP3)
+2025-08-24T10:38:18.387+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] c.s.SpringBootProjectEp3Application      : No active profile set, falling back to 1 default profile: "default"
+2025-08-24T10:38:18.414+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\hendr\.m2\repository\com\sun\xml\bind\jaxb-xjc\4.0.5\jaxb-xjc-4.0.5.jar referenced one or more files that do not exist: file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-xjc/4.0.5/jaxb-core.jar,file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-xjc/4.0.5/jaxb-impl.jar
+2025-08-24T10:38:18.415+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\hendr\.m2\repository\com\sun\xml\bind\jaxb-core\4.0.5\jaxb-core-4.0.5.jar referenced one or more files that do not exist: file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.activation-api.jar,file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.xml.bind-api.jar
+2025-08-24T10:38:18.415+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-24T10:38:18.415+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-24T10:38:18.780+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-24T10:38:18.793+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JPA repository interfaces.
+2025-08-24T10:38:19.123+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-08-24T10:38:19.133+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-24T10:38:19.133+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-24T10:38:19.229+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-08-24T10:38:19.232+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-24T10:38:19.232+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 817 ms
+2025-08-24T10:38:19.338+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-24T10:38:19.369+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-08-24T10:38:19.396+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-24T10:38:19.558+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-24T10:38:19.577+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-24T10:38:19.784+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@655e0503
+2025-08-24T10:38:19.785+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-24T10:38:19.815+02:00  WARN 164512 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-24T10:38:19.817+02:00  WARN 164512 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-24T10:38:19.828+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-24T10:38:20.023+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-24T10:38:20.027+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-24T10:38:22.737+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] repository.AddressDaoJpa                 : AddressDaoJpa initialized
+2025-08-24T10:38:22.741+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] repository.CategoryDaoJpa                : CategoryDaoJpa initialized
+2025-08-24T10:38:22.743+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] repository.VendorDaoJpa                  : VendorDaoJpa initialized
+2025-08-24T10:38:22.745+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] repository.FestivalDaoJpa                : FestivalDaoJpa initialized
+2025-08-24T10:38:22.768+02:00  WARN 164512 --- [SpringBoot_Project_EP3] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-24T10:38:22.978+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-08-24T10:38:23.005+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-08-24T10:38:23.011+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] c.s.SpringBootProjectEp3Application      : Started SpringBootProjectEp3Application in 4.88 seconds (process running for 5.314)
+2025-08-24T10:38:23.013+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] repository.AddressDaoJpa                 : AddressDaoJpa initialized
+2025-08-24T10:38:23.013+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] repository.CategoryDaoJpa                : CategoryDaoJpa initialized
+2025-08-24T10:38:23.013+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] repository.FestivalDaoJpa                : FestivalDaoJpa initialized
+2025-08-24T10:38:23.014+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] repository.RegistrationDaoJpa            : RegistrationDaoJpa initialized
+2025-08-24T10:38:23.015+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] repository.UserDaoJpa                    : UserDaoJpa initialized
+2025-08-24T10:38:23.015+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] repository.VendorDaoJpa                  : VendorDaoJpa initialized
+2025-08-24T10:38:23.015+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : !!! Started populating database
+2025-08-24T10:38:24.992+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Addresses populated
+2025-08-24T10:38:24.992+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Categories populated
+2025-08-24T10:38:24.994+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Users populated
+2025-08-24T10:38:24.994+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Vendors populated
+2025-08-24T10:38:24.995+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Festivals populated
+2025-08-24T10:38:25.001+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Registrations populated
+2025-08-24T10:38:25.210+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : !!! Finished populating database
+2025-08-24T10:38:39.605+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-24T10:38:39.605+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-24T10:38:39.606+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-08-24T10:38:39.657+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-1] repository.FestivalDaoJpa                : Fetching all festivals
+2025-08-24T10:38:39.663+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-1] repository.FestivalDaoJpa                : Fetched 19 festivals
+2025-08-24T11:05:25.648+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-10] repository.VendorDaoJpa                  : Started fetching all vendors
+2025-08-24T11:05:25.656+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-10] repository.VendorDaoJpa                  : Fetched 30 vendors
+2025-08-24T11:05:26.264+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-1] repository.AddressDaoJpa                 : Started fetching all addresses
+2025-08-24T11:05:26.266+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-1] repository.AddressDaoJpa                 : Fetched 20 addresses
+2025-08-24T11:05:27.737+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-3] repository.AddressDaoJpa                 : Started fetching all addresses
+2025-08-24T11:05:27.739+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-3] repository.AddressDaoJpa                 : Fetched 20 addresses
+2025-08-24T11:05:28.094+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-10] repository.VendorDaoJpa                  : Started fetching all vendors
+2025-08-24T11:05:28.096+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-10] repository.VendorDaoJpa                  : Fetched 30 vendors
+2025-08-24T11:05:28.590+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-9] repository.FestivalDaoJpa                : Fetching all festivals
+2025-08-24T11:05:28.592+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-9] repository.FestivalDaoJpa                : Fetched 19 festivals
+2025-08-24T11:05:31.936+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-3] repository.CategoryDaoJpa                : Fetching all categories
+2025-08-24T11:05:31.938+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-3] repository.CategoryDaoJpa                : Fetched 12 categories
+2025-08-24T11:05:31.938+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-3] repository.AddressDaoJpa                 : Started fetching all addresses
+2025-08-24T11:05:31.940+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-3] repository.AddressDaoJpa                 : Fetched 20 addresses
+2025-08-24T11:05:31.940+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-3] repository.VendorDaoJpa                  : Started fetching all vendors
+2025-08-24T11:05:31.940+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-3] repository.VendorDaoJpa                  : Fetched 30 vendors
+2025-08-24T11:05:31.941+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-3] repository.FestivalDaoJpa                : Fetching festival with id 1
+2025-08-24T11:05:31.943+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-3] repository.FestivalDaoJpa                : Fetched 1 festival
+2025-08-24T11:05:50.298+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-5] repository.VendorDaoJpa                  : Started fetching all vendors
+2025-08-24T11:05:50.300+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-5] repository.VendorDaoJpa                  : Fetched 30 vendors
+2025-08-24T11:05:51.203+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-6] repository.VendorDaoJpa                  : Fetching vendor with id 1
+2025-08-24T11:05:51.204+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-6] repository.VendorDaoJpa                  : Fetched 1 vendor
+2025-08-24T11:05:51.204+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-6] repository.CategoryDaoJpa                : Fetching all categories
+2025-08-24T11:05:51.205+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-6] repository.CategoryDaoJpa                : Fetched 12 categories
+2025-08-24T11:05:51.205+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-6] repository.AddressDaoJpa                 : Started fetching all addresses
+2025-08-24T11:05:51.206+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-6] repository.AddressDaoJpa                 : Fetched 20 addresses
+2025-08-24T11:05:57.367+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-1] repository.AddressDaoJpa                 : Started fetching all addresses
+2025-08-24T11:05:57.368+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-1] repository.AddressDaoJpa                 : Fetched 20 addresses
+2025-08-24T11:06:00.132+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-9] repository.FestivalDaoJpa                : Fetching all festivals
+2025-08-24T11:06:00.134+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [http-nio-8080-exec-9] repository.FestivalDaoJpa                : Fetched 19 festivals
+2025-08-24T11:15:19.779+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [RMI TCP Connection(46)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2025-08-24T11:15:19.783+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [RMI TCP Connection(46)-127.0.0.1] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-24T11:15:19.797+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-08-24T11:15:19.801+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [RMI TCP Connection(46)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-24T11:15:19.806+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [RMI TCP Connection(46)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-24T11:15:19.809+02:00  INFO 164512 --- [SpringBoot_Project_EP3] [RMI TCP Connection(46)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-24T14:03:51.686+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] c.s.SpringBootProjectEp3Application      : Starting SpringBootProjectEp3Application using Java 21.0.6 with PID 200728 (G:\Toegepaste Informatica\TI 2 - 2024-25\S2 - Enterprise Web Development Java\ExamenOpdracht - EP3\Project\SpringBoot_Project_EP3\target\classes started by hendr in G:\Toegepaste Informatica\TI 2 - 2024-25\S2 - Enterprise Web Development Java\ExamenOpdracht - EP3\Project\SpringBoot_Project_EP3)
+2025-08-24T14:03:51.688+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] c.s.SpringBootProjectEp3Application      : No active profile set, falling back to 1 default profile: "default"
+2025-08-24T14:03:51.716+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\hendr\.m2\repository\com\sun\xml\bind\jaxb-xjc\4.0.5\jaxb-xjc-4.0.5.jar referenced one or more files that do not exist: file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-xjc/4.0.5/jaxb-core.jar,file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-xjc/4.0.5/jaxb-impl.jar
+2025-08-24T14:03:51.717+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\hendr\.m2\repository\com\sun\xml\bind\jaxb-core\4.0.5\jaxb-core-4.0.5.jar referenced one or more files that do not exist: file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.activation-api.jar,file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.xml.bind-api.jar
+2025-08-24T14:03:51.717+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-24T14:03:51.717+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-24T14:03:52.143+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-24T14:03:52.156+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JPA repository interfaces.
+2025-08-24T14:03:52.525+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-08-24T14:03:52.535+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-24T14:03:52.536+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-24T14:03:52.639+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-08-24T14:03:52.641+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-24T14:03:52.642+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 925 ms
+2025-08-24T14:03:52.764+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-24T14:03:52.814+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-08-24T14:03:52.848+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-24T14:03:53.040+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-24T14:03:53.064+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-24T14:03:53.292+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3370ac3f
+2025-08-24T14:03:53.294+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-24T14:03:53.330+02:00  WARN 200728 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-24T14:03:53.331+02:00  WARN 200728 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-24T14:03:53.342+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-24T14:03:53.573+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-24T14:03:53.577+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-24T14:03:56.485+02:00  WARN 200728 --- [SpringBoot_Project_EP3] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'addressController': Unsatisfied dependency expressed through field 'addressesService': Error creating bean with name 'addressService': Unsatisfied dependency expressed through field 'addressRepository': Error creating bean with name 'addressDaoJpa' defined in com.springBoot_Opdracht_EP3.SpringBootProjectEp3Application: Failed to instantiate [repository.AddressDaoJpa]: Factory method 'addressDaoJpa' threw exception with message: Unresolved compilation problems: 
+	The method getId() is undefined for the type Address
+	The method getId() is undefined for the type Address
+	The method getId() is undefined for the type Address
+
+2025-08-24T14:03:56.485+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-24T14:03:56.487+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-24T14:03:56.490+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-24T14:03:56.491+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-08-24T14:03:56.499+02:00  INFO 200728 --- [SpringBoot_Project_EP3] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-08-24T14:03:56.513+02:00 ERROR 200728 --- [SpringBoot_Project_EP3] [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'addressController': Unsatisfied dependency expressed through field 'addressesService': Error creating bean with name 'addressService': Unsatisfied dependency expressed through field 'addressRepository': Error creating bean with name 'addressDaoJpa' defined in com.springBoot_Opdracht_EP3.SpringBootProjectEp3Application: Failed to instantiate [repository.AddressDaoJpa]: Factory method 'addressDaoJpa' threw exception with message: Unresolved compilation problems: 
+	The method getId() is undefined for the type Address
+	The method getId() is undefined for the type Address
+	The method getId() is undefined for the type Address
+
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1222) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1188) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1123) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:987) ~[spring-context-6.2.8.jar:6.2.8]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.8.jar:6.2.8]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.3.jar:3.5.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.3.jar:3.5.3]
+	at com.springBoot_Opdracht_EP3.SpringBootProjectEp3Application.main(SpringBootProjectEp3Application.java:27) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.3.jar:3.5.3]
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'addressService': Unsatisfied dependency expressed through field 'addressRepository': Error creating bean with name 'addressDaoJpa' defined in com.springBoot_Opdracht_EP3.SpringBootProjectEp3Application: Failed to instantiate [repository.AddressDaoJpa]: Factory method 'addressDaoJpa' threw exception with message: Unresolved compilation problems: 
+	The method getId() is undefined for the type Address
+	The method getId() is undefined for the type Address
+	The method getId() is undefined for the type Address
+
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:788) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:768) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:509) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1459) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:606) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1745) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1628) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785) ~[spring-beans-6.2.8.jar:6.2.8]
+	... 25 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'addressDaoJpa' defined in com.springBoot_Opdracht_EP3.SpringBootProjectEp3Application: Failed to instantiate [repository.AddressDaoJpa]: Factory method 'addressDaoJpa' threw exception with message: Unresolved compilation problems: 
+	The method getId() is undefined for the type Address
+	The method getId() is undefined for the type Address
+	The method getId() is undefined for the type Address
+
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:489) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1375) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1205) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:569) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1745) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1628) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:785) ~[spring-beans-6.2.8.jar:6.2.8]
+	... 39 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [repository.AddressDaoJpa]: Factory method 'addressDaoJpa' threw exception with message: Unresolved compilation problems: 
+	The method getId() is undefined for the type Address
+	The method getId() is undefined for the type Address
+	The method getId() is undefined for the type Address
+
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:199) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:88) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:168) ~[spring-beans-6.2.8.jar:6.2.8]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653) ~[spring-beans-6.2.8.jar:6.2.8]
+	... 52 common frames omitted
+Caused by: java.lang.Error: Unresolved compilation problems: 
+	The method getId() is undefined for the type Address
+	The method getId() is undefined for the type Address
+	The method getId() is undefined for the type Address
+
+	at repository.AddressDaoJpa.<init>(AddressDaoJpa.java:35) ~[classes/:na]
+	at com.springBoot_Opdracht_EP3.SpringBootProjectEp3Application.addressDaoJpa(SpringBootProjectEp3Application.java:62) ~[classes/:na]
+	at com.springBoot_Opdracht_EP3.SpringBootProjectEp3Application$$SpringCGLIB$$0.CGLIB$addressDaoJpa$0(<generated>) ~[classes/:na]
+	at com.springBoot_Opdracht_EP3.SpringBootProjectEp3Application$$SpringCGLIB$$FastClass$$1.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:258) ~[spring-core-6.2.8.jar:6.2.8]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:400) ~[spring-context-6.2.8.jar:6.2.8]
+	at com.springBoot_Opdracht_EP3.SpringBootProjectEp3Application$$SpringCGLIB$$0.addressDaoJpa(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:171) ~[spring-beans-6.2.8.jar:6.2.8]
+	... 55 common frames omitted
+
+2025-08-24T14:06:55.404+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] c.s.SpringBootProjectEp3Application      : Starting SpringBootProjectEp3Application using Java 21.0.6 with PID 202336 (G:\Toegepaste Informatica\TI 2 - 2024-25\S2 - Enterprise Web Development Java\ExamenOpdracht - EP3\Project\SpringBoot_Project_EP3\target\classes started by hendr in G:\Toegepaste Informatica\TI 2 - 2024-25\S2 - Enterprise Web Development Java\ExamenOpdracht - EP3\Project\SpringBoot_Project_EP3)
+2025-08-24T14:06:55.405+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] c.s.SpringBootProjectEp3Application      : No active profile set, falling back to 1 default profile: "default"
+2025-08-24T14:06:55.432+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\hendr\.m2\repository\com\sun\xml\bind\jaxb-xjc\4.0.5\jaxb-xjc-4.0.5.jar referenced one or more files that do not exist: file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-xjc/4.0.5/jaxb-core.jar,file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-xjc/4.0.5/jaxb-impl.jar
+2025-08-24T14:06:55.433+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\hendr\.m2\repository\com\sun\xml\bind\jaxb-core\4.0.5\jaxb-core-4.0.5.jar referenced one or more files that do not exist: file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.activation-api.jar,file:/C:/Users/hendr/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jakarta.xml.bind-api.jar
+2025-08-24T14:06:55.433+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-24T14:06:55.433+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-24T14:06:55.794+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-24T14:06:55.807+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 0 JPA repository interfaces.
+2025-08-24T14:06:56.118+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-08-24T14:06:56.125+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-24T14:06:56.127+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.42]
+2025-08-24T14:06:56.216+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-08-24T14:06:56.219+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-24T14:06:56.219+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 786 ms
+2025-08-24T14:06:56.311+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-24T14:06:56.342+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.18.Final
+2025-08-24T14:06:56.361+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-24T14:06:56.521+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-24T14:06:56.538+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-24T14:06:56.729+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@13721709
+2025-08-24T14:06:56.731+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-24T14:06:56.763+02:00  WARN 202336 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-24T14:06:56.763+02:00  WARN 202336 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-08-24T14:06:56.773+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-24T14:06:56.950+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-24T14:06:56.953+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-24T14:06:59.712+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] repository.AddressDaoJpa                 : AddressDaoJpa initialized
+2025-08-24T14:06:59.717+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] repository.CategoryDaoJpa                : CategoryDaoJpa initialized
+2025-08-24T14:06:59.719+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] repository.VendorDaoJpa                  : VendorDaoJpa initialized
+2025-08-24T14:06:59.720+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] repository.FestivalDaoJpa                : FestivalDaoJpa initialized
+2025-08-24T14:06:59.741+02:00  WARN 202336 --- [SpringBoot_Project_EP3] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-24T14:06:59.948+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-08-24T14:06:59.975+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-08-24T14:06:59.979+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] c.s.SpringBootProjectEp3Application      : Started SpringBootProjectEp3Application in 4.826 seconds (process running for 5.259)
+2025-08-24T14:06:59.983+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] repository.AddressDaoJpa                 : AddressDaoJpa initialized
+2025-08-24T14:06:59.983+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] repository.CategoryDaoJpa                : CategoryDaoJpa initialized
+2025-08-24T14:06:59.983+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] repository.FestivalDaoJpa                : FestivalDaoJpa initialized
+2025-08-24T14:06:59.983+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] repository.RegistrationDaoJpa            : RegistrationDaoJpa initialized
+2025-08-24T14:06:59.983+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] repository.UserDaoJpa                    : UserDaoJpa initialized
+2025-08-24T14:06:59.983+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] repository.VendorDaoJpa                  : VendorDaoJpa initialized
+2025-08-24T14:06:59.983+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : !!! Started populating database
+2025-08-24T14:07:01.941+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Addresses populated
+2025-08-24T14:07:01.942+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Categories populated
+2025-08-24T14:07:01.943+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Users populated
+2025-08-24T14:07:01.954+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Vendors populated
+2025-08-24T14:07:01.962+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Festivals populated
+2025-08-24T14:07:01.968+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : Registrations populated
+2025-08-24T14:07:02.175+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [restartedMain] populate.PopulateDB                      : !!! Finished populating database
+2025-08-24T14:17:50.401+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [RMI TCP Connection(20)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2025-08-24T14:17:50.403+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [RMI TCP Connection(20)-127.0.0.1] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-24T14:17:50.419+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-08-24T14:17:50.422+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [RMI TCP Connection(20)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-24T14:17:50.424+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [RMI TCP Connection(20)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-24T14:17:50.427+02:00  INFO 202336 --- [SpringBoot_Project_EP3] [RMI TCP Connection(20)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
