@@ -7,6 +7,7 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -78,12 +79,12 @@ public class Vendor implements Serializable, BaseEntity {
 	private int vendorRating;
 
 	/** The category to which this vendor belongs. */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "CATEGORY_ID")
 	private Category category;
 
 	/** The address associated with this vendor. */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ADDRESS_ID")
 	private Address address;
 

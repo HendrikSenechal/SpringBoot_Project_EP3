@@ -1,9 +1,5 @@
 package com.springBoot_Opdracht_EP3;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import domain.AddressService;
-import domain.CategoryService;
-import domain.FestivalService;
-import domain.VendorService;
-import entity.Address;
 import entity.Festival;
-import entity.Vendor;
 import lombok.extern.slf4j.Slf4j;
+import services.AddressService;
+import services.CategoryService;
+import services.FestivalService;
+import services.VendorService;
 
 @Slf4j
 @Controller
@@ -66,28 +60,25 @@ public class FestivalController {
 
 	@PostMapping("/updateFestival")
 	public String saveOrUpdateFestival(@ModelAttribute Festival festival,
-			@RequestParam(value = "vendorIds", required = false) List<Long> vendorIds, Model model) {
+			@RequestParam(value = "vendorIds", required = false) java.util.List<Long> vendorIds, Model model) {
 
-		// Resolve address if present
+		// Make sure Address is a managed entity
 		if (festival.getAddress() != null && festival.getAddress().getId() != null) {
-			Address fullAddress = addressService.getAddressById(festival.getAddress().getId());
+			entity.Address fullAddress = addressService.getAddressById(festival.getAddress().getId());
 			festival.setAddress(fullAddress);
 		}
 
-		// Resolve vendors if selected
+		// Map selected vendor IDs -> Vendor entities
+		java.util.Set<entity.Vendor> selectedVendors = new java.util.HashSet<>();
 		if (vendorIds != null && !vendorIds.isEmpty()) {
-			Set<Vendor> selectedVendors = new HashSet<>(vendorService.getVendorsByIds(vendorIds));
-			festival.setVendors(selectedVendors);
-		} else {
-			festival.setVendors(new HashSet<>()); // no vendors selected
+			for (entity.Vendor v : vendorService.getVendorsByIds(vendorIds)) {
+				selectedVendors.add(v);
+			}
 		}
+		festival.setVendors(selectedVendors);
 
-		// Decide whether to create or update
-		if (festival.getId() == null) {
-			festivalService.addFestival(festival); // assumes such method exists
-		} else {
-			festivalService.updateFestival(festival);
-		}
+		// One method for both create & update
+		festivalService.save(festival);
 
 		model.addAttribute("festivals", festivalService.getAllFestivals());
 		return "festival-table";

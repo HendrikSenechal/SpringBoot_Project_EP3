@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -96,14 +97,14 @@ public class Festival implements Serializable, BaseEntity {
 	/**
 	 * Address where the festival takes place.
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ADDRESS_ID")
 	private Address address;
 
 	/**
 	 * Category of the festival.
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "CATEGORY_ID")
 	private Category category;
 

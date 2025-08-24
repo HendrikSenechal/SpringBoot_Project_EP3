@@ -1,26 +1,25 @@
 package com.springBoot_Opdracht_EP3;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import domain.AddressService;
-import domain.AddressServiceImpl;
-import domain.CategoryService;
-import domain.CategoryServiceImpl;
-import domain.FestivalService;
-import domain.FestivalServiceImpl;
-import domain.VendorService;
-import domain.VendorServiceImpl;
-import populate.PopulateDB;
-import repository.AddressDaoJpa;
-import repository.CategoryDaoJpa;
-import repository.VendorDaoJpa;
+import services.AddressService;
+import services.AddressServiceImpl;
+import services.CategoryService;
+import services.CategoryServiceImpl;
+import services.FestivalService;
+import services.FestivalServiceImpl;
+import services.VendorService;
+import services.VendorServiceImpl;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = { "com.springBoot_Opdracht_EP3", "repository" })
+@EnableJpaRepositories("repository")
+@EntityScan("entity")
 public class SpringBootProjectEp3Application implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
@@ -29,7 +28,7 @@ public class SpringBootProjectEp3Application implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addRedirectViewController("/", "/login");
+		registry.addRedirectViewController("/", "/addresses");
 	}
 
 	@Bean
@@ -50,27 +49,5 @@ public class SpringBootProjectEp3Application implements WebMvcConfigurer {
 	@Bean
 	CategoryService categoryService() {
 		return new CategoryServiceImpl();
-	}
-
-	@Bean
-	VendorDaoJpa vendorDaoJpa() {
-		return new VendorDaoJpa();
-	}
-
-	@Bean
-	AddressDaoJpa addressDaoJpa() {
-		return new AddressDaoJpa();
-	}
-
-	@Bean
-	CategoryDaoJpa categoryDaoJpa() {
-		return new CategoryDaoJpa();
-	}
-
-	@Bean
-	public CommandLineRunner runOnStartup() {
-		return args -> {
-			new PopulateDB().runDAO();
-		};
 	}
 }

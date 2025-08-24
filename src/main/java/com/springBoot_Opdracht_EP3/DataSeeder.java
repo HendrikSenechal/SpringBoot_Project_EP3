@@ -1,4 +1,4 @@
-package populate;
+package com.springBoot_Opdracht_EP3;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,7 +17,10 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import entity.Address;
 import entity.Category;
@@ -31,12 +34,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import lombok.extern.slf4j.Slf4j;
-import repository.AddressDaoJpa;
-import repository.CategoryDaoJpa;
-import repository.FestivalDaoJpa;
-import repository.RegistrationDaoJpa;
-import repository.UserDaoJpa;
-import repository.VendorDaoJpa;
+import repository.AddressRepository;
+import repository.CategoryRepository;
+import repository.FestivalRepository;
+import repository.RegistrationRepository;
+import repository.UserRepository;
+import repository.VendorRepository;
 
 /**
  * Populates the database with initial data for addresses, categories, users,
@@ -47,60 +50,66 @@ import repository.VendorDaoJpa;
  */
 @Slf4j
 @Component
-public class PopulateDB {
-	private final AddressDaoJpa addressDao = new AddressDaoJpa();
-	private final CategoryDaoJpa categoryDao = new CategoryDaoJpa();
-	private final FestivalDaoJpa festivalDao = new FestivalDaoJpa();
-	private final RegistrationDaoJpa registrationDao = new RegistrationDaoJpa();
-	private final UserDaoJpa userDao = new UserDaoJpa();
-	private final VendorDaoJpa vendorDao = new VendorDaoJpa();
+public class DataSeeder implements CommandLineRunner {
+	@Autowired
+	private AddressRepository addressRepository;
+	@Autowired
+	private CategoryRepository categoryRepository;
+	@Autowired
+	private FestivalRepository festivalRepository;
+	@Autowired
+	private RegistrationRepository registrationRepository;
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private VendorRepository vendorRepository;
 
 	/**
 	 * Runs the population process using DAO classes. Reads CSV files and inserts
 	 * addresses, categories, users, vendors, festivals, and registrations into the
 	 * database within a transaction.
 	 */
-	public void runDAO() {
+	@Transactional
+	public void run(String... args) {
 		try {
-			// start transaction for population of database
 			log.info("!!! Started populating database");
-			festivalDao.startTransaction();
 
-			// Create and persist data for addresses, categories and users
+			// Addresses, categories, users
 			List<Address> addresses = createAddresses(Paths.get("src/main/resources/populate-data/address-data.csv"));
 			List<Category> categories = createCategories(
 					Paths.get("src/main/resources/populate-data/category-data.csv"));
 			List<User> users = createUsers(Paths.get("src/main/resources/populate-data/user-data.csv"));
-			addresses.forEach(addressDao::insert);
-			log.info("Addresses populated");
-			categories.forEach(categoryDao::insert);
-			log.info("Categories populated");
-			users.forEach(userDao::insert);
-			log.info("Users populated");
 
-			// Create and persist data for vendors
+			addressRepository.saveAll(addresses);
+			log.info("Addresses populated: {}", addresses.size());
+			categoryRepository.saveAll(categories);
+			log.info("Categories populated: {}", categories.size());
+			userRepository.saveAll(users);
+			log.info("Users populated: {}", users.size());
+
+			// Vendors
 			List<Vendor> vendors = createVendors(addresses, categories,
 					Paths.get("src/main/resources/populate-data/vendor-data.csv"));
-			vendors.forEach(vendorDao::insert);
-			log.info("Vendors populated");
+			vendorRepository.saveAll(vendors);
+			log.info("Vendors populated: {}", vendors.size());
 
-			// Create and persist data for festivals
+			// Festivals
 			List<Festival> festivals = createFestivals(addresses, categories, vendors,
 					Paths.get("src/main/resources/populate-data/festival-data.csv"), 3, 5);
-			festivals.forEach(festivalDao::insert);
-			log.info("Festivals populated");
+			festivalRepository.saveAll(festivals);
+			log.info("Festivals populated: {}", festivals.size());
 
-			// Create and persist data for registrations
+			// Registrations (composite key handled by Registration entity/Repository)
 			List<Registration> registrations = createRegistrations(users, festivals, 200);
-			registrations.forEach(registrationDao::insert);
-			log.info("Registrations populated");
+			registrationRepository.saveAll(registrations);
+			log.info("Registrations populated: {}", registrations.size());
 
-			// Commit data to database
-			festivalDao.commitTransaction();
 			log.info("!!! Finished populating database");
-
+			// No explicit commit needed; @Transactional will commit if no exception is
+			// thrown.
 		} catch (Exception e) {
-			log.error("Error while populating database" + e);
+			// Transaction will roll back automatically on runtime exceptions
+			log.error("Error while populating database", e);
 		}
 	}
 
