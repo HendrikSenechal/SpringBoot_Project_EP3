@@ -132,6 +132,17 @@ A Spring Boot application for managing food truck festivals. The application all
 								        <h4 class="invisible mb-4">Algemene info</h4> <!-- Keeps alignment with column 1 -->
 								        <p class="mb-2"><strong class="text-dark">Tickets:</strong> <span th:text="${festival.amount}">120</span></p>
 								        <p class="mb-2"><strong class="text-dark">Inschrijvingen:</strong> <span th:text="${festival.registrations.size()}">5</span></p>
+										<p class="mb-2">
+										    <strong class="text-dark">Rating:</strong>
+										    <span class="px-3 py-1 rounded-pill"
+										          th:classappend="${
+										              averageRating > 4 ? ' bg-success text-white' :
+										              (averageRating >= 2.5 ? ' bg-warning text-dark' : ' bg-danger text-white')
+										          }"
+										          th:text="${averageRating}">
+										    </span>
+										</p>
+
 								    </div>
 								
 								    <!-- Address: 2 columns -->

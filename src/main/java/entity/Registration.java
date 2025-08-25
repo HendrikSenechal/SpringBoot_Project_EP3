@@ -61,6 +61,13 @@ public class Registration implements Serializable {
 	private String comment;
 
 	/**
+	 * Optional comment left by the user. Stored as large text.
+	 */
+	@Lob
+	@Column(columnDefinition = "TEXT")
+	private String detailDescription;
+
+	/**
 	 * Timestamp of the registration.
 	 */
 	private LocalDateTime date;
@@ -90,9 +97,11 @@ public class Registration implements Serializable {
 	 * @param user     the registered user
 	 * @param festival the registered festival
 	 */
-	public Registration(int rating, String comment, LocalDateTime date, User user, Festival festival) {
+	public Registration(int rating, String comment, String detailDescription, LocalDateTime date, User user,
+			Festival festival) {
 		this.rating = rating;
 		this.comment = comment;
+		this.detailDescription = detailDescription;
 		this.date = date;
 		this.user = user;
 		this.festival = festival;

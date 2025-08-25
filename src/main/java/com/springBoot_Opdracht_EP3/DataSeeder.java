@@ -27,12 +27,8 @@ import entity.Category;
 import entity.Festival;
 import entity.Registration;
 import entity.User;
-import entity.UserFestivalKey;
 import entity.Vendor;
 import enums.Role;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import lombok.extern.slf4j.Slf4j;
 import repository.AddressRepository;
 import repository.CategoryRepository;
@@ -63,6 +59,10 @@ public class DataSeeder implements CommandLineRunner {
 	private UserRepository userRepository;
 	@Autowired
 	private VendorRepository vendorRepository;
+
+	private String loremIpsum = "Proin et purus sed elit sodales elementum sit amet in lacus. Suspendisse quis lobortis quam. Aliquam sodales mollis diam,"
+			+ "a vestibulum lorem congue et. Pellentesque et quam felis. Quisque quis ligula in libero scelerisque laoreet eget non purus."
+			+ "Donec congue tincidunt egestas. Fusce at laoreet enim. Nam lobortis lectus eget massa posuere condimentum.";
 
 	/**
 	 * Runs the population process using DAO classes. Reads CSV files and inserts
@@ -345,98 +345,10 @@ public class DataSeeder implements CommandLineRunner {
 			int rating = 3 + random.nextInt(3); // 3 to 5
 			LocalDateTime regDate = LocalDateTime.now().minusDays(random.nextInt(60) + 1);
 
-			registrations.add(
-					new Registration(rating, comment, regDate, allPairs.get(i).getKey(), allPairs.get(i).getValue()));
+			registrations.add(new Registration(rating, comment, loremIpsum, regDate, allPairs.get(i).getKey(),
+					allPairs.get(i).getValue()));
 		}
 
 		return registrations;
 	}
-
-	/**
-	 * Populates the database using JPA EntityManager and EntityManagerFactory
-	 * directly. Creates and persists sample categories, addresses, users,
-	 * festivals, vendors, and registrations. Demonstrates a manual population
-	 * approach independent of DAOs.
-	 */
-	public void runEMF() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("festivalPU");
-		EntityManager em = emf.createEntityManager();
-
-		try {
-			em.getTransaction().begin();
-
-			// --- Categories ---
-			Category foodCategory = new Category("Food", "Food and beverages");
-			Category musicCategory = new Category("Music", "Live concerts and DJs");
-			em.persist(foodCategory);
-			em.persist(musicCategory);
-
-			// --- Addresses ---
-			Address venue1 = new Address("Main Square", "USA", "New York", 10001, "Broadway", 1, "A");
-			Address venue2 = new Address("City Park", "USA", "Chicago", 60601, "Michigan Ave", 200, null);
-			em.persist(venue1);
-			em.persist(venue2);
-
-			// --- Users ---
-			User user1 = new User("Smith", "John", "john@example.com", "123456789", Role.USER, "password123");
-			User user2 = new User("Admin", "Alice", "alice@example.com", "987654321", Role.ADMIN, "adminPass");
-			em.persist(user1);
-			em.persist(user2);
-
-			// --- Festivals ---
-			Festival fest1 = new Festival("Summer Beats", "Music fest", 100, 2000);
-			fest1.setStart(LocalDateTime.now().plusDays(30));
-			fest1.setEnd(LocalDateTime.now().plusDays(32));
-			fest1.setAddress(venue1);
-			fest1.setCategory(musicCategory);
-
-			Festival fest2 = new Festival("Food Carnival", "Culinary delights", 50, 1000);
-			fest2.setStart(LocalDateTime.now().plusDays(15));
-			fest2.setEnd(LocalDateTime.now().plusDays(16));
-			fest2.setAddress(venue2);
-			fest2.setCategory(foodCategory);
-
-			em.persist(fest1);
-			em.persist(fest2);
-
-			// --- Vendors ---
-			Vendor vendor1 = new Vendor("Tasty Burgers", "Delicious grilled burgers", "5551234", "burger@example.com",
-					"www.burgers.com", "logo1.png", 5);
-			vendor1.setCategory(foodCategory);
-			vendor1.setAddress(venue1);
-			vendor1.getFestivals().add(fest2);
-			fest2.getVendors().add(vendor1);
-
-			Vendor vendor2 = new Vendor("DJ Soundz", "Live DJ sets", "5555678", "dj@example.com", "www.djz.com",
-					"logo2.png", 4);
-			vendor1.setCategory(musicCategory);
-			vendor1.setAddress(venue2);
-			vendor2.getFestivals().add(fest1);
-			fest1.getVendors().add(vendor2);
-
-			em.persist(vendor1);
-			em.persist(vendor2);
-
-			// --- Registrations ---
-			Registration reg1 = new Registration(new UserFestivalKey(user1.getId(), 1L), 5, "Amazing festival!",
-					LocalDateTime.now(), user1, fest1);
-
-			Registration reg2 = new Registration(new UserFestivalKey(2L, 2L), 4, "Great food!", LocalDateTime.now(),
-					user2, fest2);
-
-			em.persist(reg1);
-			em.persist(reg2);
-
-			em.getTransaction().commit();
-		} catch (Exception e) {
-			if (em.getTransaction().isActive()) {
-				em.getTransaction().rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			em.close();
-			emf.close();
-		}
-	}
-
 }

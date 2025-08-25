@@ -54,9 +54,10 @@ public class FestivalController {
 	@GetMapping("/festivals/{id}")
 	public String showFestivalDetails(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("festival", festivalService.getFestivalById(id));
+		model.addAttribute("averageRating", registrationService.getAverageRatingForFestival(id));
 
 		Pageable pageable = PageRequest.of(0, 10);
-		Page<Registration> registrationPage = registrationService.getRegistrations(pageable);
+		Page<Registration> registrationPage = registrationService.getRegistrations(id, pageable);
 
 		model.addAttribute("registrations", registrationPage.getContent());
 		model.addAttribute("currentPage", 0);
