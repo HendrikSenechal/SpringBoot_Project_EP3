@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import entity.Festival;
+import entity.Registration;
 import lombok.extern.slf4j.Slf4j;
 import services.AddressService;
 import services.CategoryService;
 import services.FestivalService;
+import services.RegistrationService;
 import services.VendorService;
 
 @Slf4j
@@ -30,6 +32,8 @@ public class FestivalController {
 	private VendorService vendorService;
 	@Autowired
 	private FestivalService festivalService;
+	@Autowired
+	private RegistrationService registrationService;
 
 	@GetMapping("/festivals")
 	public String listFestivals(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
@@ -50,6 +54,16 @@ public class FestivalController {
 	@GetMapping("/festivals/{id}")
 	public String showFestivalDetails(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("festival", festivalService.getFestivalById(id));
+
+		Pageable pageable = PageRequest.of(0, 10);
+		Page<Registration> registrationPage = registrationService.getRegistrations(pageable);
+
+		model.addAttribute("registrations", registrationPage.getContent());
+		model.addAttribute("currentPage", 0);
+		model.addAttribute("pageSize", 10);
+		model.addAttribute("totalPages", registrationPage.getTotalPages());
+		model.addAttribute("totalItems", registrationPage.getTotalElements());
+
 		return "festival-details"; // Your Thymeleaf template
 	}
 

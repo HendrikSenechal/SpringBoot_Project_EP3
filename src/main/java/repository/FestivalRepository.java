@@ -1,4 +1,3 @@
-// src/main/java/repository/FestivalRepository.java
 package repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;

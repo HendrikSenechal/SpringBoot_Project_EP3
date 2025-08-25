@@ -19,7 +19,7 @@ A Spring Boot application for managing food truck festivals. The application all
     <script src="/assets/js/theme.js"></script>
 </head>
 
-<body style="background-color: #f0f2f5;" id="page-top">
+<body class="h-100" style="background-color: #f8f9fc;" id="page-top">
     <div id="wrapper">
         <nav class="navbar align-items-start p-0 sidebar sidebar-dark accordion bg-gradient-primary navbar-dark">
 		    <div class="container-fluid d-flex flex-column p-0">
@@ -102,72 +102,163 @@ A Spring Boot application for managing food truck festivals. The application all
 				</nav>
 
 
-
 				<div class="container-fluid pt-4 mt-5" style="margin-right: 320px;">
-                	<div class="card border-0 shadow-md m-4 p-1">
-	                    <div class="card-body d-flex align-items-center justify-content-between">
-						    <h3 class="text-dark mb-0 fw-bold text-dark" th:text="${festival.name}">Festival Name</h3>
-						    <div class="d-flex gap-2">
-						        <a th:href="@{/festivals/edit/{id}(id=${festival.id})}" class="btn btn-secondary fw-semibold fs-6">Edit this festival</a>
-						    	<a href="javascript:history.back()" class="btn btn-primary fw-semibold fs-6">Return to overview</a>						        
-						    </div>
-						</div>
-					</div>
-					<div class="card border-0 shadow-md m-4 p-2">
-	                    <div class="card-body">
-						    <div class="row">
-							    <!-- Algemene info: 2 columns -->
-							    <div class="col-md-3">
-							        <h4 class="mb-4 text-dark fw-bold">Algemene info</h4>
-							        <p class="mb-2"><strong class="text-dark">Startdatum:</strong> <span th:text="${#temporals.format(festival.start, 'yyyy-MM-dd HH:mm')}">2025-09-15 14:00</span></p>
-							        <p class="mb-2"><strong class="text-dark">Einddatum:</strong> <span th:text="${#temporals.format(festival.end, 'yyyy-MM-dd HH:mm')}">2025-09-18 18:00</span></p>
-							        <p class="mb-2"><strong class="text-dark">Categorie:</strong> <span th:text="${festival.category.name}">Street Food</span></p>
-							        <p class="mb-2"><strong class="text-dark">Prijs:</strong> €<span th:text="${festival.price}">20</span></p>
-							        
-							    </div>
-							
-							    <div class="col-md-3">
-							        <h4 class="invisible mb-4">Algemene info</h4> <!-- Keeps alignment with column 1 -->
-							        <p class="mb-2"><strong class="text-dark">Tickets:</strong> <span th:text="${festival.amount}">120</span></p>
-							        <p class="mb-2"><strong class="text-dark">Inschrijvingen:</strong> <span th:text="${festival.registrations.size()}">5</span></p>
-							    </div>
-							
-							    <!-- Address: 2 columns -->
-							    <div class="col-md-3">
-							        <h4 class="mb-4 text-dark fw-bold">Address</h4>
-							        <p class="mb-2"><strong class="text-dark">Name:</strong> <span th:text="${festival.address.name}">Thuis</span></p>
-							        <p class="mb-2"><strong class="text-dark">Country:</strong> <span th:text="${festival.address.country}">Belgie</span></p>
-							        <p class="mb-2"><strong class="text-dark">Place:</strong> <span th:text="${festival.address.place}">Gent</span></p>
-							        <p class="mb-2"><strong class="text-dark">Postcode:</strong> <span th:text="${festival.address.postcode}">9000</span></p>
-							        
-							    </div>
-							
-							    <div class="col-md-3">
-							        <h4 class="invisible mb-4">Address</h4> <!-- Keeps alignment with column 3 -->
-							        <p class="mb-2"><strong class="text-dark">Street:</strong> <span th:text="${festival.address.street}">Kunstlaan</span></p>
-							        <p class="mb-2"><strong class="text-dark">Number:</strong> <span th:text="${festival.address.number}">9</span></p>
-							        <p class="mb-2"><strong class="text-dark">Addition:</strong> <span th:text="${festival.address.addition}">kot 12</span></p>
+	                	<div class="card border-0 shadow-md m-4 p-1">
+		                    <div class="card-body d-flex align-items-center justify-content-between">
+							    <h3 class="text-dark mb-0 fw-bold text-dark" th:text="${festival.name}">Festival Name</h3>
+							    <div class="d-flex gap-2">
+							        <a th:href="@{/festivals/edit/{id}(id=${festival.id})}" class="btn btn-secondary fw-semibold fs-6">Edit this festival</a>
+							    	<a href="javascript:history.back()" class="btn btn-primary fw-semibold fs-6">Return to overview</a>						        
 							    </div>
 							</div>
 						</div>
-	                </div>
-
-					<div class="card m-4 shadow-md border-0">
-					    <div class="card-header bg-white fw-bold fs-5 p-4">
-					    <h4 class="m-0 fw-bold text-dark">Foodtrucks</h4>
-					    </div>
-					    <div class="card-body p-0">
-					        <div class="card-group ">
-					            <div th:each="vendor : ${festival.vendors}" class="card m-0 p-4 border-0">
-					                <h5 class="mb-4 text-dark fw-bold" th:text="${vendor.name}">Vendor Name</h5>
-					                <p class="mb-2"><strong class="text-dark">Phone:</strong> <span th:text="${vendor.phoneNumber}">Phone Number</span></p>
-					                <p class="mb-2"><strong class="text-dark">Email:</strong> <span th:text="${vendor.email}">Email</span></p>
-					                <p class="mb-2"><strong class="text-dark">Rating:</strong> <span th:text="${vendor.vendorRating}">Rating</span></p>
-					                <p class="mb-4"><strong class="text-dark">Category:</strong> <span th:text="${vendor.category.name}">Category</span></p>
-					                <a class="btn btn-primary fw-semibold fs-6 mt-auto" th:href="@{/vendors/{id}(id=${vendor.id})}">More info</a>            
-					            </div>
-					        </div>
-					    </div>
+						<div class="row m-4">
+						<div class="col-8 p-0">
+						
+						<div class="card border-0 shadow-md">
+		                    <div class="card-body">
+							    <div class="row">
+								    <!-- Algemene info: 2 columns -->
+								    <div class="col-md-3">
+								        <h4 class="mb-4 text-dark fw-bold">Algemene info</h4>
+								        <p class="mb-2"><strong class="text-dark">Startdatum:</strong> <span th:text="${#temporals.format(festival.start, 'yyyy-MM-dd HH:mm')}">2025-09-15 14:00</span></p>
+								        <p class="mb-2"><strong class="text-dark">Einddatum:</strong> <span th:text="${#temporals.format(festival.end, 'yyyy-MM-dd HH:mm')}">2025-09-18 18:00</span></p>
+								        <p class="mb-2"><strong class="text-dark">Categorie:</strong> <span th:text="${festival.category.name}">Street Food</span></p>
+								        <p class="mb-2"><strong class="text-dark">Prijs:</strong> €<span th:text="${festival.price}">20</span></p>
+								        
+								    </div>
+								
+								    <div class="col-md-3">
+								        <h4 class="invisible mb-4">Algemene info</h4> <!-- Keeps alignment with column 1 -->
+								        <p class="mb-2"><strong class="text-dark">Tickets:</strong> <span th:text="${festival.amount}">120</span></p>
+								        <p class="mb-2"><strong class="text-dark">Inschrijvingen:</strong> <span th:text="${festival.registrations.size()}">5</span></p>
+								    </div>
+								
+								    <!-- Address: 2 columns -->
+								    <div class="col-md-3">
+								        <h4 class="mb-4 text-dark fw-bold">Address</h4>
+								        <p class="mb-2"><strong class="text-dark">Name:</strong> <span th:text="${festival.address.name}">Thuis</span></p>
+								        <p class="mb-2"><strong class="text-dark">Country:</strong> <span th:text="${festival.address.country}">Belgie</span></p>
+								        <p class="mb-2"><strong class="text-dark">Place:</strong> <span th:text="${festival.address.place}">Gent</span></p>
+								        <p class="mb-2"><strong class="text-dark">Postcode:</strong> <span th:text="${festival.address.postcode}">9000</span></p>
+								        
+								    </div>
+								
+								    <div class="col-md-3">
+								        <h4 class="invisible mb-4">Address</h4> <!-- Keeps alignment with column 3 -->
+								        <p class="mb-2"><strong class="text-dark">Street:</strong> <span th:text="${festival.address.street}">Kunstlaan</span></p>
+								        <p class="mb-2"><strong class="text-dark">Number:</strong> <span th:text="${festival.address.number}">9</span></p>
+								        <p class="mb-2"><strong class="text-dark">Addition:</strong> <span th:text="${festival.address.addition}">kot 12</span></p>
+								    </div>
+								</div>
+							</div>
+		                </div>
+	
+						<div class="card shadow-md border-0 mt-4">
+						    <div class="card-header bg-white fw-bold fs-5 p-4">
+						    <h4 class="m-0 fw-bold text-dark">Foodtrucks</h4>
+						    </div>
+						    <div class="card-body p-0">
+						        <div class="card-group ">
+						            <div th:each="vendor : ${festival.vendors}" class="card m-0 p-4 border-0">
+						                <h5 class="mb-4 text-dark fw-bold" th:text="${vendor.name}">Vendor Name</h5>
+						                <p class="mb-2"><strong class="text-dark">Phone:</strong> <span th:text="${vendor.phoneNumber}">Phone Number</span></p>
+						                <p class="mb-2"><strong class="text-dark">Email:</strong> <span th:text="${vendor.email}">Email</span></p>
+						                <p class="mb-2"><strong class="text-dark">Rating:</strong> <span th:text="${vendor.vendorRating}">Rating</span></p>
+						                <p class="mb-4"><strong class="text-dark">Category:</strong> <span th:text="${vendor.category.name}">Category</span></p>
+						                <a class="btn btn-primary fw-semibold fs-6 mt-auto" th:href="@{/vendors/{id}(id=${vendor.id})}">More info</a>            
+						            </div>
+						        </div>
+						    </div>
+						</div>
+												</div>
+						
+						<div class="col-4 p-0 ps-4">
+							<div class="card border-0 shadow-md h-100" >
+			                    <div class="card-body pb-0">
+			                        <div class="row align-items-center">
+			                            <!-- Title -->
+			                            <div class="col-md-6">
+			                                <div class="input-group" style="max-width: 100%;">
+			                                    <h3 class="text-dark fw-bold">Reviews</h3>
+			                                </div>
+			                            </div>
+			                        </div>
+			
+			                        <div class="table-responsive mt-2 table" id="dataTable" role="grid" aria-describedby="dataTable_info">
+			                            <table class="table my-0" id="dataTable">
+			                                <thead>
+			                                <tr>
+			                                    <th class="text-dark">Name</th>
+			                                    <th class="text-dark">Comment</th>
+			                                </tr>
+			                                </thead>
+			                                <tbody>
+			                                <tr th:each="registration : ${registrations}">
+			                                    <td class="text-dark" th:text="${registration.rating}">rating</td>
+			                                    <td class="text-dark" th:text="${registration.comment}">Comment</td>
+			                                </tr>
+			                                <tr th:if="${#lists.isEmpty(registrations)}">
+			                                    <td colspan="6" class="text-center text-muted">No festivals found</td>
+			                                </tr>
+			                                </tbody>
+			                            </table>
+			
+			                        </div>
+			
+			                        <div class="row">
+			                            <div class="col-md-6 align-self-center">
+			                                <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite" th:if="${totalPages > 0}">
+			                                    Showing
+			                                    <span th:text="${(totalItems == 0) ? 0 : (currentPage * pageSize + 1)}">1</span>
+			                                    to
+			                                    <span th:text="${((currentPage + 1) * pageSize) > totalItems ? totalItems : ((currentPage + 1) * pageSize)}">10</span>
+			                                    of
+			                                    <span th:text="${totalItems}">27</span>
+			                                </p>
+			                            </div>
+			                            <div class="col-md-6">
+			                                <!-- Bottom Pagination (mirrors the top one) -->
+			                                <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers" th:if="${totalPages > 0}">
+			                                    <ul class="pagination mb-0">
+			
+			                                        <!-- Previous -->
+			                                        <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+			                                            <a class="page-link"
+			                                               th:href="@{/festivals(page=${currentPage - 1}, size=${pageSize})}"
+			                                               aria-label="Previous">
+			                                                <span aria-hidden="true">«</span>
+			                                            </a>
+			                                        </li>
+			
+			                                        <!-- Page numbers -->
+			                                        <li class="page-item"
+													    th:each="i : ${#numbers.sequence(
+													        (currentPage - 2) < 0 ? 0 : (currentPage - 2),
+													        (currentPage + 2) >= (totalPages - 1) ? (totalPages - 1) : (currentPage + 2)
+													    )}"
+													    th:classappend="${i} == ${currentPage} ? ' active'">
+													    <a class="page-link"
+													       th:href="@{/festivals(page=${i}, size=${pageSize})}"
+													       th:text="${i + 1}">1</a>
+													</li>
+			
+			                                        <!-- Next -->
+			                                        <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
+			                                            <a class="page-link"
+			                                               th:href="@{/festivals(page=${currentPage + 1}, size=${pageSize})}"
+			                                               aria-label="Next">
+			                                                <span aria-hidden="true">»</span>
+			                                            </a>
+			                                        </li>
+			                                    </ul>
+			                                </nav>
+			                            </div>
+			                        </div>
+						          </div>
+			
+			                    </div>
+			                </div>
 					</div>
 	            </div>
 	        </div>

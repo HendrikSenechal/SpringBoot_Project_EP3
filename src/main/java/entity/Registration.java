@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
@@ -67,7 +68,7 @@ public class Registration implements Serializable {
 	/**
 	 * The user associated with this registration.
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("userId")
 	@JoinColumn(name = "USER_ID")
 	private User user;

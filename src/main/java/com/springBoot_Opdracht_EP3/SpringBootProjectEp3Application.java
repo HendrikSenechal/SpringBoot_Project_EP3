@@ -14,6 +14,8 @@ import services.CategoryService;
 import services.CategoryServiceImpl;
 import services.FestivalService;
 import services.FestivalServiceImpl;
+import services.RegistrationService;
+import services.RegistrationServiceImpl;
 import services.VendorService;
 import services.VendorServiceImpl;
 
@@ -49,5 +51,10 @@ public class SpringBootProjectEp3Application implements WebMvcConfigurer {
 	@Bean
 	CategoryService categoryService() {
 		return new CategoryServiceImpl();
+	}
+
+	@Bean
+	RegistrationService registrationService() {
+		return new RegistrationServiceImpl();
 	}
 }
