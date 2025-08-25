@@ -32,7 +32,7 @@ public class FestivalController {
 	private FestivalService festivalService;
 
 	@GetMapping("/festivals")
-	public String listFestivals(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+	public String listFestivals(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
 			Model model) {
 
 		Pageable pageable = PageRequest.of(page, size);
@@ -93,7 +93,15 @@ public class FestivalController {
 		// One method for both create & update
 		festivalService.save(festival);
 
-		model.addAttribute("festivals", festivalService.getAllFestivals());
+		// after festivalService.save(festival);
+		Pageable pageable = PageRequest.of(0, 10);
+		Page<Festival> page = festivalService.getFestivals(pageable);
+
+		model.addAttribute("festivals", page.getContent());
+		model.addAttribute("currentPage", page.getNumber());
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("pageSize", page.getSize());
+
 		return "festival-table";
 	}
 
