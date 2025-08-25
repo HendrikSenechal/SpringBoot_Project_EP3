@@ -1,6 +1,9 @@
 package com.springBoot_Opdracht_EP3;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,9 +32,19 @@ public class FestivalController {
 	private FestivalService festivalService;
 
 	@GetMapping("/festivals")
-	public String showFestivals(Model model) {
-		model.addAttribute("festivals", festivalService.getAllFestivals());
-		return "festival-table"; // name of the HTML file (festival-table.html)
+	public String listFestivals(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+			Model model) {
+
+		Pageable pageable = PageRequest.of(page, size);
+		Page<Festival> festivalPage = festivalService.getFestivals(pageable);
+
+		model.addAttribute("festivals", festivalPage.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("pageSize", size);
+		model.addAttribute("totalPages", festivalPage.getTotalPages());
+		model.addAttribute("totalItems", festivalPage.getTotalElements());
+
+		return "festival-table";
 	}
 
 	@GetMapping("/festivals/{id}")

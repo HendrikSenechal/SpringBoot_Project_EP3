@@ -1,6 +1,8 @@
 package services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -12,8 +14,8 @@ public class FestivalServiceImpl implements FestivalService {
 	private FestivalRepository festivalRepository;
 
 	@Override
-	public Iterable<Festival> getAllFestivals() {
-		return festivalRepository.findAll();
+	public Page<Festival> getFestivals(Pageable pageable) {
+		return festivalRepository.findAll(pageable);
 	}
 
 	@Override
