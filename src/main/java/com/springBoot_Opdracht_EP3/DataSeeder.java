@@ -19,14 +19,16 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import entity.Address;
 import entity.Category;
 import entity.Festival;
+import entity.MyUser;
 import entity.Registration;
-import entity.User;
 import entity.Vendor;
 import enums.Role;
 import lombok.extern.slf4j.Slf4j;
@@ -64,6 +66,8 @@ public class DataSeeder implements CommandLineRunner {
 			+ "a vestibulum lorem congue et. Pellentesque et quam felis. Quisque quis ligula in libero scelerisque laoreet eget non purus."
 			+ "Donec congue tincidunt egestas. Fusce at laoreet enim. Nam lobortis lectus eget massa posuere condimentum.";
 
+	private PasswordEncoder encoder = new BCryptPasswordEncoder();
+
 	/**
 	 * Runs the population process using DAO classes. Reads CSV files and inserts
 	 * addresses, categories, users, vendors, festivals, and registrations into the
@@ -78,14 +82,14 @@ public class DataSeeder implements CommandLineRunner {
 			List<Address> addresses = createAddresses(Paths.get("src/main/resources/populate-data/address-data.csv"));
 			List<Category> categories = createCategories(
 					Paths.get("src/main/resources/populate-data/category-data.csv"));
-			List<User> users = createUsers(Paths.get("src/main/resources/populate-data/user-data.csv"));
+			List<MyUser> myUsers = createUsers(Paths.get("src/main/resources/populate-data/user-data.csv"));
 
 			addressRepository.saveAll(addresses);
 			log.info("Addresses populated: {}", addresses.size());
 			categoryRepository.saveAll(categories);
 			log.info("Categories populated: {}", categories.size());
-			userRepository.saveAll(users);
-			log.info("Users populated: {}", users.size());
+			userRepository.saveAll(myUsers);
+			log.info("Users populated: {}", myUsers.size());
 
 			// Vendors
 			List<Vendor> vendors = createVendors(addresses, categories,
@@ -100,7 +104,7 @@ public class DataSeeder implements CommandLineRunner {
 			log.info("Festivals populated: {}", festivals.size());
 
 			// Registrations (composite key handled by Registration entity/Repository)
-			List<Registration> registrations = createRegistrations(users, festivals, 200);
+			List<Registration> registrations = createRegistrations(myUsers, festivals, 200);
 			registrationRepository.saveAll(registrations);
 			log.info("Registrations populated: {}", registrations.size());
 
@@ -175,13 +179,15 @@ public class DataSeeder implements CommandLineRunner {
 	 * @return a list of User entities created from the CSV data
 	 * @throws IOException if reading the file fails
 	 */
-	public List<User> createUsers(Path csvFilePath) throws IOException {
-		List<User> users = new ArrayList<>();
+	public List<MyUser> createUsers(Path csvFilePath) throws IOException {
+		List<MyUser> myUsers = new ArrayList<>();
 		Random random = new Random();
 
 		// Add a fixed user and admin for testing
-		users.add(new User("Hendrik", "Senechal", "h.s@gmail.com", "32478683011", Role.ADMIN, "123"));
-		users.add(new User("Ana", "Castelijn", "a.c@gmail.com", "32476513846", Role.ADMIN, "123"));
+		myUsers.add(
+				new MyUser("Hendrik", "Senechal", "h.s@gmail.com", "32478683011", Role.ADMIN, encoder.encode("123")));
+		myUsers.add(
+				new MyUser("Ana-Laura", "Castelijn", "a.c@gmail.com", "32476513846", Role.USER, encoder.encode("123")));
 
 		// Read CSV file with object data inside
 		try (BufferedReader br = Files.newBufferedReader(csvFilePath)) {
@@ -191,15 +197,13 @@ public class DataSeeder implements CommandLineRunner {
 				if (fields.length != 5)
 					continue;
 
-				// add random role. 20% chance admin, 80% chance user
-				Role role = (random.nextDouble() < 0.2) ? Role.ADMIN : Role.USER;
-
 				// Constructor: name, firstName, email, phoneNumber, role, password)
-				users.add(new User(fields[0], fields[1], fields[2], fields[3], role, fields[4]));
+				myUsers.add(
+						new MyUser(fields[0], fields[1], fields[2], fields[3], Role.USER, encoder.encode(fields[4])));
 			}
 		}
 
-		return users;
+		return myUsers;
 	}
 
 	/**
@@ -307,17 +311,17 @@ public class DataSeeder implements CommandLineRunner {
 	 * non-admin users are registered. Each registration includes a random rating,
 	 * comment, and registration date.
 	 *
-	 * @param users     the list of users to create registrations for (admins
+	 * @param myUsers   the list of users to create registrations for (admins
 	 *                  excluded)
 	 * @param festivals the list of festivals to register users to
 	 * @param amount    the total number of registrations to create
 	 * @return a list of Registration objects
 	 */
-	private List<Registration> createRegistrations(List<User> users, List<Festival> festivals, int amount) {
+	private List<Registration> createRegistrations(List<MyUser> myUsers, List<Festival> festivals, int amount) {
 		Random random = new Random();
 		List<Registration> registrations = new ArrayList<>();
-		List<Map.Entry<User, Festival>> allPairs = new ArrayList<>();
-		List<User> nonAdminUsers = users.stream().filter(user -> user.getRole() != Role.ADMIN)
+		List<Map.Entry<MyUser, Festival>> allPairs = new ArrayList<>();
+		List<MyUser> nonAdminUsers = myUsers.stream().filter(user -> user.getRole() != Role.ADMIN)
 				.collect(Collectors.toList());
 
 		// List with comments to randomly select from
@@ -330,9 +334,9 @@ public class DataSeeder implements CommandLineRunner {
 				"Top-notch lineup" };
 
 		// Create all possible festival_user pairings
-		for (User user : nonAdminUsers)
+		for (MyUser myUser : nonAdminUsers)
 			for (Festival festival : festivals)
-				allPairs.add(new AbstractMap.SimpleEntry<>(user, festival));
+				allPairs.add(new AbstractMap.SimpleEntry<>(myUser, festival));
 
 		// Shuffle all possible festival_user pairings
 		Collections.shuffle(allPairs, random);

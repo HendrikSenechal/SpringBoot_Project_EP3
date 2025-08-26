@@ -32,4 +32,5 @@ public class FestivalServiceImpl implements FestivalService {
 	public void save(Festival festival) {
 		festivalRepository.save(festival);
 	}
+
 }

@@ -1,11 +1,14 @@
 package domain;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import entity.Festival;
 import entity.Registration;
 import lombok.extern.slf4j.Slf4j;
+import security.CustomUserDetails;
 import services.AddressService;
 import services.CategoryService;
 import services.FestivalService;
@@ -60,15 +64,36 @@ public class FestivalController {
 		model.addAttribute("averageRating", registrationService.getAverageRatingForFestival(id));
 
 		Pageable pageable = PageRequest.of(0, 10);
+		List<Registration> top10Reviews = registrationService.getTop10Reviews(id);
+
+		model.addAttribute("registrations", top10Reviews);
+
+		return "festival-details";
+	}
+
+	@GetMapping("/festivals/reviews/{id}")
+	public String showFestivalReviews(@PathVariable("id") Long id, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, Model model) {
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+
+		model.addAttribute("userReview", registrationService.getRegistrationById(id, userDetails.getId()));
+
+		model.addAttribute("festival", festivalService.getFestivalById(id));
+		model.addAttribute("averageRating", registrationService.getAverageRatingForFestival(id));
+
+		Pageable pageable = PageRequest.of(page, size); // add Sort if you want
 		Page<Registration> registrationPage = registrationService.getRegistrations(id, pageable);
 
 		model.addAttribute("registrations", registrationPage.getContent());
-		model.addAttribute("currentPage", 0);
-		model.addAttribute("pageSize", 10);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("pageSize", size);
 		model.addAttribute("totalPages", registrationPage.getTotalPages());
 		model.addAttribute("totalItems", registrationPage.getTotalElements());
+		model.addAttribute("festivalId", id); // handy for links
 
-		return "festival-details"; // Your Thymeleaf template
+		return "festival-review"; // Thymeleaf template
 	}
 
 	@GetMapping("/festivals/edit/{id}")

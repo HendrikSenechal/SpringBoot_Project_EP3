@@ -2,8 +2,8 @@ package repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import entity.User;
+import entity.MyUser;
 
-public interface UserRepository extends CrudRepository<User, Long> {
-	User findByEmail(String email);
+public interface UserRepository extends CrudRepository<MyUser, Long> {
+	MyUser findByEmail(String email);
 }

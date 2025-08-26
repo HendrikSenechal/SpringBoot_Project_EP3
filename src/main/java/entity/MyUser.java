@@ -9,6 +9,8 @@ import enums.Role;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,15 +18,15 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import utility.PasswordUtil;
 
 /**
  * Represents a system user who can register for festivals.
@@ -34,16 +36,18 @@ import utility.PasswordUtil;
  * </p>
  */
 @Entity
-@NamedQueries({ @NamedQuery(name = "User.findAll", query = "SELECT u from User u"),
-		@NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"), })
+@NamedQueries({ @NamedQuery(name = "MyUser.findAll", query = "SELECT m from MyUser m"),
+		@NamedQuery(name = "MyUser.findByEmail", query = "SELECT m FROM MyUser m WHERE m.email = :email"), })
 @Table(name = "user")
+@Data
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = { "id", "registrations" })
 @ToString(exclude = { "id", "registrations" })
-public class User implements Serializable, BaseEntity {
+public class MyUser implements Serializable, BaseEntity {
 
 	@Serial
 	private static final long serialVersionUID = 1L;
@@ -81,19 +85,9 @@ public class User implements Serializable, BaseEntity {
 	/**
 	 * User's role within the system (e.g., ADMIN, ORGANIZER, USER).
 	 */
+	@Enumerated(EnumType.STRING)
+	@Column(length = 20)
 	private Role role;
-
-	/**
-	 * Salt used for password hashing. Automatically generated.
-	 */
-	@Column(nullable = false)
-	private byte[] salt = PasswordUtil.generateSalt();
-
-	/**
-	 * Transient field holding the plain password (not persisted).
-	 */
-	@Transient
-	private String plainPassword;
 
 	/**
 	 * Hashed password stored securely in the database.
@@ -103,7 +97,7 @@ public class User implements Serializable, BaseEntity {
 	/**
 	 * Registrations made by the user for various festivals.
 	 */
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "myUser", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Registration> registrations = new HashSet<>();
 
 	/**
@@ -117,22 +111,16 @@ public class User implements Serializable, BaseEntity {
 	 * @param role        the user's role
 	 * @param password    the user's plain password (will be hashed)
 	 */
-	public User(String name, String firstName, String email, String phoneNumber, Role role, String password) {
+	public MyUser(String firstName, String name, String email, String phoneNumber, Role role, String password) {
 		this.name = name;
 		this.firstName = firstName;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.role = role;
-		setPassword(password);
+		this.password = password;
 	}
 
-	/**
-	 * Hashes and stores the password using the generated salt.
-	 *
-	 * @param password the plain password to hash
-	 */
-	private void setPassword(String password) {
-		this.plainPassword = password;
-		this.password = PasswordUtil.hashPassword(password, salt);
+	public String getFullName() {
+		return firstName + ' ' + name;
 	}
 }

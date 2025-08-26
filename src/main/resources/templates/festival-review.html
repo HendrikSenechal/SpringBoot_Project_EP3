@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Festival - Detail</title>
+    <meta
+      name="description"
+      content="EWDJ Exam Assignment EP 3:
+A Spring Boot application for managing food truck festivals. The application allows the management of festivals and vendors."
+    />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-..."
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap"
+    />
+    <link rel="stylesheet" href="/assets/css/bss-overrides.css" />
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bs-init.js"></script>
+    <script src="/assets/js/theme.js"></script>
+  </head>
+  <body class="h-100" style="background-color: #f8f9fc;" id="page-top">
+    <div id="wrapper">
+      <nav
+        class="navbar align-items-start p-0 sidebar sidebar-dark accordion bg-gradient-primary navbar-dark"
+      >
+        <div class="container-fluid d-flex flex-column p-0">
+          <a
+            class="navbar-brand d-flex justify-content-center align-items-center m-0 sidebar-brand"
+            href="#"
+          >
+            <div class="sidebar-brand-icon">
+              <div
+                class="d-flex align-items-center justify-content-center me-2 ms-2"
+                style="width: 30px;"
+              >
+                <i class="fas fa-pepper-hot"></i>
+              </div>
+            </div>
+            <div class="mx-3 sidebar-brand-text">
+              <span>FOODIE APP</span>
+            </div>
+          </a>
+          <hr class="my-0 sidebar-divider" />
+          <ul class="navbar-nav text-light fs-5" id="accordionSidebar">
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" th:href="@{/dashboard}">
+                <div
+                  class="d-flex align-items-center justify-content-center me-2 ms-2"
+                  style="width: 30px;"
+                >
+                  <i class="fas fa-tachometer-alt fa-xl"></i>
+                </div>
+                <span class="fs-6">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link d-flex active align-items-center"
+                th:href="@{/festivals}"
+              >
+                <div
+                  class="d-flex align-items-center justify-content-center me-2 ms-2"
+                  style="width: 30px;"
+                >
+                  <i class="fas fa-calendar-alt fa-xl"></i>
+                </div>
+                <span class="fs-6">Festival</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" th:href="@{/vendors}">
+                <div
+                  class="d-flex align-items-center justify-content-center me-2 ms-2"
+                  style="width: 30px;"
+                >
+                  <i class="fas fa-truck fa-xl"></i>
+                </div>
+                <span class="fs-6">Vendor</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" th:href="@{/addresses}">
+                <div
+                  class="d-flex align-items-center justify-content-center me-2 ms-2"
+                  style="width: 30px;"
+                >
+                  <i class="fa-solid fa-map-location-dot"></i>
+                  </i>
+                </div>
+                <span class="fs-6">Addresses</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" th:href="@{/profile}">
+                <div
+                  class="d-flex align-items-center justify-content-center me-2 ms-2"
+                  style="width: 30px;"
+                >
+                  <i class="fas fa-user fa-xl"></i>
+                </div>
+                <span class="fs-6">Profile</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="d-flex flex-column" id="content-wrapper" style="margin-left: 224px;">
+        <div id="content">
+          <nav
+            class="navbar navbar-expand bg-white shadow topbar p-2 fixed-top"
+            style="z-index: 1030; margin-left: 224px;"
+          >
+            <div class="container-fluid">
+              <h3 class="m-0">
+                Dashboard &gt; Festival overview &gt;
+                <span th:text="${festival.name}">Festival name</span>
+                > Reviews
+              </h3>
+              <ul class="navbar-nav flex-nowrap ms-auto">
+                <div class="d-none d-sm-block topbar-divider"></div>
+                <li class="nav-item dropdown no-arrow">
+                  <div class="nav-item dropdown no-arrow">
+                    <a
+                      class="dropdown-toggle nav-link p-0"
+                      aria-expanded="false"
+                      data-bs-toggle="dropdown"
+                      href="#"
+                    >
+                      <span class="d-none d-lg-inline me-2 text-gray-900 large"
+                        >Valerie Luna</span
+                      >
+                      <img
+                        class="border rounded-circle img-profile"
+                        src="/assets/img/avatars/avatar1.jpeg"
+                        style="width: 28%; height: auto;"
+                      />
+                    </a>
+                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                      <a class="dropdown-item" th:href="@{/profile}">
+                        <i class="fas fa-user me-2 fa-sm fa-fw text-gray-400"></i>&nbsp;Profile
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">
+                        <i class="fas fa-sign-out-alt me-2 fa-sm fa-fw text-gray-400"></i
+                        >&nbsp;Logout
+                      </a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <div class="container-fluid pt-4 mt-5" style="margin-right: 320px;">
+            <div class="card border-0 shadow-md m-4 p-1">
+              <div class="card-body d-flex align-items-center justify-content-between">
+                <h3 class="text-dark mb-0 fw-bold text-dark">
+                  <span th:text="${festival.name}">Festival Name</span> Reviews
+                </h3>
+                <div class="d-flex gap-2">
+                  <a href="javascript:history.back()" class="btn btn-primary fw-semibold fs-6"
+                    >Return to overview</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="row m-4">
+              <!-- Column 1 -->
+              <div class="col-12 col-lg-4 p-0" style="min-height: 640px;">
+                <div class="card border-0 shadow-md h-100  p-3">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-md-6">
+	                        <h3 class="text-dark fw-bold mb-3">Reviews</h3>
+                      	</div>
+                      	<div class="col-md-6 text-end mb-2">
+	                        <span
+	                            class="px-3 rounded-pill"
+	                            th:classappend="${
+	                              averageRating > 4 ? ' bg-success text-white' :
+	                              (averageRating >= 2.5 ? ' bg-warning text-dark' : ' bg-danger text-white')
+	                            }"
+	                            th:text="${averageRating}"
+	                          ></span>
+                      </div>
+                    </div>
+                    <!-- Table -->
+                    <div
+                      class="table-responsive mt-2"
+                      role="grid"
+                      aria-describedby="reviews_info"
+                    >
+                      <!-- NOTE: removed duplicate id; only one unique id for table -->
+                      <table class="table table-hover table-clickable my-0" id="reviewsTable">
+                        <thead>
+                          <tr>
+                            <th class="text-dark min-rating" style="width: 40px;">Rating</th>
+                            <th class="text-dark" style="width: 30%;">Reviewer</th>                            
+                            <th class="text-dark">Comment</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr
+                            th:each="registration : ${registrations}"
+                            class="review-row"
+                            style="cursor: pointer;"
+                            th:attr="
+								          data-id=${registration.id},
+								          data-rating=${registration.rating},
+								          data-comment=${registration.comment},
+								          data-detail=${registration.detailDescription},
+								          data-user=${registration.myUser.firstName} + ' ' + ${registration.myUser.name}"
+								          
+                          >
+                            <td style="width: 40px;">
+	                            <span
+	                            class="px-3 py-0 rounded-pill"
+	                            th:classappend="${
+	                              registration.rating > 4 ? ' bg-success text-white' :
+	                              (registration.rating >= 2.5 ? ' bg-warning text-dark' : ' bg-danger text-white')
+	                            }"
+	                            th:text="${registration.rating}"
+	                          ></span>
+                            </td>
+                            <td class="text-dark" th:text="${registration.myUser.firstName}" style="width: 30%;">name</td>
+                            
+                            <td
+                              class="text-dark text-truncate"
+                              style="max-width:0;"
+                              th:text="${registration.comment}"
+                            >
+                              Comment…
+                            </td>
+                          </tr>
+                          <tr th:if="${#lists.isEmpty(registrations)}">
+                            <td colspan="2" class="text-center text-muted">No reviews found</td>
+                          </tr>
+                      </table>
+                    </div>
+                    <!-- Info + Pagination -->
+                    <div class="row g-2 align-items-center mt-3">
+                      <div class="col-md-6">
+                        <p id="reviews_info" class="mb-0 text-muted" th:if="${totalPages > 0}">
+                          Showing
+                          <span
+                            th:text="${(totalItems == 0) ? 0 : (currentPage * pageSize + 1)}"
+                            >1</span
+                          >
+                          to
+                          <span
+                            th:text="${((currentPage + 1) * pageSize) > totalItems ? totalItems : ((currentPage + 1) * pageSize)}"
+                            >10</span
+                          >
+                          of
+                          <span th:text="${totalItems}">0</span>
+                        </p>
+                      </div>
+                      <div class="col-md-6">
+                        <nav class="d-lg-flex justify-content-lg-end" th:if="${totalPages > 0}">
+                          <ul class="pagination mb-0">
+                            <!-- Previous -->
+                            <li class="page-item" th:classappend="${currentPage == 0} ? ' disabled'">
+                              <a
+                                class="page-link"
+                                th:href="@{/festivals/reviews/{id}(id=${festivalId}, page=${currentPage - 1}, size=${pageSize})}"
+                                aria-label="Previous"
+                              >
+                                <span aria-hidden="true">«</span>
+                              </a>
+                            </li>
+                            <!-- Page numbers (window -2 to +2) -->
+                            <li
+                              class="page-item"
+                              th:each="i : ${#numbers.sequence(
+				                               (currentPage - 2) < 0 ? 0 : (currentPage - 2),
+				                               (currentPage + 2) >= (totalPages - 1) ? (totalPages - 1) : (currentPage + 2)
+				                            )}"
+                              th:classappend="${i} == ${currentPage} ? ' active'"
+                            >
+                              <a
+                                class="page-link"
+                                th:text="${i + 1}"
+                                th:href="@{/festivals/reviews/{id}(id=${festivalId}, page=${i}, size=${pageSize})}"
+                                >1</a
+                              >
+                            </li>
+                            <!-- Next -->
+                            <li
+                              class="page-item"
+                              th:classappend="${currentPage + 1 >= totalPages} ? ' disabled'"
+                            >
+                              <a
+                                class="page-link"
+                                th:href="@{/festivals/reviews/{id}(id=${festivalId}, page=${currentPage + 1}, size=${pageSize})}"
+                                aria-label="Next"
+                              >
+                                <span aria-hidden="true">»</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Column 2: Details -->
+              <div class="col-12 col-lg-4 p-0 ps-lg-4 mt-lg-0">
+                <div class="card border-0 shadow-md h-100 p-3">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <h4 class="mb-0 text-dark fw-bold">Review details</h4>
+                      <span class="badge bg-secondary invisible" id="detail-id" style="display: none;"></span>
+                    </div>
+                    <div class="row">
+                    <div class="col-8">
+                    <div class="mb-3">
+                      <div class="text-dark fw-bold">Reviewer</div>
+                      <div class="fs-5 fw-semibold" id="detail-user">—</div>
+                    </div>
+                    </div>
+                    <div class="col-4">
+                    <div class="mb-3">
+                      <div class="text-dark fw-bold">Rating</div>
+                      <div class="fs-5" id="detail-rating" aria-label="rating"></div>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="text-dark fw-bold">Comment</div>
+                      <p class="mb-0" id="detail-comment">—</p>
+                    </div>
+                    <div>
+                      <div class="text-dark fw-bold">Description:</div>
+                      <p class="mb-0 overflow-auto" id="detail-detail">—</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Column 1: Form -->
+				<form action="/submit-review" method="POST" class="col-12 col-lg-4 p-0 ps-4 mt-lg-0">
+				  <div class="card border-0 shadow-md h-100 p-3">
+				    <div class="card-body">
+				      <h4 class="mb-3 text-dark fw-bold">Add / Edit your own Review</h4>
+				
+				      <!-- Rating -->
+				      <div class="mb-3">
+						  <label for="form-rating" class="form-label text-dark fw-bold">Rating</label>
+						  <select class="form-select" id="form-rating" name="rating" aria-label="Select rating" required>
+						    <option value="">Select rating</option>
+						    <option value="1" th:selected="${userReview.rating == 1}">1 - Poor</option>
+						    <option value="2" th:selected="${userReview.rating == 2}">2 - Fair</option>
+						    <option value="3" th:selected="${userReview.rating == 3}">3 - Good</option>
+						    <option value="4" th:selected="${userReview.rating == 4}">4 - Very Good</option>
+						    <option value="5" th:selected="${userReview.rating == 5}">5 - Excellent</option>
+						  </select>
+						</div>
+
+				      <!-- Comment -->
+				      <div class="mb-3">
+				        <label for="form-comment" class="form-label text-dark fw-bold">Comment</label>
+				        <textarea class="form-control" id="form-comment" name="comment" rows="2" th:text="${userReview.comment}" placeholder="Enter short comment" maxlength="255" required></textarea>
+				      </div>
+				
+				      <!-- Description -->
+				      <div class="mb-3">
+				        <label for="form-detail" class="form-label text-dark fw-bold">Description</label>
+				        <textarea class="form-control" id="form-detail" name="detail" rows="9" th:text="${userReview.detailDescription}" placeholder="Enter detailed feedback"></textarea>
+				      </div>
+				
+				      <!-- Submit -->
+				      <div class="text-end">
+				        <button type="submit" class="btn btn-primary px-4">Save Review</button>
+				      </div>
+				    </div>
+				  </div>
+				</form>
+            </div>
+          </div>
+        </div>
+      </div>
+		<script>
+		  function renderStars(n) {
+		    const count = parseInt(n, 10) || 0;
+		    const full = "★".repeat(Math.max(0, Math.min(count, 5)));
+		    const empty = "☆".repeat(Math.max(0, 5 - Math.min(count, 5)));
+		    return full + empty;
+		  }
+		
+		  function updateDetailFromRow(row) {
+		    if (!row) return;
+		
+		    // clear active state from other rows
+		    document
+		      .querySelectorAll("#reviewsTable tbody tr.review-row.active")
+		      .forEach((r) => r.classList.remove("active"));
+		
+		    row.classList.add("active");
+		
+		    const id = row.getAttribute("data-id") || "";
+		    const user = row.getAttribute("data-user") || "—";
+		    const rating = parseInt(row.getAttribute("data-rating")) || 0;
+		    const comm = row.getAttribute("data-comment") || "—";
+		    const detail = row.getAttribute("data-detail") || "—";
+		
+		    const el = (id) => document.getElementById(id);
+		
+		    // Fill the ID and user fields
+		    el("detail-id").textContent = id ? `#${id}` : "";
+		    el("detail-id").style.display = id ? "inline-block" : "none";
+		    el("detail-user").textContent = user;
+		
+		    // Handle rating stars and number separately
+		    const ratingEl = el("detail-rating");
+		    ratingEl.innerHTML = `
+		      <span id="detail-stars">${renderStars(rating)}</span>
+		      <span class="text-dark"> (${rating}/5)</span>
+		    `;
+		
+		    // Grab the stars span to colorize
+		    const starsEl = document.getElementById("detail-stars");
+		
+		    // Remove any old classes
+		    starsEl.classList.remove("text-danger", "text-warning", "text-success");
+		
+		    // Add new class based on rating
+		    if (rating === 1 || rating === 2) {
+		      starsEl.classList.add("text-danger");
+		    } else if (rating === 3) {
+		      starsEl.classList.add("text-warning");
+		    } else if (rating === 4 || rating === 5) {
+		      starsEl.classList.add("text-success");
+		    }
+		
+		    // Fill comment and details
+		    el("detail-comment").textContent = comm;
+		    el("detail-detail").textContent = detail;
+		  }
+		
+		  document.addEventListener("DOMContentLoaded", function () {
+		    const rows = Array.from(
+		      document.querySelectorAll("#reviewsTable tbody tr.review-row")
+		    );
+		
+		    rows.forEach((row) => {
+		      row.setAttribute("tabindex", "0");
+		      row.addEventListener("click", () => updateDetailFromRow(row));
+		      row.addEventListener("keydown", (e) => {
+		        if (e.key === "Enter" || e.key === " ") {
+		          e.preventDefault();
+		          updateDetailFromRow(row);
+		        }
+		      });
+		    });
+		
+		    // auto-select first review on load
+		    if (rows.length > 0) {
+		      updateDetailFromRow(rows[0]);
+		    }
+		  });
+		</script>
+    </div>
+  </body>
+</html>

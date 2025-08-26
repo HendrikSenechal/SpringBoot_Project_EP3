@@ -16,6 +16,7 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,8 +24,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Represents a registration of a {@link User} for a {@link Festival}, including
- * rating, comment, and timestamp.
+ * Represents a registration of a {@link MyUser} for a {@link Festival},
+ * including rating, comment, and timestamp.
  * <p>
  * This entity uses a composite primary key defined in {@link UserFestivalKey}.
  * </p>
@@ -34,6 +35,7 @@ import lombok.ToString;
 @Table(name = "registration")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = { "id" })
@@ -78,7 +80,7 @@ public class Registration implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("userId")
 	@JoinColumn(name = "USER_ID")
-	private User user;
+	private MyUser myUser;
 
 	/**
 	 * The festival associated with this registration.
@@ -94,16 +96,16 @@ public class Registration implements Serializable {
 	 * @param rating   the rating given by the user
 	 * @param comment  the comment made by the user
 	 * @param date     the time of registration
-	 * @param user     the registered user
+	 * @param myUser   the registered user
 	 * @param festival the registered festival
 	 */
-	public Registration(int rating, String comment, String detailDescription, LocalDateTime date, User user,
+	public Registration(int rating, String comment, String detailDescription, LocalDateTime date, MyUser myUser,
 			Festival festival) {
 		this.rating = rating;
 		this.comment = comment;
 		this.detailDescription = detailDescription;
 		this.date = date;
-		this.user = user;
+		this.myUser = myUser;
 		this.festival = festival;
 	}
 }

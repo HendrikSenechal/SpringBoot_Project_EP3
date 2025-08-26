@@ -86,12 +86,12 @@ A Spring Boot application for managing food truck festivals. The application all
 							
 							  <!-- Name + role (hide on small screens) -->
 							  <div class="text-end d-none d-lg-block">							  
-							    <div class="fw-semibold fs-6 text-dark lh-1" th:text="${username}">username</div>
+							    <div class="fw-semibold fs-6 text-dark lh-1" th:text="${fullName}">username</div>
 							    <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
 									<h2 class="text-muted small lh-1 m-0">ADMIN</h2>
 								</th:block>
 								<th:block th:unless="${#authorization.expression('hasRole(''ADMIN'')')}">
-									<h3 class="text-muted small lh-1 m-0">User</h3>
+									<h2 class="text-muted small lh-1 m-0">USER</h2>
 								</th:block>
 								
 							  </div>
