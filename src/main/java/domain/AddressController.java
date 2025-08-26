@@ -1,4 +1,4 @@
-package com.springBoot_Opdracht_EP3;
+package domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

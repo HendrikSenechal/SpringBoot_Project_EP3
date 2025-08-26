@@ -1,4 +1,6 @@
-package com.springBoot_Opdracht_EP3;
+package domain;
+
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,7 +39,8 @@ public class FestivalController {
 
 	@GetMapping("/festivals")
 	public String listFestivals(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
-			Model model) {
+			Model model, Principal principal) {
+		model.addAttribute("username", principal.getName());
 
 		Pageable pageable = PageRequest.of(page, size);
 		Page<Festival> festivalPage = festivalService.getFestivals(pageable);

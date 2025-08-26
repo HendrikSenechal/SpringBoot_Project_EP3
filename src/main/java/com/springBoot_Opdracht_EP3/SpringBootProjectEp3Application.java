@@ -30,7 +30,7 @@ public class SpringBootProjectEp3Application implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addRedirectViewController("/", "/addresses");
+		registry.addRedirectViewController("/", "/festivals");
 	}
 
 	@Bean

@@ -1,4 +1,4 @@
-package com.springBoot_Opdracht_EP3;
+package domain;
 
 public class RegistrationController {
 
