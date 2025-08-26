@@ -18,7 +18,8 @@ public class SecurityConfig {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		auth.inMemoryAuthentication().withUser("nameUser").password(encoder.encode("12345678")).roles("USER");
+		auth.inMemoryAuthentication().withUser("nameUser").password(encoder.encode("12345678")).roles("USER").and()
+				.withUser("Hendrik Senechal").password(encoder.encode("admin1234")).roles("USER", "ADMIN");
 	}
 
 	@Bean
@@ -27,8 +28,8 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.csrfTokenRepository(new HttpSessionCsrfTokenRepository()))
 				.authorizeHttpRequests(requests -> requests.requestMatchers("/login**").permitAll()
 						.requestMatchers("/403**", "/assets/**", "/css/**", "/js/**", "/images/**", "/webjars/**")
-						.permitAll().requestMatchers("/*").hasRole("USER"))
-				.formLogin(form -> form.defaultSuccessUrl("/festivals", true).loginPage("/login").permitAll());
+						.permitAll().requestMatchers("/**").hasRole("USER"))
+				.formLogin(form -> form.defaultSuccessUrl("/festivals", true).loginPage("/login"));
 		return http.build();
 	}
 }

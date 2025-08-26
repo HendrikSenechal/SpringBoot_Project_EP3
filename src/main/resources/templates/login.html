@@ -44,6 +44,8 @@ A Spring Boot application for managing food truck festivals. The application all
 									    <input class="form-control form-control-user my-3"
 									           type="password" name="password" placeholder="Password">
 									  </div>
+									  <div th:if="${error}" class="text-danger text-center mb-3" th:text="${error}"></div>
+									  <div th:if="${msg}" class="text-primary text-center mb-3" th:text="${msg}"></div>
 									
 									  <!-- Proper CSRF field -->
 									  <input type="hidden"
@@ -54,7 +56,7 @@ A Spring Boot application for managing food truck festivals. The application all
 									</form>
 
                                     <div class="text-center"></div>
-                                    <div class="text-center"><a class="small">Create an Account!</a></div>
+                                    <div class="text-center mt-2"><a class="small">Create an Account!</a></div>
                                 </div>
                             </div>
                         </div>

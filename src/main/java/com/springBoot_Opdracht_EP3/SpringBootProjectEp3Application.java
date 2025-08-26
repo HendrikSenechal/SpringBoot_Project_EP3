@@ -19,7 +19,7 @@ import services.RegistrationServiceImpl;
 import services.VendorService;
 import services.VendorServiceImpl;
 
-@SpringBootApplication(scanBasePackages = { "com.springBoot_Opdracht_EP3", "repository" })
+@SpringBootApplication(scanBasePackages = { "com.springBoot_Opdracht_EP3", "repository", "domain" })
 @EnableJpaRepositories("repository")
 @EntityScan("entity")
 public class SpringBootProjectEp3Application implements WebMvcConfigurer {

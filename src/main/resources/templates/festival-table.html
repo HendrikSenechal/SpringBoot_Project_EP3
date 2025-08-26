@@ -85,13 +85,19 @@ A Spring Boot application for managing food truck festivals. The application all
 							<div class="d-flex align-items-center justify-content-end gap-3">
 							
 							  <!-- Name + role (hide on small screens) -->
-							  <div class="text-end d-none d-lg-block">
-							    <div class="fw-semibold" th:text="${username}">Valerie Luna</div>
-							    <div class="text-muted small">Admin</div>
+							  <div class="text-end d-none d-lg-block">							  
+							    <div class="fw-semibold fs-6 text-dark lh-1" th:text="${username}">username</div>
+							    <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+									<h2 class="text-muted small lh-1 m-0">ADMIN</h2>
+								</th:block>
+								<th:block th:unless="${#authorization.expression('hasRole(''ADMIN'')')}">
+									<h3 class="text-muted small lh-1 m-0">User</h3>
+								</th:block>
+								
 							  </div>
 							
 							  <!-- Avatar -->
-							  <img class="rounded-circle" th:src="@{/assets/img/avatars/avatar1.jpeg}" src="/assets/img/avatars/avatar1.jpeg" alt="Profile picture of [[${username}]]" width="50" height="50" loading="lazy" style="object-fit:cover;"/>
+							  <img class="rounded-circle" th:src="@{/assets/img/avatars/avatar1.jpeg}" src="/assets/img/avatars/avatar1.jpeg" alt="Profile picture of [[${username}]]" width="47" height="47" loading="lazy" style="object-fit:cover;"/>
 							
 							  <!-- Divider (Bootstrap 5 vertical rule) -->
 							  <div class="vr d-none d-sm-inline mx-1"></div>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
+
 	@GetMapping
 	public String login(String error, String logout, Model model) {
 
@@ -19,4 +20,5 @@ public class LoginController {
 		}
 		return "login";
 	}
+
 }
