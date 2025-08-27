@@ -136,7 +136,14 @@ A Spring Boot application for managing food truck festivals. The application all
 							
 							    <div class="col-md-3">
 							        <h4 class="invisible mb-4">Algemene info</h4> <!-- Keeps alignment with column 1 -->
-									<p class="mb-2"><strong class="text-dark">Rating:</strong> <span th:text="${vendor.vendorRating}">Vendor vendorRating</span></p>
+									<p class="mb-2"><strong class="text-dark">Rating:</strong>
+									<span
+									    class="ms-2 px-3 py-0 rounded-pill"
+									    th:classappend="${vendor.vendorRating > 4 ? ' bg-success text-white' :
+									                    (vendor.vendorRating >= 2.5 ? ' bg-warning text-dark' : ' bg-danger text-white')}"
+									    th:text="${vendor.vendorRating}">
+									</span>
+									</p>
 	                        		<p class="mb-2"><strong class="text-dark">Category:</strong> <span th:text="${vendor.category.name}">Vendor category</span></p>
 							    </div>
 							
@@ -153,8 +160,11 @@ A Spring Boot application for managing food truck festivals. The application all
 							        <h4 class="invisible mb-4">Address</h4> <!-- Keeps alignment with column 3 -->
 							        <p class="mb-2"><strong class="text-dark">Street:</strong> <span th:text="${vendor.address.street}">Kunstlaan</span></p>
 							        <p class="mb-2"><strong class="text-dark">Number:</strong> <span th:text="${vendor.address.number}">9</span></p>
-							        <p class="mb-2"><strong class="text-dark">Addition:</strong> <span th:text="${vendor.address.addition}">kot 12</span></p>
-							    </div>
+									<p class="mb-2" th:if="${!#strings.isEmpty(vendor.address.addition)}">
+									    <strong class="text-dark">Addition:</strong>
+									    <span th:text="${vendor.address.addition}">kot 12</span>
+									</p>							   
+								</div>
 							</div>
 						</div>
 					</div>

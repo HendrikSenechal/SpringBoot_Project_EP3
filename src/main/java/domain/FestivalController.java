@@ -1,6 +1,7 @@
 package domain;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import entity.Festival;
+import entity.MyUser;
 import entity.Registration;
 import entity.UserFestivalKey;
 import lombok.extern.slf4j.Slf4j;
@@ -67,43 +68,76 @@ public class FestivalController {
 	}
 
 	@GetMapping("/festivals/{id}")
-	public String showFestivalDetails(@PathVariable("id") Long id, Authentication authentication, Model model) {
-		model.addAttribute("festival", festivalService.getFestivalById(id));
-		model.addAttribute("averageRating", registrationService.getAverageRatingForFestival(id));
-		model.addAttribute("reservedTickets", registrationService.getTicketsByFestival(id));
-
-		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-		model.addAttribute("userTickets", registrationService.getTicketsByFestivalAndUser(id, userDetails.getId()));
-
-		Pageable pageable = PageRequest.of(0, 10);
-		List<Registration> top10Reviews = registrationService.getTop10Reviews(id);
-
-		model.addAttribute("registrations", top10Reviews);
-
+	public String showFestivalDetails(@PathVariable("id") Long festivalId,
+			@AuthenticationPrincipal CustomUserDetails user, Model model) {
+		populateFestivalDetailModel(festivalId, user, model);
 		return "festival-details";
+	}
+
+	@PostMapping("/festivals/{festivalId}")
+	public String saveFestivalTickets(@PathVariable("festivalId") Long festivalId,
+			@RequestParam("orderedTickets") int tickets, @AuthenticationPrincipal CustomUserDetails user, Model model) {
+		Registration reg = registrationService.getRegistrationById(festivalId, user.getId());
+		if (reg == null) {
+			Long userId = user.getId();
+			MyUser myUser = userRepository.findById(userId)
+					.orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+			Festival festival = festivalRepository.findById(festivalId)
+					.orElseThrow(() -> new RuntimeException("Festival not found with id: " + festivalId));
+			reg = new Registration(null, tickets, "", "", LocalDateTime.now(), myUser, festival);
+		} else {
+			reg.setTickets(tickets);
+		}
+
+		registrationService.saveOrUpdate(reg);
+
+		populateFestivalDetailModel(festivalId, user, model);
+		return "festival-details";
+	}
+
+	@PostMapping("/festivals/{id}/delete")
+	public String removeRegistration(@PathVariable("id") Long festivalId,
+			@AuthenticationPrincipal CustomUserDetails user, Model model) {
+
+		registrationService.deleteById(festivalId, user.getId());
+
+		populateFestivalDetailModel(festivalId, user, model);
+		return "festival-details";
+	}
+
+	private void populateFestivalDetailModel(@PathVariable("festivalId") Long festivalId,
+			@AuthenticationPrincipal CustomUserDetails user, Model model) {
+		model.addAttribute("festival", festivalService.getFestivalById(festivalId));
+		model.addAttribute("averageRating", registrationService.getAverageRatingForFestival(festivalId));
+		model.addAttribute("reservedTickets", registrationService.getTicketsByFestival(festivalId));
+		model.addAttribute("userTickets", registrationService.getTicketsByFestivalAndUser(festivalId, user.getId()));
+		List<Registration> top10Reviews = registrationService.getTop10Reviews(festivalId);
+		model.addAttribute("registrations", top10Reviews);
 	}
 
 	@GetMapping("/festivals/edit/{id}")
 	public String editFestival(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("categories", categoryService.getAllCategories());
-		model.addAttribute("addresses", addressService.getAllAddresses());
-		model.addAttribute("vendors", vendorService.getAllVendors());
-		model.addAttribute("festival", festivalService.getFestivalById(id));
+		populateNewOrEditModel(model, festivalService.getFestivalById(id));
 		return "festival-edit";
 	}
 
 	@GetMapping("/festivals/new")
 	public String newFestival(Model model) {
+		populateNewOrEditModel(model, new Festival("", "", 0, 0));
+		return "festival-edit";
+	}
+
+	public void populateNewOrEditModel(Model model, Festival festival) {
 		model.addAttribute("categories", categoryService.getAllCategories());
 		model.addAttribute("addresses", addressService.getAllAddresses());
 		model.addAttribute("vendors", vendorService.getAllVendors());
-		model.addAttribute("festival", new Festival("", "", 0, 0));
-		return "festival-edit";
+		model.addAttribute("festival", festival);
 	}
 
 	@PostMapping("/updateFestival")
 	public String saveOrUpdateFestival(@ModelAttribute Festival festival,
-			@RequestParam(value = "vendorIds", required = false) java.util.List<Long> vendorIds, Model model) {
+			@RequestParam(value = "vendorIds", required = false) java.util.List<Long> vendorIds,
+			@AuthenticationPrincipal CustomUserDetails user, Model model) {
 
 		// Make sure Address is a managed entity
 		if (festival.getAddress() != null && festival.getAddress().getId() != null) {
@@ -124,34 +158,12 @@ public class FestivalController {
 		festivalService.save(festival);
 
 		// after festivalService.save(festival);
-		Pageable pageable = PageRequest.of(0, 10);
-		Page<Festival> page = festivalService.getFestivals(pageable);
+		populateFestivalDetailModel(festival.getId(), user, model);
 
-		model.addAttribute("festivals", page.getContent());
-		model.addAttribute("currentPage", page.getNumber());
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("pageSize", page.getSize());
-
-		return "festival-table";
+		return "festival-details";
 	}
 
 	// REVIEW
-
-	private void populateFestivalReviewModel(Long festivalId, int page, int size, CustomUserDetails user, Model model) {
-		model.addAttribute("userReview", registrationService.getRegistrationById(festivalId, user.getId()));
-		model.addAttribute("festival", festivalService.getFestivalById(festivalId));
-		model.addAttribute("averageRating", registrationService.getAverageRatingForFestival(festivalId));
-
-		Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "rating"));
-		Page<Registration> registrationPage = registrationService.getRegistrations(festivalId, pageable);
-
-		model.addAttribute("registrations", registrationPage.getContent());
-		model.addAttribute("currentPage", page);
-		model.addAttribute("pageSize", size);
-		model.addAttribute("totalPages", registrationPage.getTotalPages());
-		model.addAttribute("totalItems", registrationPage.getTotalElements());
-		model.addAttribute("festivalId", festivalId);
-	}
 
 	@GetMapping("/festivals/{id}/reviews")
 	public String showFestivalReviews(@PathVariable("id") Long festivalId, @RequestParam(defaultValue = "0") int page,
@@ -186,6 +198,22 @@ public class FestivalController {
 		populateFestivalReviewModel(festivalId, page, size, user, model);
 
 		return "festival-review";
+	}
+
+	private void populateFestivalReviewModel(Long festivalId, int page, int size, CustomUserDetails user, Model model) {
+		model.addAttribute("userReview", registrationService.getRegistrationById(festivalId, user.getId()));
+		model.addAttribute("festival", festivalService.getFestivalById(festivalId));
+		model.addAttribute("averageRating", registrationService.getAverageRatingForFestival(festivalId));
+
+		Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "rating"));
+		Page<Registration> registrationPage = registrationService.getRegistrations(festivalId, pageable);
+
+		model.addAttribute("registrations", registrationPage.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("pageSize", size);
+		model.addAttribute("totalPages", registrationPage.getTotalPages());
+		model.addAttribute("totalItems", registrationPage.getTotalElements());
+		model.addAttribute("festivalId", festivalId);
 	}
 
 }

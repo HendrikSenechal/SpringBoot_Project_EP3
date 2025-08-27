@@ -33,8 +33,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Override
 	public Double getAverageRatingForFestival(Long festivalId) {
-		Double avg = Math.round(registrationRepository.findAverageRatingByFestivalId(festivalId) * 10.0) / 10.0;
-		return avg != null ? avg : 0.0;
+		Double avg = registrationRepository.findAverageRatingByFestivalId(festivalId);
+		return (avg == null) ? 0.0 : Math.round(avg * 10.0) / 10.0;
 	}
 
 	@Override
@@ -54,5 +54,13 @@ public class RegistrationServiceImpl implements RegistrationService {
 	public int getTicketsByFestivalAndUser(Long festivalId, Long userId) {
 		Long sum = registrationRepository.sumTicketsForFestivalAndCurrentUser(festivalId, userId);
 		return (sum == null) ? 0 : Math.toIntExact(sum); // throws if overflow
+	}
+
+	public void updateTickets(Long festivalId, Long userId, Integer tickets) {
+		registrationRepository.updateTickets(festivalId, userId, tickets);
+	}
+
+	public void deleteById(Long festivalId, Long userId) {
+		registrationRepository.deleteByFestivalIdAndUserId(festivalId, userId);
 	}
 }

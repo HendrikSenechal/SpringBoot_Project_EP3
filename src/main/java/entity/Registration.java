@@ -3,6 +3,8 @@ package entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import org.springframework.lang.Nullable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -53,7 +55,9 @@ public class Registration implements Serializable {
 	/**
 	 * Rating given by the user for the festival.
 	 */
-	private int rating;
+	@Nullable // signals "may be null" to IDEs & Spring
+	@Column(name = "rating", nullable = true) // DB column allows NULL
+	private Integer rating;
 
 	/**
 	 * Amount of tickets ordered by the user for the festival.
@@ -99,12 +103,13 @@ public class Registration implements Serializable {
 	 * Creates a registration entry. Used for database population in populateDB.
 	 *
 	 * @param rating   the rating given by the user
+	 * @param rating   the ticket amount ordered by the user
 	 * @param comment  the comment made by the user
 	 * @param date     the time of registration
 	 * @param myUser   the registered user
 	 * @param festival the registered festival
 	 */
-	public Registration(int rating, int tickets, String comment, String detailDescription, LocalDateTime date,
+	public Registration(Integer rating, int tickets, String comment, String detailDescription, LocalDateTime date,
 			MyUser myUser, Festival festival) {
 		this.rating = rating;
 		this.tickets = tickets;

@@ -21,4 +21,8 @@ public interface RegistrationService {
 	int getTicketsByFestival(Long festivalId);
 
 	int getTicketsByFestivalAndUser(Long festivalId, Long userId);
+
+	void updateTickets(Long festivalId, Long userId, Integer tickets);
+
+	void deleteById(Long festivalId, Long userId);
 }

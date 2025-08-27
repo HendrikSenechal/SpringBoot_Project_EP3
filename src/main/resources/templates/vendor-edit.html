@@ -155,17 +155,35 @@ A Spring Boot application for managing food truck festivals. The application all
 							                    <input type="text" class="form-control" th:field="*{description}" placeholder="e.g. Italian pastas">
 							                </p>
 							                <p class="mb-2">
-							                    <strong class="text-dark">Phone Number:</strong>
-							                    <input type="text" class="form-control" th:field="*{phoneNumber}" placeholder="e.g. 32478683011">
-							                </p>
-							                <p class="mb-2">
-							                    <strong class="text-dark">E-mail:</strong>
-							                    <input type="email" class="form-control" th:field="*{email}" placeholder="e.g. example@email.com">
-							                </p>
-							                <p class="mb-2">
-							                    <strong class="text-dark">Website:</strong>
-							                    <input type="text" class="form-control" th:field="*{website}" placeholder="e.g. www.example.com">
-							                </p>
+											  <strong class="text-dark">Phone Number:</strong>
+											  <input type="tel"
+											         class="form-control"
+											         th:field="*{phoneNumber}"
+											         placeholder="e.g. 32478683011"
+											         pattern="^[0-9]{7,15}$"
+											         title="Phone number must be 7–15 digits (numbers only)">
+											</p>
+											
+											<p class="mb-2">
+											  <strong class="text-dark">E-mail:</strong>
+											  <input type="email"
+											         class="form-control"
+											         th:field="*{email}"
+											         placeholder="e.g. example@email.com"
+											         required
+											         title="Please enter a valid email address (e.g. name@example.com)">
+											</p>
+											
+											<p class="mb-2">
+											  <strong class="text-dark">Website:</strong>
+											  <input type="url"
+											         class="form-control"
+											         th:field="*{website}"
+											         placeholder="e.g. https://www.example.com"
+											         pattern="https?://.+"
+											         title="Website must start with http:// or https://">
+											</p>
+
 							            </div>
 							
 							            <!-- Address Tabs -->
