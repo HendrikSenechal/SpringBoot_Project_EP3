@@ -55,8 +55,7 @@ public class AddressController {
 
 	@GetMapping("/address/new")
 	public String addAddress(Model model) {
-		Address address = new Address("", "", "", 0, "", 0, "");
-		model.addAttribute("address", address);
+		model.addAttribute("address", new Address("", "", "", 0, "", 0, ""));
 		return "address-edit";
 	}
 

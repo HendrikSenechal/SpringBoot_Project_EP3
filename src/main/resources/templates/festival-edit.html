@@ -81,7 +81,7 @@
             <div id="content">
                 <nav class="navbar navbar-expand bg-white shadow topbar p-2 fixed-top" style="z-index: 1030; margin-left: 224px;">
                     <div class="container-fluid">
-                        <h3 class="m-0">Dashboard &gt; Festival overview &gt; <span th:text="${festival.name}">Festival name</span></h3>
+                        <h3 class="m-0">Dashboard &gt; Festival overview &gt; <span th:text="${festival.name != '' ? festival.name : 'New Festival'}">Festival name</span></h3>
                         <div class="d-flex align-items-center justify-content-end gap-3">
 							
 							  <!-- Name + role (hide on small screens) -->
@@ -212,7 +212,7 @@
                                         <h4 class="mb-3 fw-bold text-dark">Vendors</h4>
                                         <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                                             <table class="table table-hover">
-                                                <thead class="table-light border-light">
+                                                <thead class="table-light border-light sticky-top">
                                                     <tr>
                                                         <th>Select</th>
                                                         <th>Name</th>

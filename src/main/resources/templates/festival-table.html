@@ -147,11 +147,17 @@ A Spring Boot application for managing food truck festivals. The application all
 							</div>
 
 						
-						  <div class="col-12 col-md-2 d-grid">
+						  <div class="col-6 col-md-1 d-grid">
 						    <label class="form-label invisible">Apply</label>
-						    <button type="submit" class="btn btn-primary w-100">Apply</button>
+						    <button type="submit" class="btn btn-secondary w-100">Apply</button>
 						  </div>
-						
+						  <div class="col-6 col-md-1 d-grid">
+						  	<label class="form-label invisible">New</label>
+							  <a th:href="@{/festivals/new}" class="btn btn-primary fw-semibold fs-6">
+			                    New
+			                  </a>
+		                  </div>
+								
 						  <!-- Keep current size; always go back to first page on filter -->
 						  <input type="hidden" name="size" th:value="${pageSize}">
 						  <input type="hidden" name="page" value="0">

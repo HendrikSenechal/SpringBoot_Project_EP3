@@ -39,7 +39,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Override
 	public List<Registration> getTop10Reviews(Long festivalId) {
-		return registrationRepository.findTop10ByIdFestivalIdOrderByRatingDesc(festivalId);
+		List<Registration> all = registrationRepository.findTop10ByIdFestivalIdOrderByRatingDesc(festivalId);
+		return all.subList(0, Math.min(10, all.size()));
 	}
 
 	@Transactional

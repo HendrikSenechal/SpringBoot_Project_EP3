@@ -47,7 +47,7 @@ public class VendorServiceImpl implements VendorService {
 				String like = "%" + search.trim().toLowerCase() + "%";
 				Join<Vendor, Address> addr = root.join("address", JoinType.LEFT);
 				preds.add(cb.or(cb.like(cb.lower(root.get("name")), like), cb.like(cb.lower(root.get("email")), like),
-						cb.like(cb.lower(root.get("phone")), like), cb.like(cb.lower(addr.get("city")), like),
+						cb.like(cb.lower(root.get("phoneNumber")), like), cb.like(cb.lower(addr.get("place")), like),
 						cb.like(cb.lower(addr.get("country")), like), cb.like(cb.lower(addr.get("street")), like)));
 			}
 
