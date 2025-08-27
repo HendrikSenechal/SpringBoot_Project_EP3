@@ -146,10 +146,10 @@ A Spring Boot application for managing food truck festivals. The application all
                   <a th:href="@{/festivals/edit/{id}(id=${festival.id})}" class="btn btn-secondary fw-semibold fs-6">
                     Edit this festival
                   </a>
-                  <a th:href="@{/festivals/edit/{id}(id=${festival.id})}" class="btn btn-primary fw-semibold fs-6">
+                  <a th:href="@{/festivals/edit/{id}(id=${festival.id})}" th:if="${!T(java.time.LocalDateTime).now().isAfter(festival.end)}" class="btn btn-primary fw-semibold fs-6">
 					Reserve tickets
                   </a>
-                  <a href="javascript:history.back()" class="btn btn-primary fw-semibold fs-6">
+                  <a  th:href="@{/festivals}" class="btn btn-primary fw-semibold fs-6">
                     Return to overview
                   </a>
                 </div>
@@ -285,63 +285,63 @@ A Spring Boot application for managing food truck festivals. The application all
               <!-- Reviews Section -->
               <div class="col-4 p-0 ps-4">
                 <div class="card border-0 shadow-md h-100">
-                  <div class="card-body pb-0">
-                    <div class="row align-items-center">
-                      <div class="col-6">
-                        <div class="input-group" style="max-width: 100%;">
-                          <h3 class="text-dark fw-bold">Reviews</h3>
-                        </div>
-                      </div>
-                      <div class="col-6 d-flex justify-content-end align-items-end">
-						  <a th:href="@{/festivals/{id}/reviews(id=${festival.id})}" class="btn btn-primary fw-semibold fs-6">
-							All reviews
-						  </a>
-						</div>
-                    </div>
+                  <div class="card-body pb-0"
+				     th:with="locked=${T(java.time.LocalDateTime).now().isBefore(festival.start)}"
+				     th:classappend="${locked} ? ' is-locked' : ''">
 
-                    <!-- Reviews Table -->
-                    <div class="table-responsive mt-2 table" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                      <table class="table my-0" id="dataTable">
-                        <thead>
-                          <tr>
-                            <th class="text-dark">Name</th>
-                            <th class="text-dark">Reviewer</th>
-                            <th class="text-dark">Comment</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr th:each="registration : ${registrations}">
-                            <td>
-	                            <span
-	                            class="px-3 py-0 rounded-pill"
-	                            th:classappend="${
-	                              registration.rating > 4 ? ' bg-success text-white' :
-	                              (registration.rating >= 2.5 ? ' bg-warning text-dark' : ' bg-danger text-white')
-	                            }"
-	                            th:text="${registration.rating}"
-	                          ></span>
-	                          </td>
-                            <td class="text-dark" th:text="${registration.myUser.firstName}">Comment</td>
-                            <td class="text-dark" th:text="${registration.comment}">Comment</td>
-                          </tr>
-                          <tr th:if="${#lists.isEmpty(registrations)}">
-                            <td colspan="6" class="text-center text-muted">No festivals found</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
+					
+					  <div class="row align-items-center">
+					    <div class="col-6">
+					      <div class="input-group" style="max-width: 100%;">
+					        <h3 class="text-dark fw-bold">Reviews</h3>
+					      </div>
+					    </div>
+					    <div class="col-6 d-flex justify-content-end align-items-end">
+					      <a th:if="${!locked}"
+					         th:href="@{/festivals/{id}/reviews(id=${festival.id})}"
+					         class="btn btn-primary fw-semibold fs-6">
+					        All reviews
+					      </a>
+					    </div>
+					  </div>
+					
+					  <!-- When locked: show info -->
+					  <div th:if="${locked}" class="alert alert-warning mt-3 border-0">
+					    Reviews will be available once the festival starts.
+					  </div>
+					
+					  <!-- Reviews Table -->
+					  <div th:if="${!locked}" class="table-responsive mt-2 table" id="dataTable" role="grid"
+					       aria-describedby="dataTable_info">
+					    <table class="table my-0" id="dataTable">
+					      <thead>
+					        <tr>
+					          <th class="text-dark">Name</th>
+					          <th class="text-dark">Reviewer</th>
+					          <th class="text-dark">Comment</th>
+					        </tr>
+					      </thead>
+					      <tbody>
+					        <tr th:each="registration : ${registrations}">
+					          <td>
+					            <span class="px-3 py-0 rounded-pill"
+					                  th:classappend="${
+					                    registration.rating > 4 ? ' bg-success text-white' :
+					                    (registration.rating >= 2.5 ? ' bg-warning text-dark' : ' bg-danger text-white')
+					                  }"
+					                  th:text="${registration.rating}"></span>
+					          </td>
+					          <td class="text-dark" th:text="${registration.myUser.firstName}">Comment</td>
+					          <td class="text-dark" th:text="${registration.comment}">Comment</td>
+					        </tr>
+					        <tr th:if="${#lists.isEmpty(registrations)}">
+					          <td colspan="6" class="text-center text-muted">No reviews found</td>
+					        </tr>
+					      </tbody>
+					    </table>
+					  </div>
+					</div>
 
-                    <!-- Pagination -->
-
-                        <p
-                          id="dataTable_info"
-                          class="dataTables_info"
-                          role="status"
-                          aria-live="polite"
-                        >
-                          Showing top <span th:text="${registrations.size}"></span> reviews
-                        </p>
-                  </div>
                 </div>
               </div>
               <!-- End Reviews -->

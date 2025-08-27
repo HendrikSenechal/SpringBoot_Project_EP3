@@ -1,7 +1,6 @@
 package domain;
 
 import java.security.Principal;
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +71,6 @@ public class FestivalController {
 		model.addAttribute("festival", festivalService.getFestivalById(id));
 		model.addAttribute("averageRating", registrationService.getAverageRatingForFestival(id));
 		model.addAttribute("reservedTickets", registrationService.getTicketsByFestival(id));
-		model.addAttribute("currentDate", LocalDate.now()); // <-- Add this line
 
 		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 		model.addAttribute("userTickets", registrationService.getTicketsByFestivalAndUser(id, userDetails.getId()));
