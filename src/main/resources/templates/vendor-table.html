@@ -117,104 +117,62 @@ A Spring Boot application for managing food truck festivals. The application all
 				<div class="container-fluid pt-4 mt-5" >
                     <div class="card border-0 shadow-md m-4 p-2">
 					  <div class="card-body">
-					    <div class="row g-3">
-					      
-					      <!-- Layout for md only -->
-					      <div class="d-none d-md-block d-xl-none">
-					        <div class="row g-3">
-					          <!-- Search Row -->
-					          <div class="col-12">
-					            <label class="form-label fw-bold fs-6 text-dark">What are you looking for?</label>
-					            <div class="input-group">
-					              <input class="form-control bg-light border-0 fs-6" type="text" placeholder="Search for category, name, company, etc.">
-					              <span class="input-group-text bg-primary text-white">
-					                <i class="fas fa-search"></i>
-					              </span>
-					            </div>
-					          </div>
-					
-					          <!-- Filters and Button -->
-					          <div class="col-12 col-md-3">
-					            <label class="form-label fw-bold fs-6 text-dark">Category</label>
-					            <select class="form-select fs-6">
-					              <option selected>All</option>
-					              <option value="1">Category A</option>
-					              <option value="2">Category B</option>
-					            </select>
-					          </div>
-					
-					          <div class="col-12 col-md-3">
-					            <label class="form-label fw-bold fs-6 text-dark">Status</label>
-					            <select class="form-select fs-6">
-					              <option selected>All</option>
-					              <option value="1">Active</option>
-					              <option value="2">Inactive</option>
-					            </select>
-					          </div>
-					
-					          <div class="col-12 col-md-3 d-grid">
-					            <label class="form-label invisible">Filter</label>
-					            <button class="btn btn-primary fw-semibold fs-6">Filter</button>
-					          </div>
-					          <div class="col-12 col-md-3 d-grid">
-					            <label class="form-label invisible">Filter</label>
-								<a class="btn btn-secondary w-100" th:href="@{/vendors/new}">New</a>
-					          </div>
-					        </div>
-					      </div>
-					
-					      <!-- Layout for xs, sm, lg, xl, xxl -->
-					      <div class="d-block d-md-none d-xl-block"> 
-							  <div class="row g-3 align-items-end">
-								  <!-- Search input -->
-								  <div class="col-12 col-md-6 col-lg-4">
-								    <label class="form-label fw-bold fs-6 text-dark" style="margin-bottom: 8px">What are you looking for?</label>
-								    <div class="input-group">
-								      <input class="form-control bg-light border-0 fs-6" type="text" placeholder="Search for category, name, company, etc." style="margin-bottom: 2px">
-								      <span class="input-group-text bg-primary text-white">
-								        <i class="fas fa-search"></i>
-								      </span>
-								    </div>
-								  </div>
-								
-								  <!-- Category select -->
-								  <div class="col-12 col-sm-6 col-md-6 col-lg-2">
-								    <label class="form-label fw-bold fs-6 text-dark">Category</label>
-								    <select class="form-select fs-6">
-								      <option selected>All</option>
-								      <option value="1">Category A</option>
-								      <option value="2">Category B</option>
-								    </select>
-								  </div>
-								
-								  <!-- Status select -->
-								  <div class="col-12 col-sm-6 col-md-6 col-lg-2">
-								    <label class="form-label fw-bold fs-6 text-dark">Status</label>
-								    <select class="form-select fs-6">
-								      <option selected>All</option>
-								      <option value="1">Active</option>
-								      <option value="2">Inactive</option>
-								    </select>
-								  </div>
-								
-								  <!-- Filter button -->
-								  <div class="col-lg-2"> 
-									  <label class="form-label d-none d-lg-block invisible">Filter</label>
-									  <button class="btn btn-primary w-100">Filter</button>
-									</div>
-									<div class="col-lg-2">
-									  <label class="form-label d-none d-lg-block invisible">New</label>
-									  <a class="btn btn-secondary w-100" th:href="@{/vendors/new}">New</a>
-									</div>
-								</div>
-							</div>
-					    </div>
-							</div>
-					    </div>
+					    <form class="row g-3" method="get" th:action="@{/vendors}">
+						  <!-- Search -->
+						  <div class="col-12 col-lg-6">
+						    <label class="form-label fw-bold fs-6 text-dark">What are you looking for?</label>
+						    <div class="input-group">
+						      <input class="form-control bg-light border-0 fs-6"
+						             type="text"
+						             name="search"
+						             placeholder="Name, E-mail, Phone, or Location"
+						             th:value="${search}">
+						    </div>
+						  </div>
+						
+						  <!-- Category -->
+						  <div class="col-12 col-sm-4 col-lg-2">
+						    <label class="form-label fw-bold fs-6 text-dark">Category?</label>
+						    <select class="form-select fs-6" name="categoryId">
+						      <option value="" th:selected="${categoryId == null}">All</option>
+						      <option th:each="c : ${categories}"
+						              th:value="${c.id}"
+						              th:text="${c.name}"
+						              th:selected="${categoryId != null and categoryId == c.id}">
+						      </option>
+						    </select>
+						  </div>
+						
+						  <!-- Minimum rating -->
+						  <div class="col-12 col-sm-4 col-lg-2">
+						    <label class="form-label fw-bold fs-6 text-dark">Min. Rating?</label>
+						    <select class="form-select fs-6" name="minRating">
+						      <option value="" th:selected="${minRating == null}">Any</option>
+						      <option value="5" th:selected="${minRating == 5}">≥ 5</option>
+						      <option value="4" th:selected="${minRating == 4}">≥ 4</option>
+						      <option value="3" th:selected="${minRating == 3}">≥ 3</option>
+						      <option value="2" th:selected="${minRating == 2}">≥ 2</option>
+						      <option value="1" th:selected="${minRating == 1}">≥ 1</option>
+						    </select>
+						  </div>
+						
+						  <!-- Apply -->
+						  <div class="col-12 col-sm-4 col-lg-2 d-grid">
+						    <label class="form-label invisible">Apply</label>
+						    <button type="submit" class="btn btn-primary w-100">Filter</button>
+						  </div>
+						
+						  <!-- Keep size; go back to first page on filter -->
+						  <input type="hidden" name="size" th:value="${pageSize}">
+						  <input type="hidden" name="page" value="0">
+						</form>
+
+						</div>
+					</div>
 
 
                     <div class="card border-0 shadow-md mt-4 ms-4 me-4 p-2" style="margin-bottom: 31px;">
-					  <div class="card-body px-0">
+					  <div class="card-body px-0 pb-0">
 					    
 					    <!-- Header Row -->
 					    <div class="row align-items-center px-3">
@@ -228,27 +186,21 @@ A Spring Boot application for managing food truck festivals. The application all
 					      </div>
 					
 					      <!-- Pagination (top right) -->
-					      <div class="col-md-6 text-end d-none d-lg-block">
-					        <nav class="d-flex justify-content-end dataTables_paginate paging_simple_numbers">
-					          <ul class="pagination mb-0">
-					            <li class="page-item disabled">
-					              <a class="page-link" href="#"><span>«</span></a>
-					            </li>
-					            <li class="page-item active">
-					              <a class="page-link" href="#">1</a>
-					            </li>
-					            <li class="page-item d-none d-sm-block">
-					              <a class="page-link" href="#">2</a>
-					            </li>
-					            <li class="page-item d-none d-sm-block">
-					              <a class="page-link" href="#">3</a>
-					            </li>
-					            <li class="page-item">
-					              <a class="page-link" href="#"><span>»</span></a>
-					            </li>
-					          </ul>
-					        </nav>
-					      </div>
+					      <div class="col-md-6 text-end">
+						      <form method="get" th:action="@{/vendors}" class="d-inline-block">
+								  <input type="hidden" name="page" th:value="${currentPage}" />
+								  <input th:if="${search != null}" type="hidden" name="search" th:value="${search}" />
+								  <input th:if="${categoryId != null}" type="hidden" name="categoryId" th:value="${categoryId}" />
+								  <input th:if="${minRating != null}" type="hidden" name="minRating" th:value="${minRating}" />
+								  <label for="pageSizeV" class="me-2 fw-bold text-dark fs-6">Rows per page:</label>
+								  <select id="pageSizeV" name="size" class="form-select form-select-sm d-inline-block fs-6"
+								          style="width:auto" onchange="this.form.submit()">
+								    <option th:value="11" th:selected="${pageSize == 11}">11</option>
+								    <option th:value="20" th:selected="${pageSize == 20}">20</option>
+								    <option th:value="50" th:selected="${pageSize == 50}">50</option>
+								  </select>
+								</form>
+							</div>
 					    </div>
 
 					
@@ -290,37 +242,57 @@ A Spring Boot application for managing food truck festivals. The application all
 					    </div>
 					
 					    <!-- Footer Row: Info and Pagination -->
-					    <div class="row mt-3 px-3">
-					      <!-- Info -->
-					      <div class="col-md-6 align-self-center d-none d-md-block">
-					        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
-					          Showing 1 to 10 of 27
-					        </p>
-					      </div>
-					
-					      <!-- Pagination -->
-					      <div class="col-md">
-					        <nav class="d-flex justify-content-end dataTables_paginate paging_simple_numbers">
-					          <ul class="pagination mb-0">
-					            <li class="page-item disabled">
-					              <a class="page-link" href="#"><span>«</span></a>
-					            </li>
-					            <li class="page-item active">
-					              <a class="page-link" href="#">1</a>
-					            </li>
-					            <li class="page-item d-none d-sm-block">
-					              <a class="page-link" href="#">2</a>
-					            </li>
-					            <li class="page-item d-none d-sm-block">
-					              <a class="page-link" href="#">3</a>
-					            </li>
-					            <li class="page-item">
-					              <a class="page-link" href="#"><span>»</span></a>
-					            </li>
-					          </ul>
-					        </nav>
-					      </div>
-					    </div>
+					    <div class="row mt-3 p-0 px-3 align-items-center">
+						  <!-- Info (left) -->
+						  <div class="col-md-6">
+						    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite" th:if="${totalPages > 0}">
+                                    Showing
+                                    <span th:text="${(totalItems == 0) ? 0 : (currentPage * pageSize + 1)}">1</span>
+                                    to
+                                    <span th:text="${((currentPage + 1) * pageSize) > totalItems ? totalItems : ((currentPage + 1) * pageSize)}">10</span>
+                                    of
+                                    <span th:text="${totalItems}">27</span>
+                                </p>
+						  </div>
+						
+						  <!-- Pagination (right, boxed) -->
+						  <div class="col-md-6 d-flex justify-content-md-end">
+						      <nav aria-label="Vendors pagination">
+						        <ul class="pagination pagination-sm mb-0">
+						          <!-- Previous -->
+						          <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+						            <a class="page-link"
+						               th:href="@{/vendors(page=${currentPage - 1}, size=${pageSize},
+						                                   search=${search}, categoryId=${categoryId}, minRating=${minRating})}">
+						              «
+						            </a>
+						          </li>
+						
+						          <!-- Page numbers (±2 around current) -->
+						          <li class="page-item"
+						              th:each="i : ${#numbers.sequence(
+						                    (currentPage - 2) < 0 ? 0 : (currentPage - 2),
+						                    (currentPage + 2) >= (totalPages - 1) ? (totalPages - 1) : (currentPage + 2))}"
+						              th:classappend="${i} == ${currentPage} ? ' active'">
+						            <a class="page-link"
+						               th:href="@{/vendors(page=${i}, size=${pageSize},
+						                                   search=${search}, categoryId=${categoryId}, minRating=${minRating})}"
+						               th:text="${i + 1}">1</a>
+						          </li>
+						
+						          <!-- Next -->
+						          <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
+						            <a class="page-link"
+						               th:href="@{/vendors(page=${currentPage + 1}, size=${pageSize},
+						                                   search=${search}, categoryId=${categoryId}, minRating=${minRating})}">
+						              »
+						            </a>
+						          </li>
+						        </ul>
+						      </nav>
+						  </div>
+						</div>
+
 					  </div>
 					</div>
                 </div>

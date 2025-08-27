@@ -109,91 +109,54 @@ A Spring Boot application for managing food truck festivals. The application all
 
                 <div class="card border-0 shadow-md my-4 ms-4 p-2" style="margin-right: 348px;">
                     <div class="card-body">
-                        <div class="row g-3">
+                        <form class="row g-3" method="get" th:action="@{/festivals}">
+						  <!-- Search -->
+						  <div class="col-12 col-md-6">
+						    <label class="form-label fw-bold fs-6 text-dark">What are you looking for?</label>
+						    <div class="input-group">
+						      <input class="form-control bg-light border-0 fs-6"
+						             type="text"
+						             name="search"
+						             placeholder="Search by name or location"
+						             th:value="${search}">
+						    </div>
+						  </div>
+						
+						  <div class="col-12 col-md-2">
+							  	<label class="form-label fw-bold fs-6 text-dark">Category?</label>
+								<select class="form-select fs-6" name="categoryId">
+								  <!-- use plain HTML value="" instead of th:value="" -->
+								  <option value="" th:selected="${categoryId == null}">All</option>
+								  <option th:each="c : ${categories}"
+								          th:value="${c.id}"
+								          th:text="${c.name}"
+								          th:selected="${categoryId != null and categoryId == c.id}">
+								  </option>
+								</select>
+							</div>
+							
+							
+						  <div class="col-12 col-md-2">
+						  	<label class="form-label fw-bold fs-6 text-dark">When?</label>
+							<select class="form-select fs-6" name="status">
+							  <!-- use plain HTML values for constants -->
+							  <option value="ALL" th:selected="${status == null or status == 'ALL'}">All</option>
+							  <option value="UPCOMING" th:selected="${status == 'UPCOMING'}">Upcoming</option>
+							  <option value="PAST" th:selected="${status == 'PAST'}">Past</option>
+							</select>
+							</div>
 
-                            <!-- Layout for md only -->
-                            <div class="d-none d-lg-block d-xxl-none">
-                                <div class="row g-3">
-                                    <!-- Search Row -->
-                                    <div class="col-12">
-                                        <label class="form-label fw-bold fs-6 text-dark">What are you looking for?</label>
-                                        <div class="input-group">
-                                            <input class="form-control bg-light border-0 fs-6" type="text" placeholder="Search for category, name, company, etc.">
-                                            <span class="input-group-text bg-primary text-white">
-                                                <i class="fas fa-search"></i>
-                                            </span>
-                                        </div>
-                                    </div>
+						
+						  <div class="col-12 col-md-2 d-grid">
+						    <label class="form-label invisible">Apply</label>
+						    <button type="submit" class="btn btn-primary w-100">Apply</button>
+						  </div>
+						
+						  <!-- Keep current size; always go back to first page on filter -->
+						  <input type="hidden" name="size" th:value="${pageSize}">
+						  <input type="hidden" name="page" value="0">
+						</form>
 
-                                    <!-- Filters and Button -->
-                                    <div class="col-12 col-md-4">
-                                        <label class="form-label fw-bold fs-6 text-dark">Category</label>
-                                        <select class="form-select fs-6">
-                                            <option selected>All</option>
-                                            <option value="1">Category A</option>
-                                            <option value="2">Category B</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-12 col-md-4">
-                                        <label class="form-label fw-bold fs-6 text-dark">Status</label>
-                                        <select class="form-select fs-6">
-                                            <option selected>All</option>
-                                            <option value="1">Active</option>
-                                            <option value="2">Inactive</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-12 col-md-4 d-grid">
-                                        <label class="form-label invisible">Filter</label>
-                                        <button class="btn btn-primary fw-semibold fs-6">Filter</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Layout for xs, sm, lg, xl, xxl -->
-                            <div class="d-block d-lg-none d-xxl-block">
-                                <div class="row g-3 align-items-end">
-                                    <div class="col-12 col-lg-6">
-                                        <label class="form-label fw-bold fs-6 text-dark">What are you looking for?</label>
-                                        <div class="input-group">
-                                            <input class="form-control bg-light border-0 fs-6" type="text" placeholder="Search for category, name, company, etc.">
-                                            <span class="input-group-text bg-primary text-white">
-                                                <i class="fas fa-search"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-lg-2">
-                                        <label class="form-label fw-bold fs-6 text-dark">Category</label>
-                                        <select class="form-select fs-6">
-                                            <option selected>All</option>
-                                            <option value="1">Category A</option>
-                                            <option value="2">Category B</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-12 col-lg-2">
-                                        <label class="form-label fw-bold fs-6 text-dark">Status</label>
-                                        <select class="form-select fs-6">
-                                            <option selected>All</option>
-                                            <option value="1">Active</option>
-                                            <option value="2">Inactive</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-12 col-md-1 d-grid">
-                                        <label class="form-label invisible">Filter</label>
-                                        <button class="btn btn-primary fw-semibold fs-6">Filter</button>
-                                    </div>
-                                    <div class="col-12 col-md-1 d-grid">
-                                        <label class="form-label invisible">Filter</label>
-                                        <a class="btn btn-secondary w-100" th:href="@{/festivals/new}">New</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
                 </div>
 
@@ -283,7 +246,7 @@ A Spring Boot application for managing food truck festivals. The application all
                             <div class="col-md-6">
                                 <!-- Bottom Pagination (mirrors the top one) -->
                                 <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers" th:if="${totalPages > 0}">
-                                    <ul class="pagination mb-0">
+                                    <ul class="pagination pagination-sm  mb-0">
 
                                         <!-- Previous -->
                                         <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">

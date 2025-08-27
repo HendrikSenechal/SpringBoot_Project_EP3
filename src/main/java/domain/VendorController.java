@@ -1,12 +1,19 @@
 package domain;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort; // <-- this one
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import entity.Address;
 import entity.Vendor;
@@ -26,9 +33,30 @@ public class VendorController {
 	private VendorService vendorService;
 
 	@GetMapping("/vendors")
-	public String showVendors(Model model) {
-		model.addAttribute("vendors", vendorService.getAllVendors());
-		return "vendor-table";
+	public String listVendors(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "11") int size,
+			@RequestParam(required = false) String search, @RequestParam(required = false) Long categoryId,
+			@RequestParam(required = false) Integer minRating, Model model, Principal principal) {
+
+		model.addAttribute("username", principal.getName());
+
+		Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+		Page<Vendor> vendorPage = vendorService.getVendors(pageable, search, categoryId, minRating);
+
+		model.addAttribute("vendors", vendorPage.getContent());
+		model.addAttribute("currentPage", page);
+		model.addAttribute("pageSize", size);
+		model.addAttribute("totalPages", vendorPage.getTotalPages());
+		model.addAttribute("totalItems", vendorPage.getTotalElements());
+
+		// keep current filters for the view
+		model.addAttribute("search", search);
+		model.addAttribute("categoryId", categoryId);
+		model.addAttribute("minRating", minRating);
+
+		// for category dropdown
+		model.addAttribute("categories", categoryService.getAllCategories());
+
+		return "vendor-table"; // your template name
 	}
 
 	@GetMapping("/vendors/{id}")
@@ -55,18 +83,17 @@ public class VendorController {
 	}
 
 	@PostMapping("/updateVendor")
-	public String onSubmit(@ModelAttribute Vendor vendor, Model model) {
-		// Ensure Address is attached as a managed entity
+	public String onSubmit(@ModelAttribute Vendor vendor, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "11") int size, Model model) {
 		if (vendor.getAddress() != null && vendor.getAddress().getId() != null) {
 			Address address = addressService.getAddressById(vendor.getAddress().getId());
 			vendor.setAddress(address);
 		}
 
-		// One method for both create & update
 		vendorService.save(vendor);
 
-		model.addAttribute("vendors", vendorService.getAllVendors());
-		return "vendor-table";
+		model.addAttribute("vendor", vendorService.getVendorById(vendor.getId()));
+		return "vendor-details";
 	}
 
 }

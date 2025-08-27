@@ -116,95 +116,22 @@ A Spring Boot application for managing food truck festivals. The application all
                     <div class="card border-0 shadow-md m-4 p-2">
 					  <div class="card-body">
 					    <div class="row g-3">
-					      
-					      <!-- Layout for md only -->
-					      <div class="d-none d-md-block d-xl-none">
-					        <div class="row g-3">
-					          <!-- Search Row -->
-					          <div class="col-12">
-					            <label class="form-label fw-bold fs-6 text-dark">What are you looking for?</label>
-					            <div class="input-group">
-					              <input class="form-control bg-light border-0 fs-6" type="text" placeholder="Search for category, name, company, etc.">
-					              <span class="input-group-text bg-primary text-white">
-					                <i class="fas fa-search"></i>
-					              </span>
-					            </div>
-					          </div>
-					
-					          <!-- Filters and Button -->
-					          <div class="col-12 col-md-3">
-					            <label class="form-label fw-bold fs-6 text-dark">Category</label>
-					            <select class="form-select fs-6">
-					              <option selected>All</option>
-					              <option value="1">Category A</option>
-					              <option value="2">Category B</option>
-					            </select>
-					          </div>
-					
-					          <div class="col-12 col-md-3">
-					            <label class="form-label fw-bold fs-6 text-dark">Status</label>
-					            <select class="form-select fs-6">
-					              <option selected>All</option>
-					              <option value="1">Active</option>
-					              <option value="2">Inactive</option>
-					            </select>
-					          </div>
-					
-					          <div class="col-12 col-md-3 d-grid">
-					            <label class="form-label invisible">Filter</label>
-					            <button class="btn btn-primary fw-semibold fs-6">Filter</button>
-					          </div>
-					          <div class="col-12 col-md-3 d-grid">
-					            <label class="form-label invisible">New</label>
-								<a class="btn btn-secondary w-100" th:href="@{/address/new}">New</a>
-					          </div>
-					        </div>
-					      </div>
-					
-					      <!-- Layout for xs, sm, lg, xl, xxl -->
-					      <div class="d-block d-md-none d-xl-block"> 
-							  <div class="row g-3 align-items-end">
-								  <!-- Search input -->
-								  <div class="col-12 col-md-6 col-lg-4">
+							  <div class="row g-3 mt-0 align-items-end">
+								 <form class="d-flex gap-2" th:action="@{/addresses}" method="get">
+								  <div class="col-12 col-md-6 col-lg-10">
 								    <label class="form-label fw-bold fs-6 text-dark" style="margin-bottom: 8px">What are you looking for?</label>
-								    <div class="input-group">
-								      <input class="form-control bg-light border-0 fs-6" type="text" placeholder="Search for category, name, company, etc." style="margin-bottom: 2px">
-								      <span class="input-group-text bg-primary text-white">
-								        <i class="fas fa-search"></i>
-								      </span>
-								    </div>
+								      <input class="form-control bg-light border-0 fs-6"
+								             type="text"
+								             name="search"
+								             placeholder="Search name, country, place, postcode, street"
+								             th:value="${search}">
+								      <input type="hidden" name="size" th:value="${pageSize}">
 								  </div>
-								
-								  <!-- Category select -->
-								  <div class="col-12 col-sm-6 col-md-6 col-lg-2">
-								    <label class="form-label fw-bold fs-6 text-dark">Category</label>
-								    <select class="form-select fs-6">
-								      <option selected>All</option>
-								      <option value="1">Category A</option>
-								      <option value="2">Category B</option>
-								    </select>
-								  </div>
-								
-								  <!-- Status select -->
-								  <div class="col-12 col-sm-6 col-md-6 col-lg-2">
-								    <label class="form-label fw-bold fs-6 text-dark">Status</label>
-								    <select class="form-select fs-6">
-								      <option selected>All</option>
-								      <option value="1">Active</option>
-								      <option value="2">Inactive</option>
-								    </select>
-								  </div>
-								
-								  <!-- Filter button -->
 								  <div class="col-lg-2"> 
 									  <label class="form-label d-none d-lg-block invisible">Filter</label>
-									  <button class="btn btn-primary w-100">Filter</button>
+									  <button class="btn btn-primary w-100" type="submit">Search</button>
 									</div>
-									<div class="col-lg-2">
-									  <a class="form-label d-none d-lg-block invisible">New</a>
-									  <a class="btn btn-secondary w-100" th:href="@{/address/new}">New</a>
-									</div>
-								</div>
+								</form>
 							</div>
 					    </div>
 					  </div>
@@ -212,7 +139,7 @@ A Spring Boot application for managing food truck festivals. The application all
 
 
                     <div class="card border-0 shadow-md mt-4 ms-4 me-4 p-2" style="margin-bottom: 31px;">
-					  <div class="card-body px-0">
+					  <div class="card-body p-3 pb-0">
 					    
 					    <!-- Header Row -->
 					    <div class="row align-items-center px-3">
@@ -224,58 +151,51 @@ A Spring Boot application for managing food truck festivals. The application all
 					          </div>
 					        </form>
 					      </div>
-					
-					      <!-- Pagination (top right) -->
-					      <div class="col-md-6 text-end d-none d-lg-block">
-					        <nav class="d-flex justify-content-end dataTables_paginate paging_simple_numbers">
-					          <ul class="pagination mb-0">
-					            <li class="page-item disabled">
-					              <a class="page-link" href="#"><span>«</span></a>
-					            </li>
-					            <li class="page-item active">
-					              <a class="page-link" href="#">1</a>
-					            </li>
-					            <li class="page-item d-none d-sm-block">
-					              <a class="page-link" href="#">2</a>
-					            </li>
-					            <li class="page-item d-none d-sm-block">
-					              <a class="page-link" href="#">3</a>
-					            </li>
-					            <li class="page-item">
-					              <a class="page-link" href="#"><span>»</span></a>
-					            </li>
-					          </ul>
-					        </nav>
+					      <div class="col-md-6">
+					      	<nav class="dataTables_paginate paging_simple_numbers" th:if="${totalPages > 0}">
+
+                                
+                                    <ul class="pagination justify-content-end mb-0">
+                                    	<form method="get" th:action="@{/addresses}" class="d-inline-block">
+										    <input type="hidden" name="page" th:value="${currentPage}" />
+										
+										    <label for="pageSize" class="me-2 fw-bold text-dark fs-6">Rows per page:</label>
+										    <select id="pageSize" name="size" class="form-select form-select-sm d-inline-block h-100 fs-6 h-100"
+										            style="width: auto;" onchange="this.form.submit()">
+										        <option th:value="11" th:selected="${pageSize == 11}">11</option>
+										        <option th:value="20" th:selected="${pageSize == 20}">20</option>
+										        <option th:value="50" th:selected="${pageSize == 50}">50</option>
+										    </select>
+										</form>
+                                    </ul>
+                                </nav>
 					      </div>
 					    </div>
 
 					
 					    <!-- Table -->
-					    <div class="table-responsive mt-2 px-3">
-						  <table class="table table-hover my-0" id="dataTable">
-						    <thead>
+					     <div class="table-responsive mt-2 table" id="dataTable" role="grid" aria-describedby="dataTable_info">
+						    <table class="table table-hover my-0">
+						      <thead>
 						      <tr>
-						        <th class="fs-6 text-dark">Name</th>
-						        <th class="d-none d-xl-table-cell text-dark">Country</th>
-						        <th class="d-none d-xl-table-cell text-dark">Place</th>
-						        <th class="d-none d-md-table-cell text-dark">Postcode</th>
-						        <th class="d-none d-lg-table-cell text-dark">Street</th>
-						        <th class="d-none d-md-table-cell text-dark" style="width: 80px;"></th>						        
+						        <th>Name</th>
+						        <th>Country</th>
+						        <th>Place</th>
+						        <th>Postcode</th>
+						        <th>Street</th>
+						        <th>Edit</th>
 						      </tr>
-						    </thead>
-						    <tbody>
-						      <tr th:each="address : ${addresses}"
-						          th:data-href="@{/addresses/{id}(id=${address.id})}"
-						          onclick="window.location=this.getAttribute('data-href')"
-						          style="cursor: pointer;">
-						        <td class="text-secondary" th:text="${address.name}">Venue name</td>
-						        <td class="d-none d-xl-table-cell text-secondary" th:text="${address.country}">Belgium</td>
-						        <td class="d-none d-xl-table-cell text-secondary" th:text="${address.place}">Ghent</td>
-						        <td class="d-none d-md-table-cell text-secondary" th:text="${address.postcode}">9000</td>
-						        <td class="d-none d-lg-table-cell text-secondary" th:text="${address.street} + ' ' + ${address.number} + ' ' + ${address.addition}">Street 1 A</td>
+						      </thead>
+						      <tbody>
+						      <tr th:each="a : ${addresses}">
+						        <td class="text-secondary" th:text="${a.name}">Name</td>
+						        <td class="text-secondary" th:text="${a.country}">Country</td>
+						        <td class="text-secondary" th:text="${a.place}">Place</td>       <!-- use a.city if your field is city -->
+						        <td class="text-secondary" th:text="${a.postcode}">Postcode</td> <!-- use a.postalCode if needed -->
+						        <td class="text-secondary" th:text="${a.street}">Street</td>
 						        <td class="d-none d-md-table-cell text-muted align-middle text-secondary" style="padding-top: 2px; padding-bottom: 2px;">
 						          <div>
-						            <a th:href="@{/addresses/edit/{id}(id=${address.id})}"
+						            <a th:href="@{/addresses/edit/{id}(id=${a.id})}"
 						               class="btn btn-primary fw-semibold fs-6 w-100 h-100 py-1"
 						               onclick="event.stopPropagation();">
 						              Edit
@@ -283,43 +203,58 @@ A Spring Boot application for managing food truck festivals. The application all
 						          </div>
 						        </td>
 						      </tr>
-						    </tbody>
-						  </table>
-						</div>
+						      <tr th:if="${#lists.isEmpty(addresses)}">
+						        <td colspan="5" class="text-center text-muted">No addresses found</td>
+						      </tr>
+						      </tbody>
+						    </table>
+						  </div>
 
-					
-					    <!-- Footer Row: Info and Pagination -->
-					    <div class="row mt-3 px-3">
-					      <!-- Info -->
-					      <div class="col-md-6 align-self-center d-none d-md-block">
-					        <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
-					          Showing 1 to 10 of 27
-					        </p>
-					      </div>
-					
-					      <!-- Pagination -->
-					      <div class="col-md">
-					        <nav class="d-flex justify-content-end dataTables_paginate paging_simple_numbers">
-					          <ul class="pagination mb-0">
-					            <li class="page-item disabled">
-					              <a class="page-link" href="#"><span>«</span></a>
-					            </li>
-					            <li class="page-item active">
-					              <a class="page-link" href="#">1</a>
-					            </li>
-					            <li class="page-item d-none d-sm-block">
-					              <a class="page-link" href="#">2</a>
-					            </li>
-					            <li class="page-item d-none d-sm-block">
-					              <a class="page-link" href="#">3</a>
-					            </li>
-					            <li class="page-item">
-					              <a class="page-link" href="#"><span>»</span></a>
-					            </li>
-					          </ul>
-					        </nav>
-					      </div>
-					    </div>
+
+						  <div class="row mt-3 px-3">
+						    <!-- Info -->
+						    <div class="col-md-6">
+						      <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">
+						        <span th:if="${totalElements > 0}"
+						              th:text="|Showing ${showingFrom} to ${showingTo} of ${totalElements}|">
+						          Showing 1 to 10 of 27
+						        </span>
+						        <span th:if="${totalElements == 0}">Showing 0 to 0 of 0</span>
+						      </p>
+						    </div>
+						
+						    <!-- Pagination right -->
+						    <div class="col-md-6 text-end">
+						      <ul class="pagination justify-content-end mb-0">
+						        <!-- Previous -->
+						        <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+						          <a class="page-link"
+						             th:href="@{/addresses(page=${currentPage - 1}, size=${pageSize}, search=${search})}">
+						            «
+						          </a>
+						        </li>
+						
+						        <!-- Page numbers (±2 around current) -->
+						        <li class="page-item"
+						            th:each="i : ${#numbers.sequence(
+						                (currentPage - 2) < 0 ? 0 : (currentPage - 2),
+						                (currentPage + 2) >= (totalPages - 1) ? (totalPages - 1) : (currentPage + 2))}"
+						            th:classappend="${i} == ${currentPage} ? ' active'">
+						          <a class="page-link"
+						             th:text="${i + 1}"
+						             th:href="@{/addresses(page=${i}, size=${pageSize}, search=${search})}">1</a>
+						        </li>
+						
+						        <!-- Next -->
+						        <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
+						          <a class="page-link"
+						             th:href="@{/addresses(page=${currentPage + 1}, size=${pageSize}, search=${search})}">
+						            »
+						          </a>
+						        </li>
+						      </ul>
+						    </div>
+						  </div>
 					  </div>
 					</div>
                 </div>

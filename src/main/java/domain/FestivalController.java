@@ -52,11 +52,17 @@ public class FestivalController {
 
 	@GetMapping("/festivals")
 	public String listFestivals(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "11") int size,
+			@RequestParam(required = false) String search, // NEW
+			@RequestParam(required = false) Long categoryId, // NEW
+			@RequestParam(defaultValue = "ALL") String status, // NEW
 			Model model, Principal principal) {
+
 		model.addAttribute("username", principal.getName());
 
-		Pageable pageable = PageRequest.of(page, size);
-		Page<Festival> festivalPage = festivalService.getFestivals(pageable);
+		// Sort as you prefer (by start ascending is nice for events)
+		Pageable pageable = PageRequest.of(page, size, Sort.by("start").ascending());
+
+		Page<Festival> festivalPage = festivalService.getFestivals(pageable, search, categoryId, status);
 
 		model.addAttribute("festivals", festivalPage.getContent());
 		model.addAttribute("currentPage", page);
@@ -64,14 +70,15 @@ public class FestivalController {
 		model.addAttribute("totalPages", festivalPage.getTotalPages());
 		model.addAttribute("totalItems", festivalPage.getTotalElements());
 
-		return "festival-table";
-	}
+		// keep current filters so Thymeleaf can re-fill inputs and build links
+		model.addAttribute("search", search);
+		model.addAttribute("categoryId", categoryId);
+		model.addAttribute("status", status);
 
-	@GetMapping("/festivals/{id}")
-	public String showFestivalDetails(@PathVariable("id") Long festivalId,
-			@AuthenticationPrincipal CustomUserDetails user, Model model) {
-		populateFestivalDetailModel(festivalId, user, model);
-		return "festival-details";
+		// for category dropdown
+		model.addAttribute("categories", categoryService.getAllCategories());
+
+		return "festival-table";
 	}
 
 	@PostMapping("/festivals/{festivalId}")
