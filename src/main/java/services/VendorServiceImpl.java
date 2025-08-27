@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,7 +32,9 @@ public class VendorServiceImpl implements VendorService {
 
 	@Override
 	public Page<Vendor> getVendors(Pageable pageable) {
-		return vendorRepository.findAll(pageable);
+		Sort sort = Sort.by(Sort.Order.asc("name").ignoreCase()).and(Sort.by("id").ascending());
+		Pageable p = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+		return vendorRepository.findAll(p);
 	}
 
 	@Override
@@ -39,30 +43,29 @@ public class VendorServiceImpl implements VendorService {
 		Specification<Vendor> spec = (root, query, cb) -> {
 			List<Predicate> preds = new ArrayList<>();
 
-			// SEARCH: name, email, phone, location (city/country/street)
 			if (search != null && !search.isBlank()) {
 				String like = "%" + search.trim().toLowerCase() + "%";
 				Join<Vendor, Address> addr = root.join("address", JoinType.LEFT);
-
 				preds.add(cb.or(cb.like(cb.lower(root.get("name")), like), cb.like(cb.lower(root.get("email")), like),
 						cb.like(cb.lower(root.get("phone")), like), cb.like(cb.lower(addr.get("city")), like),
 						cb.like(cb.lower(addr.get("country")), like), cb.like(cb.lower(addr.get("street")), like)));
 			}
 
-			// FILTER: category
-			if (categoryId != null) {
+			if (categoryId != null)
 				preds.add(cb.equal(root.get("category").get("id"), categoryId));
-			}
-
-			// FILTER: rating (use vendorRating, not rating)
-			if (minRating != null) {
+			if (minRating != null)
 				preds.add(cb.greaterThanOrEqualTo(root.get("vendorRating"), minRating));
-			}
 
-			return cb.and(preds.toArray(new Predicate[0]));
+			return cb.and(preds.toArray(Predicate[]::new));
 		};
 
-		return vendorRepository.findAll(spec, pageable);
+		Sort defaultSort = Sort.by(Sort.Order.asc("name").ignoreCase());
+		Sort sort = pageable.getSort().isUnsorted() ? defaultSort.and(Sort.by("id").ascending())
+				: pageable.getSort().and(Sort.by("id").ascending());
+
+		Pageable p = PageRequest.of(Math.max(pageable.getPageNumber(), 0), Math.max(pageable.getPageSize(), 1), sort);
+
+		return vendorRepository.findAll(spec, p);
 	}
 
 	@Override

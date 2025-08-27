@@ -226,7 +226,16 @@ A Spring Boot application for managing food truck festivals. The application all
 							      <td class="d-none d-xl-table-cell text-secondary" th:text="${vendor.email}">vendor@example.com</td>
 							      <td class="d-none d-xl-table-cell text-secondary" th:text="'+' + ${vendor.phoneNumber}">+32478683011</td>
 							      <td class="d-none d-md-table-cell text-secondary" th:text="${vendor.address?.place}">Location</td>
-							      <td class="d-none d-lg-table-cell text-secondary" th:text="${vendor.vendorRating}">7</td>
+							      <td class="d-none d-lg-table-cell text-secondary">
+								  <span
+								    class="ms-2 px-3 py-0 rounded-pill"
+								    th:if="${vendor.vendorRating > 0}"
+								    th:classappend="${vendor.vendorRating > 4 ? ' bg-success text-white' :
+								                    (vendor.vendorRating >= 2.5 ? ' bg-warning text-dark' : ' bg-danger text-white')}"
+								    th:text="${vendor.vendorRating}">
+								</span>
+							      </td>
+							      
 									<td class="d-none d-md-table-cell text-muted align-middle text-secondary" style="padding-top: 2px; padding-bottom: 2px;">
 									  <div class="">
 									    <a th:href="@{/vendors/edit/{id}(id=${vendor.id})}"

@@ -81,6 +81,13 @@ public class FestivalController {
 		return "festival-table";
 	}
 
+	@GetMapping("/festivals/{festivalId}")
+	public String showFestivalDetail(@PathVariable("festivalId") Long festivalId,
+			@AuthenticationPrincipal CustomUserDetails user, Model model) {
+		populateFestivalDetailModel(festivalId, user, model);
+		return "festival-details";
+	}
+
 	@PostMapping("/festivals/{festivalId}")
 	public String saveFestivalTickets(@PathVariable("festivalId") Long festivalId,
 			@RequestParam("orderedTickets") int tickets, @AuthenticationPrincipal CustomUserDetails user, Model model) {
