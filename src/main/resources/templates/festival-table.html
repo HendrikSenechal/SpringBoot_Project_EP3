@@ -49,7 +49,7 @@ A Spring Boot application for managing food truck festivals. The application all
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center" th:href="@{/addresses}">
+                    <a class="nav-link d-flex align-items-center" th:href="@{/addresses}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
                         <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
                             <i class="fa-solid fa-map-location-dot"></i>
                         </div>
@@ -146,12 +146,15 @@ A Spring Boot application for managing food truck festivals. The application all
 							</select>
 							</div>
 
-						
-						  <div class="col-6 col-md-1 d-grid">
+						  <div class="col-12 col-md-2 d-grid" th:unless="${#authorization.expression('hasRole(''ADMIN'')')}">
 						    <label class="form-label invisible">Apply</label>
 						    <button type="submit" class="btn btn-secondary w-100">Apply</button>
 						  </div>
-						  <div class="col-6 col-md-1 d-grid">
+						  <div class="col-6 col-md-1 d-grid" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+						    <label class="form-label invisible">Apply</label>
+						    <button type="submit" class="btn btn-secondary w-100">Apply</button>
+						  </div>
+						  <div class="col-6 col-md-1 d-grid" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
 						  	<label class="form-label invisible">New</label>
 							  <a th:href="@{/festivals/new}" class="btn btn-primary fw-semibold fs-6">
 			                    New
@@ -207,7 +210,7 @@ A Spring Boot application for managing food truck festivals. The application all
                                     <th class="text-dark">Date</th>
                                     <th class="text-dark">Tickets</th>
                                     <th class="text-dark">Price</th>
-                                    <th class="text-dark" style="width: 80px;">Details</th>
+                                    <th class="text-dark" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" style="width: 80px;"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -220,7 +223,7 @@ A Spring Boot application for managing food truck festivals. The application all
                                     <td class="text-secondary" th:text="${#temporals.format(festival.start, 'yyyy-MM-dd HH:mm')}">2025-09-15 14:00</td>
                                     <td class="text-secondary" th:text="${festival.amount}">100</td>
                                     <td class="text-secondary" th:text="${festival.price}">price</td>
-                                    <td class="d-none d-md-table-cell text-muted align-middle text-secondary" style="padding-top: 2px; padding-bottom: 2px;">
+                                    <td class="d-none d-md-table-cell text-muted align-middle text-secondary" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" style="padding-top: 2px; padding-bottom: 2px;">
                                         <div>
                                             <a th:href="@{/festivals/edit/{id}(id=${festival.id})}"
                                                class="btn btn-primary fw-semibold fs-6 w-100 h-100 py-1"

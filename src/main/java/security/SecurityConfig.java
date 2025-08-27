@@ -30,7 +30,10 @@ public class SecurityConfig {
 				.authorizeHttpRequests(requests -> requests.requestMatchers("/login**").permitAll()
 						.requestMatchers("/css/**", "/js/**", "/webjars/**").permitAll()
 						.requestMatchers("/images/**", "/assets/**").permitAll().requestMatchers("/403**").permitAll()
-						.requestMatchers("/**").hasAnyRole("USER", "ADMIN"))
+						.requestMatchers("/festivals/new/**", "/festivals/edit/**", "/vendors/new/**",
+								"/vendors/edit/**", "/addresses/**", "/addresses/edit/{id}")
+						.hasRole("ADMIN").requestMatchers("/festivals/{id}/reviews").hasRole("USER").anyRequest()
+						.hasAnyRole("USER", "ADMIN"))
 				.formLogin(form -> form.defaultSuccessUrl("/festivals", true).loginPage("/login")
 						.usernameParameter("username").passwordParameter("password"))
 				.exceptionHandling(handling -> handling.accessDeniedPage("/403"));

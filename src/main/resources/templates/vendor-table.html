@@ -157,12 +157,16 @@ A Spring Boot application for managing food truck festivals. The application all
 						  </div>
 						
 						  <!-- Apply -->
-						  <div class="col-6 col-lg-1 d-grid">
+						  <div class="col-12 col-lg-2 d-grid" th:unless="${#authorization.expression('hasRole(''ADMIN'')')}">
 						    <label class="form-label invisible">Apply</label>
 						    <button type="submit" class="btn btn-secondary w-100">Filter</button>
 						  </div>
-						  <div class="col-6 col-md-1 d-grid">
-						  	<label class="form-label invisible">New</label>
+						  <div class="col-6 col-lg-1 d-grid" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+						    <label class="form-label invisible">Apply</label>
+						    <button type="submit" class="btn btn-secondary w-100">Filter</button>
+						  </div>
+						  <div class="col-6 col-md-1 d-grid" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+						  	<label class="form-label invisible" >New</label>
 							  <a th:href="@{/vendors/new}" class="btn btn-primary fw-semibold fs-6">
 			                    New
 			                  </a>
@@ -220,7 +224,7 @@ A Spring Boot application for managing food truck festivals. The application all
 							      <th class="d-none d-xl-table-cell text-dark">Phone number</th>
 							      <th class="d-none d-md-table-cell text-dark">Location</th>
 							      <th class="d-none d-lg-table-cell text-dark">Rating</th>
-							      <th class="d-none d-md-table-cell text-dark" style="width: 80px;"></th>
+							      <th class="d-none d-md-table-cell text-dark" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" style="width: 80px;"></th>
 							    </tr>
 							  </thead>
 							  <tbody>
@@ -242,7 +246,7 @@ A Spring Boot application for managing food truck festivals. The application all
 								</span>
 							      </td>
 							      
-									<td class="d-none d-md-table-cell text-muted align-middle text-secondary" style="padding-top: 2px; padding-bottom: 2px;">
+									<td class="d-none d-md-table-cell text-muted align-middle text-secondary" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" style="padding-top: 2px; padding-bottom: 2px;">
 									  <div class="">
 									    <a th:href="@{/vendors/edit/{id}(id=${vendor.id})}"
 										   class="btn btn-primary fw-semibold fs-6 w-100 h-100 py-1"

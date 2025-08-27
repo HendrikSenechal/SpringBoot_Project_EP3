@@ -180,14 +180,15 @@ A Spring Boot application for managing food truck festivals. The application all
                     id="reserveBtnLite"
                     type="button"
                     class="btn btn-primary fw-semibold fs-6"
+                    th:unless="${#authorization.expression('hasRole(''ADMIN'')')}"
                     th:if="${!T(java.time.LocalDateTime).now().isAfter(festival.end)}">
                     Reserve tickets
                   </button>
-                  <form th:action="@{/festivals/{id}/delete(id=${festival.id})}" method="post" th:if="${userTickets != 0 and !T(java.time.LocalDateTime).now().isAfter(festival.end)}">
+                  <form th:action="@{/festivals/{id}/delete(id=${festival.id})}" th:unless="${#authorization.expression('hasRole(''ADMIN'')')}" method="post" th:if="${userTickets != 0 and !T(java.time.LocalDateTime).now().isAfter(festival.end)}">
 				  <input type="hidden" name="_method" value="delete"/>
 				  <button type="submit" class="btn btn-danger">Remove Registration</button>
 				</form>
-				<a th:href="@{/festivals/edit/{id}(id=${festival.id})}" class="btn btn-secondary fw-semibold fs-6">
+				<a th:href="@{/festivals/edit/{id}(id=${festival.id})}" class="btn btn-secondary fw-semibold fs-6" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
                     Edit this festival
                   </a>
 
@@ -344,6 +345,7 @@ A Spring Boot application for managing food truck festivals. The application all
 					    </div>
 					    <div class="col-6 d-flex justify-content-end align-items-end">
 					      <a th:if="${!locked}"
+					      	 th:unless="${#authorization.expression('hasRole(''ADMIN'')')}"
 					         th:href="@{/festivals/{id}/reviews(id=${festival.id})}"
 					         class="btn btn-primary fw-semibold fs-6">
 					        All reviews
