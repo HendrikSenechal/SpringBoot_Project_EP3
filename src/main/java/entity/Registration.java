@@ -36,7 +36,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = { "id" })
 @ToString(exclude = { "id" })
@@ -54,6 +54,11 @@ public class Registration implements Serializable {
 	 * Rating given by the user for the festival.
 	 */
 	private int rating;
+
+	/**
+	 * Amount of tickets ordered by the user for the festival.
+	 */
+	private int tickets;
 
 	/**
 	 * Optional comment left by the user. Stored as large text.
@@ -99,9 +104,10 @@ public class Registration implements Serializable {
 	 * @param myUser   the registered user
 	 * @param festival the registered festival
 	 */
-	public Registration(int rating, String comment, String detailDescription, LocalDateTime date, MyUser myUser,
-			Festival festival) {
+	public Registration(int rating, int tickets, String comment, String detailDescription, LocalDateTime date,
+			MyUser myUser, Festival festival) {
 		this.rating = rating;
+		this.tickets = tickets;
 		this.comment = comment;
 		this.detailDescription = detailDescription;
 		this.date = date;

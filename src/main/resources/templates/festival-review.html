@@ -273,7 +273,7 @@ A Spring Boot application for managing food truck festivals. The application all
                             <li class="page-item" th:classappend="${currentPage == 0} ? ' disabled'">
                               <a
                                 class="page-link"
-                                th:href="@{/festivals/reviews/{id}(id=${festivalId}, page=${currentPage - 1}, size=${pageSize})}"
+                                th:href="@{'/festivals/{id}/reviews'(id=${festivalId}, page=${currentPage - 1}, size=${pageSize})}"
                                 aria-label="Previous"
                               >
                                 <span aria-hidden="true">«</span>
@@ -291,7 +291,7 @@ A Spring Boot application for managing food truck festivals. The application all
                               <a
                                 class="page-link"
                                 th:text="${i + 1}"
-                                th:href="@{/festivals/reviews/{id}(id=${festivalId}, page=${i}, size=${pageSize})}"
+                                th:href="@{'/festivals/{id}/reviews'(id=${festivalId}, page=${i}, size=${pageSize})}"
                                 >1</a
                               >
                             </li>
@@ -302,7 +302,7 @@ A Spring Boot application for managing food truck festivals. The application all
                             >
                               <a
                                 class="page-link"
-                                th:href="@{/festivals/reviews/{id}(id=${festivalId}, page=${currentPage + 1}, size=${pageSize})}"
+                                th:href="@{'/festivals/{id}/reviews'(id=${festivalId}, page=${currentPage + 1}, size=${pageSize})}"
                                 aria-label="Next"
                               >
                                 <span aria-hidden="true">»</span>
@@ -349,47 +349,85 @@ A Spring Boot application for managing food truck festivals. The application all
                 </div>
               </div>
               <!-- Column 1: Form -->
-				<form action="/submit-review" method="POST" class="col-12 col-lg-4 p-0 ps-4 mt-lg-0">
-				  <div class="card border-0 shadow-md h-100 p-3">
+				<form
+				  th:action="@{'/festivals/{id}/reviews'(id=${festivalId})}"
+				  th:object="${userReview}"
+				  method="post"
+				  class="col-12 col-lg-4 p-0 ps-4 mt-lg-0"
+				  th:with="locked=${userReview == null}">
+				
+				  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+				
+				  <div class="card border-0 shadow-md h-100 p-3 position-relative"
+				       th:classappend="${locked} ? ' is-locked' : ''">
 				    <div class="card-body">
-				      <h4 class="mb-3 text-dark fw-bold">Add / Edit your own Review</h4>
 				
-				      <!-- Rating -->
-				      <div class="mb-3">
-						  <label for="form-rating" class="form-label text-dark fw-bold">Rating</label>
-						  <select class="form-select" id="form-rating" name="rating" aria-label="Select rating" required>
-						    <option value="">Select rating</option>
-						    <option value="1" th:selected="${userReview.rating == 1}">1 - Poor</option>
-						    <option value="2" th:selected="${userReview.rating == 2}">2 - Fair</option>
-						    <option value="3" th:selected="${userReview.rating == 3}">3 - Good</option>
-						    <option value="4" th:selected="${userReview.rating == 4}">4 - Very Good</option>
-						    <option value="5" th:selected="${userReview.rating == 5}">5 - Excellent</option>
-						  </select>
-						</div>
-
-				      <!-- Comment -->
-				      <div class="mb-3">
-				        <label for="form-comment" class="form-label text-dark fw-bold">Comment</label>
-				        <textarea class="form-control" id="form-comment" name="comment" rows="2" th:text="${userReview.comment}" placeholder="Enter short comment" maxlength="255" required></textarea>
-				      </div>
+				      <!-- When NOT locked: render the bound fields -->
+				      <h4 class="text-dark fw-bold m-0" th:if="${!locked}">Add / Edit your own Review</h4>
+				      <fieldset th:if="${!locked}">
+				        <!-- bind everything with th:field only here -->
+				        <div class="mb-3">
+				          <label class="form-label text-dark fw-bold mt-3" for="form-rating">Rating</label>
+				          <select class="form-select" id="form-rating" th:field="*{rating}" required>
+				            <option value="">Select rating</option>
+				            <option value="1">1 - Poor</option>
+				            <option value="2">2 - Fair</option>
+				            <option value="3">3 - Good</option>
+				            <option value="4">4 - Very Good</option>
+				            <option value="5">5 - Excellent</option>
+				          </select>
+				        </div>
 				
-				      <!-- Description -->
-				      <div class="mb-3">
-				        <label for="form-detail" class="form-label text-dark fw-bold">Description</label>
-				        <textarea class="form-control" id="form-detail" name="detail" rows="9" th:text="${userReview.detailDescription}" placeholder="Enter detailed feedback"></textarea>
-				      </div>
+				        <div class="mb-3">
+				          <label class="form-label text-dark fw-bold" for="form-comment">Comment</label>
+				          <textarea class="form-control" id="form-comment" rows="2"
+				                    th:field="*{comment}" maxlength="255" required
+				                    placeholder="Enter short comment"></textarea>
+				        </div>
 				
-				      <!-- Submit -->
-				      <div class="text-end">
-				        <button type="submit" class="btn btn-primary px-4">Save Review</button>
-				      </div>
+				        <div class="mb-3">
+				          <label class="form-label text-dark fw-bold" for="form-detail">Description</label>
+				          <textarea class="form-control" id="form-detail" rows="9"
+				                    th:field="*{detailDescription}"
+				                    placeholder="Enter detailed feedback"></textarea>
+				        </div>
+				
+				        <div class="row">
+				          <div class="col-8">
+				            <p class="text-success mt-1 m-0"
+				               th:if="${editedMessage != null and !#strings.isEmpty(#strings.trim(editedMessage))}"
+				               th:text="${editedMessage}"></p>
+				          </div>
+				          <div class="col-4">
+				            <div class="text-end">
+				              <button type="submit" class="btn btn-primary">Save Review</button>
+				            </div>
+				          </div>
+				        </div>
+				      </fieldset>
+				
+				      <!-- When locked: show info only (NO th:field anywhere) -->
+				      <h4 class="text-dark fw-bold m-0" th:if="${locked}">
+				        Only registered users can submit a review.
+				      </h4>
+				
 				    </div>
 				  </div>
 				</form>
+
             </div>
           </div>
         </div>
       </div>
+      <style>
+	  .is-locked { filter: grayscale(1); opacity: .6; }
+	  .locked-note {
+	    position: absolute; inset: 0;
+	    display: flex; align-items: center; justify-content: center;
+	    text-align: center; font-weight: 600;
+	    pointer-events: none; /* message doesn't intercept clicks */
+	  }
+	</style>
 		<script>
 		  function renderStars(n) {
 		    const count = parseInt(n, 10) || 0;

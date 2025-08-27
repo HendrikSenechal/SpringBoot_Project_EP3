@@ -184,10 +184,8 @@ public class DataSeeder implements CommandLineRunner {
 		Random random = new Random();
 
 		// Add a fixed user and admin for testing
-		myUsers.add(
-				new MyUser("Hendrik", "Senechal", "h.s@gmail.com", "32478683011", Role.ADMIN, encoder.encode("123")));
-		myUsers.add(
-				new MyUser("Ana-Laura", "Castelijn", "a.c@gmail.com", "32476513846", Role.USER, encoder.encode("123")));
+		myUsers.add(new MyUser("Hendrik", "Senechal", "h.s@g.be", "32478683011", Role.ADMIN, encoder.encode("123")));
+		myUsers.add(new MyUser("Ana-Laura", "Castelijn", "a.c@g.be", "32476513846", Role.USER, encoder.encode("123")));
 
 		// Read CSV file with object data inside
 		try (BufferedReader br = Files.newBufferedReader(csvFilePath)) {
@@ -348,8 +346,8 @@ public class DataSeeder implements CommandLineRunner {
 			String comment = comments[random.nextInt(comments.length)];
 			int rating = 3 + random.nextInt(3); // 3 to 5
 			LocalDateTime regDate = LocalDateTime.now().minusDays(random.nextInt(60) + 1);
-
-			registrations.add(new Registration(rating, comment, loremIpsum, regDate, allPairs.get(i).getKey(),
+			int tickets = 1 + random.nextInt(3); // 3 to 5
+			registrations.add(new Registration(rating, tickets, comment, loremIpsum, regDate, allPairs.get(i).getKey(),
 					allPairs.get(i).getValue()));
 		}
 

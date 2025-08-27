@@ -83,22 +83,33 @@ A Spring Boot application for managing food truck festivals. The application all
 				<nav class="navbar navbar-expand bg-white shadow topbar p-2 fixed-top" style="z-index: 1030; margin-left: 224px;">
 				    <div class="container-fluid">
 				        <h3 class="m-0">Dashboard &gt; Address overview &gt; <span th:text="${address.name}">Address name</span></h3>
-                            <ul class="navbar-nav flex-nowrap ms-auto">
-                                <div class="d-none d-sm-block topbar-divider"></div>
-                                <li class="nav-item dropdown no-arrow">
-                                    <div class="nav-item dropdown no-arrow">
-                                        <a class="dropdown-toggle nav-link p-0" aria-expanded="false" data-bs-toggle="dropdown" href="#">
-                                        <span class="d-none d-lg-inline me-2 text-gray-900 large">Valerie Luna</span>
-                                        <img class="border rounded-circle img-profile" src="/assets/img/avatars/avatar1.jpeg" style="width:28%; height: auto;">
-                                        </a>
-                                        <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
-                                            <a class="dropdown-item"  th:href="@{/profile}"><i class="fas fa-user me-2 fa-sm fa-fw text-gray-400"></i>&nbsp;Profile</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2 fa-sm fa-fw text-gray-400"></i>&nbsp;Logout</a>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                            <div class="d-flex align-items-center justify-content-end gap-3">
+							
+							  <!-- Name + role (hide on small screens) -->
+							  <div class="text-end d-none d-lg-block">							  
+							    <div class="fw-semibold fs-6 text-dark lh-1" th:text="${fullName}">username</div>
+							    <th:block th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+									<h2 class="text-muted small lh-1 m-0">ADMIN</h2>
+								</th:block>
+								<th:block th:unless="${#authorization.expression('hasRole(''ADMIN'')')}">
+									<h2 class="text-muted small lh-1 m-0">USER</h2>
+								</th:block>
+								
+							  </div>
+							
+							  <!-- Avatar -->
+							  <img class="rounded-circle" th:src="@{/assets/img/avatars/avatar1.jpeg}" src="/assets/img/avatars/avatar1.jpeg" alt="Profile picture of [[${username}]]" width="47" height="47" loading="lazy" style="object-fit:cover;"/>
+							
+							  <!-- Divider (Bootstrap 5 vertical rule) -->
+							  <div class="vr d-none d-sm-inline mx-1"></div>
+							
+							  <!-- Logout -->
+							  <form th:action="@{/logout}" method="post" class="m-0">
+							    <input class="btn btn-primary" type="submit" value="Logout">
+							    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+							  </form>
+							
+							</div>
                         </div>
                     </nav>
                     

@@ -15,4 +15,10 @@ public interface RegistrationService {
 	Double getAverageRatingForFestival(Long festivalId);
 
 	List<Registration> getTop10Reviews(Long festivalId);
+
+	void saveOrUpdate(Registration incoming);
+
+	int getTicketsByFestival(Long festivalId);
+
+	int getTicketsByFestivalAndUser(Long festivalId, Long userId);
 }

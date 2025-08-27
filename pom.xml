@@ -72,13 +72,6 @@
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
-		
-        <!-- Internal Project Dependency -->
-        <dependency>
-            <groupId>com.springBoot</groupId>
-            <artifactId>Spring_Boot_EWDJ-1</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
 
         <!-- Other Libraries -->
         <dependency>

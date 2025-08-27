@@ -33,14 +33,6 @@ A Spring Boot application for managing food truck festivals. The application all
             <hr class="my-0 sidebar-divider">
             <ul class="navbar-nav text-light fs-5" id="accordionSidebar">
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center" th:href="@{/dashboard}">
-                        <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
-                            <i class="fas fa-tachometer-alt fa-xl"></i>
-                        </div>
-                        <span class="fs-6">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link d-flex active align-items-center" th:href="@{/festivals}">
                         <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
                             <i class="fas fa-calendar-alt fa-xl"></i>
@@ -62,14 +54,6 @@ A Spring Boot application for managing food truck festivals. The application all
                             <i class="fa-solid fa-map-location-dot"></i>
                         </div>
                         <span class="fs-6">Addresses</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center" th:href="@{/profile}">
-                        <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
-                            <i class="fas fa-user fa-xl"></i>
-                        </div>
-                        <span class="fs-6">Profile</span>
                     </a>
                 </li>
             </ul>
@@ -115,7 +99,7 @@ A Spring Boot application for managing food truck festivals. The application all
 
             <div class="container-fluid pt-4 mt-5" style="margin-right: 320px;">
 
-                <div class="position-fixed" style="top: 96px; right: calc(2rem + 16px); width: 300px; height: calc(100vh - 127px); z-index: 1020;">
+                <div class="position-fixed" style="top: 96px; right: calc(2rem + 16px); width: 300px; height: calc(100vh - 139px); z-index: 1020;">
                     <div class="card border-0 shadow-md p-3 h-100">
                         <h5 class="fw-bold mb-3 text-dark">Quick Insights</h5>
                         <p class="text-muted mb-1">Active festivals: 27</p>
@@ -216,7 +200,7 @@ A Spring Boot application for managing food truck festivals. The application all
                     </div>
                 </div>
 
-                <div class="card border-0 shadow-md mt-0 ms-4 p-2" style="margin-right: 348px; margin-bottom: 31px;">
+                <div class="card border-0 shadow-md mt-0 ms-4 p-2" style="margin-right: 348px; margin-bottom: 43px;">
                     <div class="card-body pb-0">
                         <div class="row align-items-center">
                             <!-- Title -->
@@ -238,8 +222,7 @@ A Spring Boot application for managing food truck festivals. The application all
 										    <label for="pageSize" class="me-2 fw-bold text-dark fs-6">Rows per page:</label>
 										    <select id="pageSize" name="size" class="form-select form-select-sm d-inline-block h-100 fs-6 h-100"
 										            style="width: auto;" onchange="this.form.submit()">
-										        <option th:value="5" th:selected="${pageSize == 5}">5</option>
-										        <option th:value="10" th:selected="${pageSize == 10}">10</option>
+										        <option th:value="11" th:selected="${pageSize == 11}">11</option>
 										        <option th:value="20" th:selected="${pageSize == 20}">20</option>
 										        <option th:value="50" th:selected="${pageSize == 50}">50</option>
 										    </select>

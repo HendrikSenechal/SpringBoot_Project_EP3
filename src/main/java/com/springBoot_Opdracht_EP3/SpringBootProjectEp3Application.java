@@ -7,11 +7,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 
+import security.MyUserDetailsService;
 import services.AddressService;
 import services.AddressServiceImpl;
 import services.CategoryService;
@@ -61,6 +63,11 @@ public class SpringBootProjectEp3Application implements WebMvcConfigurer {
 	@Bean
 	RegistrationService registrationService() {
 		return new RegistrationServiceImpl();
+	}
+
+	@Bean
+	UserDetailsService userDetailsService() {
+		return new MyUserDetailsService();
 	}
 
 	@Bean
