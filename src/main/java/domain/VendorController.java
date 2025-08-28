@@ -77,6 +77,7 @@ public class VendorController {
 	public String addVendor(Model model) {
 		Vendor vendor = new Vendor("", "", "", "", "", "", 0);
 		vendor.setAddress(new Address("", "", "", 0, "", 0, ""));
+		model.addAttribute("categories", categoryService.getAllCategories());
 		model.addAttribute("vendor", vendor);
 		model.addAttribute("addresses", addressService.getAllAddresses());
 		return "vendor-edit";
@@ -85,11 +86,6 @@ public class VendorController {
 	@PostMapping("/updateVendor")
 	public String onSubmit(@ModelAttribute Vendor vendor, @RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "11") int size, Model model) {
-		if (vendor.getAddress() != null && vendor.getAddress().getId() != null) {
-			Address address = addressService.getAddressById(vendor.getAddress().getId());
-			vendor.setAddress(address);
-		}
-
 		vendorService.save(vendor);
 
 		model.addAttribute("vendor", vendorService.getVendorById(vendor.getId()));

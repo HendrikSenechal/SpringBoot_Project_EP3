@@ -18,12 +18,15 @@ import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import lombok.extern.slf4j.Slf4j;
+import repository.AddressRepository;
 import repository.VendorRepository;
 
 @Slf4j
 public class VendorServiceImpl implements VendorService {
 	@Autowired
 	private VendorRepository vendorRepository;
+	@Autowired
+	private AddressRepository addressRepository;
 
 	@Override
 	public Iterable<Vendor> getAllVendors() {
@@ -76,11 +79,10 @@ public class VendorServiceImpl implements VendorService {
 
 	@Override
 	public void save(Vendor vendor) {
+		if (vendor.getAddress() != null && vendor.getAddress().getId() != null) {
+			Address address = addressRepository.findById(vendor.getAddress().getId()).orElse(null);
+			vendor.setAddress(address);
+		}
 		vendorRepository.save(vendor);
-	}
-
-	@Override
-	public Iterable<Vendor> getVendorsByIds(List<Long> vendorIds) {
-		return vendorRepository.findByIdIn(vendorIds);
 	}
 }

@@ -209,6 +209,10 @@ A Spring Boot application for managing food truck festivals. The application all
                       <!-- Algemene info -->
                       <div class="col-md-3">
                         <h4 class="mb-4 text-dark fw-bold">Algemene info</h4>
+                        <p class="mb-2">
+                          <strong class="text-dark">Festival code:</strong>
+                          <span th:text="${festival.festivalCode1 + ' - ' + festival.festivalCode2}">0000 - 0000</span>
+                        </p>
                         <p class="mb-2"
 						   th:classappend="${festival.start != null and festival.start.isBefore(T(java.time.LocalDateTime).now())} ? ' text-danger' : ''">
 						  <strong class="text-dark">Startdatum:</strong>
@@ -225,21 +229,17 @@ A Spring Boot application for managing food truck festivals. The application all
                           <strong class="text-dark">Categorie:</strong>
                           <span th:text="${festival.category.name}">Street Food</span>
                         </p>
-                        <p class="mb-2">
-                          <strong class="text-dark">Prijs:</strong> €
-                          <span th:text="${festival.price}">20</span>
-                        </p>
                       </div>
 
                       <div class="col-md-3">
                         <h4 class="invisible mb-4">Algemene info</h4>
                         <p class="mb-2">
-                          <strong class="text-dark">Tickets:</strong>
-                          <span th:text="${festival.amount}">200</span>
+                          <strong class="text-dark">Price:</strong> €
+                          <span th:text="${festival.price}">20</span>
                         </p>
                         <p class="mb-2">
-                          <strong class="text-dark">Reserved tickets:</strong>
-                          <span th:text="${reservedTickets}">100</span>
+                          <strong class="text-dark">Tickets:</strong>
+                          <span th:text="${festival.amount}">200</span>
                         </p>
                         <p class="mb-2">
                           <strong class="text-dark">Available tickets:</strong>

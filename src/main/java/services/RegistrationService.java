@@ -12,6 +12,8 @@ public interface RegistrationService {
 
 	Registration getRegistrationById(Long festivalId, Long UserId);
 
+	void buyTickets(Long userId, Long festivalId, int tickets);
+
 	Double getAverageRatingForFestival(Long festivalId);
 
 	List<Registration> getTop10Reviews(Long festivalId);

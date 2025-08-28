@@ -1,5 +1,6 @@
 package services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +10,23 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
+import entity.Festival;
+import entity.MyUser;
 import entity.Registration;
 import lombok.extern.slf4j.Slf4j;
+import repository.FestivalRepository;
 import repository.RegistrationRepository;
+import repository.UserRepository;
 import security.CustomUserDetails;
 
 @Slf4j
 public class RegistrationServiceImpl implements RegistrationService {
 	@Autowired
 	private RegistrationRepository registrationRepository;
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private FestivalRepository festivalRepository;
 
 	@Override
 	public Page<Registration> getRegistrations(Long festivalId, Pageable pageable) {
@@ -64,4 +73,21 @@ public class RegistrationServiceImpl implements RegistrationService {
 	public void deleteById(Long festivalId, Long userId) {
 		registrationRepository.deleteByFestivalIdAndUserId(festivalId, userId);
 	}
+
+	public void buyTickets(Long userId, Long festivalId, int tickets) {
+		Registration registration = registrationRepository.findByFestivalIdAndMyUserId(festivalId, userId).orElse(null);
+
+		MyUser myUser = userRepository.findById(userId)
+				.orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+		Festival festival = festivalRepository.findById(festivalId)
+				.orElseThrow(() -> new RuntimeException("Festival not found with id: " + festivalId));
+
+		if (registration == null) {
+			registration = new Registration(null, tickets, "", "", LocalDateTime.now(), myUser, festival);
+		}
+
+		registration.setTickets(tickets);
+		registrationRepository.save(registration);
+	}
+
 }

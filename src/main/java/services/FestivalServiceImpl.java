@@ -1,6 +1,9 @@
 package services;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,15 +17,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import entity.Address;
 import entity.Festival;
+import entity.Vendor;
 import jakarta.persistence.criteria.JoinType;
+import repository.AddressRepository;
 import repository.FestivalRepository;
+import repository.VendorRepository;
 
 @Service
 @Transactional
 public class FestivalServiceImpl implements FestivalService {
 	@Autowired
 	private FestivalRepository festivalRepository;
+	@Autowired
+	private AddressRepository addressRepository;
+	@Autowired
+	private VendorRepository vendorRepository;
 
 	@Override
 	public Page<Festival> getFestivals(Pageable pageable) {
@@ -72,7 +83,21 @@ public class FestivalServiceImpl implements FestivalService {
 	}
 
 	@Override
-	public void save(Festival festival) {
+	public void save(Festival festival, List<Long> vendorIds) {
+		if (festival.getAddress() != null && festival.getAddress().getId() != null) {
+			Address fullAddress = addressRepository.findById(festival.getAddress().getId())
+					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Address not found"));
+			festival.setAddress(fullAddress);
+		}
+
+		Set<Vendor> selectedVendors = new HashSet<>();
+		if (vendorIds != null && !vendorIds.isEmpty()) {
+			for (entity.Vendor v : vendorRepository.findByIdIn(vendorIds)) {
+				selectedVendors.add(v);
+			}
+		}
+		festival.setVendors(selectedVendors);
+
 		festivalRepository.save(festival);
 	}
 

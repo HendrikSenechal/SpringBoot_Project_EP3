@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +10,7 @@ import java.util.Set;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +24,15 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,20 +41,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import validation.NoDuplicateVendors;
+import validation.WithinFestivalPeriod;
 
 /**
  * Represents a festival event with details such as name, description, schedule,
  * pricing, and associations to address, category, vendors, and registrations.
- *
- * <p>
- * This entity maps to the "festival" table in the database and manages
- * relationships with {@link Address}, {@link Category}, {@link Vendor}, and
- * {@link Registration}.
  */
 @Entity
 @NamedQueries({ @NamedQuery(name = "Festival.findAll", query = "SELECT f from Festival f"),
 		@NamedQuery(name = "Festival.findById", query = "SELECT f FROM Festival f WHERE f.id = :id"), })
-
 @Table(name = "festival")
 @Getter
 @Setter
@@ -52,90 +59,69 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = { "id", "registrations", "vendors" })
 @ToString(exclude = { "id", "registrations" })
+@WithinFestivalPeriod(startField = "start", endField = "end", message = "Start/eind vallen buiten de festivalperiode (01-06-2025 t/m 31-08-2025) of eind is vóór start.")
 public class Festival implements Serializable, BaseEntity {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Unique identifier for the festival.
-	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	// @Getter(AccessLevel.NONE)
 	private Long id;
 
-	/**
-	 * Name of the festival.
-	 */
+	@NotBlank(message = "Naam is verplicht.")
+	@Pattern(regexp = "^[A-Za-z]{3}.*$", message = "Naam moet beginnen met drie letters.")
 	private String name;
 
-	/**
-	 * Description of the festival.
-	 */
 	private String description;
 
-	/**
-	 * Start date and time of the festival.
-	 */
+	@NotNull(message = "Startdatum/-tijd is verplicht.")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private LocalDateTime start;
 
-	/**
-	 * End date and time of the festival.
-	 */
+	@NotNull(message = "Einddatum/-tijd is verplicht.")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private LocalDateTime end;
 
-	/**
-	 * Price for attending the festival.
-	 */
-	private int price;
+	@Min(value = 2, message = "FestivalCode1 moet strikt positief zijn en minimaal 2.")
+	private int festivalCode1;
 
-	/**
-	 * Total number of tickets or attendees allowed.
-	 */
+	@Min(value = 3, message = "FestivalCode2 moet minimaal 3 zijn.")
+	private int festivalCode2;
+
+	@NotNull(message = "Prijs is verplicht.")
+	@DecimalMin(value = "10.50", inclusive = true, message = "Prijs moet ≥ 10,50 zijn.")
+	@DecimalMax(value = "40.00", inclusive = false, message = "Prijs moet < 40,00 zijn.")
+	@Digits(integer = 4, fraction = 2, message = "Prijs mag maximaal 2 decimalen hebben.")
+	@Column(precision = 8, scale = 2)
+	private BigDecimal price;
+
+	@Min(value = 50, message = "Aantal moet minimaal 50 zijn.")
+	@Max(value = 250, message = "Aantal mag maximaal 250 zijn.")
 	private int amount;
 
-	/**
-	 * Address where the festival takes place.
-	 */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ADDRESS_ID")
 	private Address address;
 
-	/**
-	 * Category of the festival.
-	 */
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "CATEGORY_ID")
 	private Category category;
 
-	/**
-	 * Registrations associated with this festival.
-	 */
 	@OneToMany(mappedBy = "festival", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Registration> registrations = new HashSet<>();
 
-	/**
-	 * Vendors associated with this festival.
-	 */
+	@NoDuplicateVendors
 	@ManyToMany
 	@JoinTable(name = "FESTIVAL_VENDOR", joinColumns = @JoinColumn(name = "FESTIVAL_ID"), inverseJoinColumns = @JoinColumn(name = "VENDOR_ID"))
+	@Valid
 	private Set<Vendor> vendors = new HashSet<>();
 
-	/**
-	 * Constructs a Festival with the specified name, description, price, and
-	 * amount. Does not include relationships or scheduling details. Used for
-	 * database population in populateDB.
-	 *
-	 * @param name        the name of the festival
-	 * @param description the description of the festival
-	 * @param price       the price of the festival
-	 * @param amount      the maximum number of attendees
-	 */
-	public Festival(String name, String description, int price, int amount) {
+	public Festival(String name, String description, int festivalCode1, int festivalCode2, BigDecimal price,
+			int amount) {
 		this.name = name;
 		this.description = description;
+		this.festivalCode1 = festivalCode1;
+		this.festivalCode2 = festivalCode2;
 		this.price = price;
 		this.amount = amount;
 	}

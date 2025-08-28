@@ -62,7 +62,7 @@ public class AddressController {
 	@PostMapping("/updateAddress")
 	public String onSubmit(Address address, Model model) {
 		addressesService.save(address);
-		model.addAttribute("addresses", addressesService.getAllAddresses());
-		return "address-table";
+		model.addAttribute("address", addressesService.getAddressById(address.getId()));
+		return "address-details";
 	}
 }

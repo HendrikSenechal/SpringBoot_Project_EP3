@@ -2,11 +2,13 @@ package com.springBoot_Opdracht_EP3;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,6 +26,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import constants.PeriodConstants;
 import entity.Address;
 import entity.Category;
 import entity.Festival;
@@ -38,6 +41,7 @@ import repository.FestivalRepository;
 import repository.RegistrationRepository;
 import repository.UserRepository;
 import repository.VendorRepository;
+import utils.FestivalCodeGenerator;
 
 /**
  * Populates the database with initial data for addresses, categories, users,
@@ -260,7 +264,7 @@ public class DataSeeder implements CommandLineRunner {
 	private List<Festival> createFestivals(List<Address> addresses, List<Category> categories, List<Vendor> vendors,
 			Path csvFilePath, int minVendors, int maxVendors) throws IOException {
 		List<Festival> festivals = new ArrayList<>();
-		LocalDate startOfYear = LocalDate.of(LocalDate.now().getYear(), 1, 1);
+		LocalDateTime startOfSeason = PeriodConstants.PERIOD_START;
 		Random random = new Random();
 
 		// Read CSV file with object data inside
@@ -271,22 +275,32 @@ public class DataSeeder implements CommandLineRunner {
 				if (fields.length != 4)
 					continue;
 
-				// Constructor: name, descritpion, price, amount
-				Festival festival = new Festival(fields[0], fields[1], Integer.parseInt(fields[2]),
+				int[] codes = FestivalCodeGenerator.generateValidCodes();
+
+				Festival festival = new Festival(fields[0], fields[1], codes[0], codes[1], new BigDecimal(fields[2]),
 						Integer.parseInt(fields[3]));
 
-				// Set start and end date
-				LocalDateTime date = startOfYear.plusDays(random.nextInt(365 - 5)).atTime(random.nextInt(8) + 10, 0);
-				festival.setStart(date);
-				festival.setEnd(date.plusDays(3 + random.nextInt(3)));
+				int durationDays = 3 + random.nextInt(3);
 
-				// Set random Address and Category
+				long totalDays = ChronoUnit.DAYS.between(PeriodConstants.PERIOD_START.toLocalDate(),
+						PeriodConstants.PERIOD_END.toLocalDate().plusDays(1));
+
+				long offsetDays = random.nextInt((int) Math.max(1, totalDays - durationDays + 1));
+
+				LocalDate startDate = PeriodConstants.PERIOD_START.toLocalDate().plusDays(offsetDays);
+
+				LocalDateTime startDateTime = startDate.atTime(10 + random.nextInt(8), 0);
+
+				LocalDateTime endDateTime = startDateTime.plusDays(3 + random.nextInt(3));
+
+				festival.setStart(startDateTime);
+				festival.setEnd(endDateTime);
+
 				if (!addresses.isEmpty())
 					festival.setAddress(addresses.get(random.nextInt(addresses.size())));
 				int categoryIndex = Math.max(categories.size() - 1, 1);
 				festival.setCategory(categories.get(random.nextInt(categoryIndex)));
 
-				// Set random vendors between minVendors and maxVendors
 				int vendorCount = 3 + random.nextInt(maxVendors - minVendors - 1);
 				Set<Integer> usedIndexes = new HashSet<>();
 				while (festival.getVendors().size() < vendorCount) {
