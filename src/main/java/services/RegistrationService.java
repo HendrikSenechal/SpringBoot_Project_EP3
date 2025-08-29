@@ -18,7 +18,7 @@ public interface RegistrationService {
 
 	List<Registration> getTop10Reviews(Long festivalId);
 
-	void saveOrUpdate(Registration incoming);
+	Registration saveOrUpdate(Registration incoming);
 
 	int getTicketsByFestival(Long festivalId);
 
@@ -26,5 +26,7 @@ public interface RegistrationService {
 
 	void updateTickets(Long festivalId, Long userId, Integer tickets);
 
-	void deleteById(Long festivalId, Long userId);
+	Registration deleteById(Long festivalId, Long userId);
+
+	List<Registration> getAllRegistrations();
 }

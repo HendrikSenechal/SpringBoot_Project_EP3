@@ -1,4 +1,4 @@
-package domain;
+package com.springBoot_Opdracht_EP3.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -23,6 +23,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import domain.AddressController;
 import entity.Address;
 import services.AddressService;
 
@@ -36,13 +37,11 @@ class AddressControllerTest {
 	private AddressService addressService;
 
 	private Address addr(long id, String name) {
-		// Adjust to your real constructor/setters if they differ
 		Address a = new Address("street", "house", "city", 12345, "country", 1, name);
 		try {
-			// if there's a setId(Long) use it; otherwise adapt to your entity
 			Address.class.getMethod("setId", Long.class).invoke(a, id);
 		} catch (Exception ignore) {
-			/* ok if there's no setter; tests that need id will use flashAttr */}
+		}
 		return a;
 	}
 
@@ -135,18 +134,14 @@ class AddressControllerTest {
 		Address submitted = addr(123L, "Updated");
 		Address reloaded = addr(123L, "Updated-AfterSave");
 
-		// save has no return; we just ensure it's called with what was submitted
 		given(addressService.getAddressById(123L)).willReturn(reloaded);
 
-		mockMvc.perform(post("/updateAddress")
-				// Using flashAttr binds the method parameter 'Address address'
-				.flashAttr("address", submitted)).andExpect(status().isOk()).andExpect(view().name("address-details"))
-				.andExpect(model().attribute("address", reloaded));
+		mockMvc.perform(post("/updateAddress").flashAttr("address", submitted)).andExpect(status().isOk())
+				.andExpect(view().name("address-details")).andExpect(model().attribute("address", reloaded));
 
 		ArgumentCaptor<Address> captor = ArgumentCaptor.forClass(Address.class);
 		verify(addressService).save(captor.capture());
 		assertThat(captor.getValue()).isNotNull();
-		// If your entity has getters, you can assert more here (e.g., id, fields)
 		verify(addressService).getAddressById(123L);
 	}
 }

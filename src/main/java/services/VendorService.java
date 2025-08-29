@@ -16,4 +16,8 @@ public interface VendorService {
 	Page<Vendor> getVendors(Pageable pageable, String search, Long categoryId, Integer minRating);
 
 	void save(Vendor vendor);
+
+	Vendor createVendor(Vendor vendor);
+
+	Vendor deleteVendor(Long id);
 }

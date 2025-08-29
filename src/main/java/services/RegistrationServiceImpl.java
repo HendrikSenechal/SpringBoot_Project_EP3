@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import entity.Festival;
 import entity.MyUser;
 import entity.Registration;
+import exception.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import repository.FestivalRepository;
 import repository.RegistrationRepository;
@@ -53,8 +54,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 
 	@Transactional
-	public void saveOrUpdate(Registration form) {
-		registrationRepository.save(form);
+	public Registration saveOrUpdate(Registration registration) {
+		registrationRepository.save(registration);
+		return registration;
 	}
 
 	public int getTicketsByFestival(Long festivalId) {
@@ -70,8 +72,13 @@ public class RegistrationServiceImpl implements RegistrationService {
 		registrationRepository.updateTickets(festivalId, userId, tickets);
 	}
 
-	public void deleteById(Long festivalId, Long userId) {
+	public Registration deleteById(Long festivalId, Long userId) {
+		Registration registration = registrationRepository.findByFestivalIdAndMyUserId(festivalId, userId)
+				.orElseThrow(() -> new EntityNotFoundException(
+						"Registration not found, festival id: " + festivalId + ", user id: " + userId));
 		registrationRepository.deleteByFestivalIdAndUserId(festivalId, userId);
+		return registration;
+
 	}
 
 	public void buyTickets(Long userId, Long festivalId, int tickets) {
@@ -90,4 +97,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 		registrationRepository.save(registration);
 	}
 
+	public List<Registration> getAllRegistrations() {
+		return registrationRepository.findAll();
+	}
 }

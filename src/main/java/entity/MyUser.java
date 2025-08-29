@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import enums.Role;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -97,6 +99,7 @@ public class MyUser implements Serializable, BaseEntity {
 	/**
 	 * Registrations made by the user for various festivals.
 	 */
+	@JsonIgnore
 	@OneToMany(mappedBy = "myUser", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Registration> registrations = new HashSet<>();
 

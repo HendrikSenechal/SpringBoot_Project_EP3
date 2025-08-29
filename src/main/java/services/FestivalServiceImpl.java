@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import entity.Address;
 import entity.Festival;
 import entity.Vendor;
+import exception.EntityNotFoundException;
 import jakarta.persistence.criteria.JoinType;
 import repository.AddressRepository;
 import repository.FestivalRepository;
@@ -44,7 +45,6 @@ public class FestivalServiceImpl implements FestivalService {
 		return festivalRepository.findAll(p);
 	}
 
-	// 2) Filtered list — same default sort by start
 	@Override
 	public Page<Festival> getFestivals(Pageable pageable, String search, Long categoryId, String status) {
 		Specification<Festival> spec = Specification.where(null);
@@ -145,6 +145,23 @@ public class FestivalServiceImpl implements FestivalService {
 			}
 		}
 		festival.setVendors(selectedVendors);
+		return festival;
+	}
+
+	// REST
+
+	public Festival createFestival(Festival festival) {
+
+		return festivalRepository.save(festival);
+	}
+
+	public List<Festival> getAllFestivals() {
+		return festivalRepository.findAll();
+	}
+
+	public Festival deleteFestival(Long id) {
+		Festival festival = festivalRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
+		festivalRepository.delete(festival);
 		return festival;
 	}
 

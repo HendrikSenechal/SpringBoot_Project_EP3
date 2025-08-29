@@ -18,4 +18,10 @@ public interface FestivalService {
 	void save(Festival festival, List<Long> vendorIds);
 
 	Festival addVendors(Festival festival, List<Long> vendorIds);
+
+	Festival createFestival(Festival festival);
+
+	List<Festival> getAllFestivals();
+
+	Festival deleteFestival(Long id);
 }

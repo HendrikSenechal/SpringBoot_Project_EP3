@@ -22,10 +22,12 @@ import services.FestivalService;
 import services.FestivalServiceImpl;
 import services.RegistrationService;
 import services.RegistrationServiceImpl;
+import services.MyUserService;
+import services.MyUserServiceImpl;
 import services.VendorService;
 import services.VendorServiceImpl;
 
-@SpringBootApplication(scanBasePackages = { "com.springBoot_Opdracht_EP3", "repository", "domain", "security" })
+@SpringBootApplication(scanBasePackages = { "com.springBoot_Opdracht_EP3", "repository", "domain", "security", "rest" })
 @EnableJpaRepositories("repository")
 @EntityScan("entity")
 public class SpringBootProjectEp3Application implements WebMvcConfigurer {
@@ -63,6 +65,11 @@ public class SpringBootProjectEp3Application implements WebMvcConfigurer {
 	@Bean
 	RegistrationService registrationService() {
 		return new RegistrationServiceImpl();
+	}
+
+	@Bean
+	MyUserService myUserService() {
+		return new MyUserServiceImpl();
 	}
 
 	@Bean

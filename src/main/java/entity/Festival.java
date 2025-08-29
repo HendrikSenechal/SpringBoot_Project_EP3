@@ -9,6 +9,9 @@ import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -76,10 +79,12 @@ public class Festival implements Serializable, BaseEntity {
 
 	@NotNull(message = "Startdatum/-tijd is verplicht.")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime start;
 
 	@NotNull(message = "Einddatum/-tijd is verplicht.")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime end;
 
 	@Min(value = 2, message = "FestivalCode1 moet strikt positief zijn en minimaal 2.")
@@ -109,12 +114,14 @@ public class Festival implements Serializable, BaseEntity {
 
 	// @OneToMany(mappedBy = "festival", cascade = CascadeType.ALL, orphanRemoval =
 	// true)
+	@JsonIgnore
 	@OneToMany(mappedBy = "festival", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, // not REMOVE
 			orphanRemoval = false)
 	private Set<Registration> registrations = new HashSet<>();
 
 	@NoDuplicateVendors
 	@ManyToMany
+	@JsonIgnore
 	@JoinTable(name = "FESTIVAL_VENDOR", joinColumns = @JoinColumn(name = "FESTIVAL_ID"), inverseJoinColumns = @JoinColumn(name = "VENDOR_ID"))
 	@Valid
 	private Set<Vendor> vendors = new HashSet<>();

@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -66,12 +68,14 @@ public class Category implements Serializable, BaseEntity {
 	/**
 	 * List of festivals associated with this category.
 	 */
+	@JsonIgnore
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Festival> festivalsOfCategory = new ArrayList<>();
 
 	/**
 	 * List of vendors associated with this category.
 	 */
+	@JsonIgnore
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Vendor> vendorsOfCategory = new ArrayList<>();
 

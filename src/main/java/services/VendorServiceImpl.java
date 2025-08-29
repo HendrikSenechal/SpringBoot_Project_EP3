@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import entity.Address;
 import entity.Vendor;
+import exception.EntityNotFoundException;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
@@ -84,5 +85,15 @@ public class VendorServiceImpl implements VendorService {
 			vendor.setAddress(address);
 		}
 		vendorRepository.save(vendor);
+	}
+
+	public Vendor createVendor(Vendor vendor) {
+		return vendorRepository.save(vendor);
+	}
+
+	public Vendor deleteVendor(Long id) {
+		Vendor vendor = vendorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
+		vendorRepository.delete(vendor);
+		return vendor;
 	}
 }

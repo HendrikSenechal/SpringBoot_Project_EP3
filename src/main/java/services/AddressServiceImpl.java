@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import entity.Address;
+import exception.EntityNotFoundException;
 import jakarta.persistence.criteria.Predicate;
 import lombok.extern.slf4j.Slf4j;
 import repository.AddressRepository;
@@ -70,7 +71,14 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	@Override
-	public void save(Address address) {
+	public Address save(Address address) {
 		addressRepository.save(address);
+		return address;
+	}
+
+	public Address deleteAddress(Long id) {
+		Address address = addressRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
+		addressRepository.delete(address);
+		return address;
 	}
 }

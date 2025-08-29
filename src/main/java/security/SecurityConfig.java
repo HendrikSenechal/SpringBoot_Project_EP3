@@ -3,9 +3,11 @@ package security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -25,11 +27,23 @@ public class SecurityConfig {
 	}
 
 	@Bean
+	@Order(1)
+	SecurityFilterChain api(HttpSecurity http) throws Exception {
+		http.securityMatcher("/api/**").csrf(csrf -> csrf.disable()) // no CSRF for stateless API
+				.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+		// If you want 401 instead of redirect, keep httpBasic (even if not used):
+		// .httpBasic(Customizer.withDefaults());
+		return http.build();
+	}
+
+	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.csrfTokenRepository(new HttpSessionCsrfTokenRepository()))
 				.authorizeHttpRequests(requests -> requests.requestMatchers("/login**").permitAll()
-						.requestMatchers("/css/**", "/js/**", "/webjars/**").permitAll()
-						.requestMatchers("/images/**", "/assets/**").permitAll().requestMatchers("/403**").permitAll()
+						.requestMatchers("/rest**").permitAll().requestMatchers("/css/**", "/js/**", "/webjars/**")
+						.permitAll().requestMatchers("/images/**", "/assets/**").permitAll().requestMatchers("/403**")
+						.permitAll()
 						.requestMatchers("/festivals/new/**", "/festivals/edit/**", "/vendors/new/**",
 								"/vendors/edit/**", "/addresses/**", "/addresses/edit/{id}")
 						.hasRole("ADMIN").requestMatchers("/festivals/{id}/reviews").hasRole("USER").anyRequest()

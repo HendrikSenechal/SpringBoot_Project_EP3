@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -92,6 +94,7 @@ public class Address implements Serializable, BaseEntity {
 	 * List of festivals associated with this address. Mapped by the "address" field
 	 * in the {@link Festival} entity.
 	 */
+	@JsonIgnore
 	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Festival> festivalsOfAddress = new ArrayList<>();
 
@@ -99,6 +102,7 @@ public class Address implements Serializable, BaseEntity {
 	 * List of vendors associated with this address. Mapped by the "address" field
 	 * in the {@link Vendor} entity.
 	 */
+	@JsonIgnore
 	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Vendor> vendorsOfAddress = new ArrayList<>();
 

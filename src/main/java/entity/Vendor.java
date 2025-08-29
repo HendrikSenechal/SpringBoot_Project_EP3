@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -91,6 +93,7 @@ public class Vendor implements Serializable, BaseEntity {
 	private Address address;
 
 	/** Festivals that this vendor is participating in. */
+	@JsonIgnore
 	@ManyToMany(mappedBy = "vendors")
 	private Set<Festival> festivals = new HashSet<>();
 
