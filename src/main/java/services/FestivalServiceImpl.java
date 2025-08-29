@@ -82,14 +82,62 @@ public class FestivalServiceImpl implements FestivalService {
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Festival not found"));
 	}
 
-	@Override
-	public void save(Festival festival, List<Long> vendorIds) {
-		if (festival.getAddress() != null && festival.getAddress().getId() != null) {
-			Address fullAddress = addressRepository.findById(festival.getAddress().getId())
-					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Address not found"));
-			festival.setAddress(fullAddress);
+	@Transactional
+	public void save(Festival form, List<Long> vendorIds) {
+		LocalDateTime start = form.getStart();
+		LocalDateTime end = form.getEnd();
+
+		if (start == null || end == null || end.isBefore(start)) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid period.");
 		}
 
+		boolean exists;
+		if (form.getId() == null) {
+			exists = festivalRepository.existsOverlapByName(form.getName(), start, end);
+		} else {
+			exists = festivalRepository.existsOverlapByNameExcludingId(form.getName(), start, end, form.getId());
+		}
+
+		if (exists) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT,
+					"Another festival with this name exists in the selected period.");
+		}
+
+		Address fullAddress = addressRepository.findById(form.getAddress().getId())
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Address not found"));
+		form.setAddress(fullAddress);
+
+		if (form.getId() != null) {
+			Festival existing = festivalRepository.findById(form.getId())
+					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Festival not found"));
+
+			existing.setName(form.getName());
+			existing.setDescription(form.getDescription());
+			existing.setStart(form.getStart());
+			existing.setEnd(form.getEnd());
+			existing.setPrice(form.getPrice());
+			existing.setAmount(form.getAmount());
+			existing.setFestivalCode1(form.getFestivalCode1());
+			existing.setFestivalCode2(form.getFestivalCode2());
+			existing.setAddress(form.getAddress());
+			existing.setCategory(form.getCategory());
+
+			existing.getVendors().clear();
+			if (vendorIds != null && !vendorIds.isEmpty()) {
+				existing.getVendors().addAll(vendorRepository.findByIdIn(vendorIds));
+			}
+
+			festivalRepository.save(existing);
+		}
+
+		if (vendorIds != null && !vendorIds.isEmpty()) {
+			form.setVendors(new HashSet<>(vendorRepository.findByIdIn(vendorIds)));
+		}
+		festivalRepository.save(form);
+	}
+
+	@Override
+	public Festival addVendors(Festival festival, List<Long> vendorIds) {
 		Set<Vendor> selectedVendors = new HashSet<>();
 		if (vendorIds != null && !vendorIds.isEmpty()) {
 			for (entity.Vendor v : vendorRepository.findByIdIn(vendorIds)) {
@@ -97,8 +145,7 @@ public class FestivalServiceImpl implements FestivalService {
 			}
 		}
 		festival.setVendors(selectedVendors);
-
-		festivalRepository.save(festival);
+		return festival;
 	}
 
 }

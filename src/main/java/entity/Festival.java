@@ -107,7 +107,10 @@ public class Festival implements Serializable, BaseEntity {
 	@JoinColumn(name = "CATEGORY_ID")
 	private Category category;
 
-	@OneToMany(mappedBy = "festival", cascade = CascadeType.ALL, orphanRemoval = true)
+	// @OneToMany(mappedBy = "festival", cascade = CascadeType.ALL, orphanRemoval =
+	// true)
+	@OneToMany(mappedBy = "festival", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, // not REMOVE
+			orphanRemoval = false)
 	private Set<Registration> registrations = new HashSet<>();
 
 	@NoDuplicateVendors

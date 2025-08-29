@@ -16,4 +16,6 @@ public interface FestivalService {
 	Festival getFestivalById(Long id);
 
 	void save(Festival festival, List<Long> vendorIds);
+
+	Festival addVendors(Festival festival, List<Long> vendorIds);
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import entity.Festival;
 import entity.Registration;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import security.CustomUserDetails;
 import services.AddressService;
@@ -77,6 +78,7 @@ public class FestivalController {
 	public String saveFestivalTickets(@PathVariable("festivalId") Long festivalId,
 			@RequestParam("orderedTickets") int tickets, @AuthenticationPrincipal CustomUserDetails user, Model model) {
 		registrationService.buyTickets(user.getId(), festivalId, tickets);
+		model.addAttribute("boughtTickets", "You bought " + tickets + " tickets");
 		populateFestivalDetailModel(festivalId, user, model);
 		return "festival-details";
 	}
@@ -123,9 +125,21 @@ public class FestivalController {
 	public String saveOrUpdateFestival(@ModelAttribute Festival festival,
 			@RequestParam(value = "vendorIds", required = false) List<Long> vendorIds,
 			@AuthenticationPrincipal CustomUserDetails user, Model model) {
-		festivalService.save(festival, vendorIds);
-		populateFestivalDetailModel(festival.getId(), user, model);
-		return "festival-details";
+		try {
+			festivalService.save(festival, vendorIds);
+			populateFestivalDetailModel(festival.getId(), user, model);
+			return "festival-details";
+		} catch (ConstraintViolationException e) {
+			var first = e.getConstraintViolations().stream().findFirst().orElse(null);
+			model.addAttribute("errorMessage", first.getMessage());
+			populateNewOrEditModel(model, festivalService.addVendors(festival, vendorIds));
+			return "festival-edit";
+		} catch (Exception e) {
+			model.addAttribute("errorMessage", e.getMessage());
+			populateNewOrEditModel(model, festivalService.addVendors(festival, vendorIds));
+			return "festival-edit";
+		}
+
 	}
 
 	// REVIEW
