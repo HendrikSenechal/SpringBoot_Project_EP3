@@ -58,7 +58,7 @@ import validation.WithinFestivalPeriod;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = { "id", "registrations", "vendors" })
 @ToString(exclude = { "id", "registrations" })

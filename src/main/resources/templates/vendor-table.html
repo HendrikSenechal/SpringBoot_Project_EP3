@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-bs-theme="light" lang="en">
+<html lang="en" data-bs-theme="light" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -34,14 +34,6 @@ A Spring Boot application for managing food truck festivals. The application all
 		        <hr class="my-0 sidebar-divider">
 				<ul class="navbar-nav text-light fs-5" id="accordionSidebar">
 				    <li class="nav-item">
-				        <a class="nav-link d-flex align-items-center" th:href="@{/dashboard}">
-				            <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
-				                <i class="fas fa-tachometer-alt fa-xl"></i>
-				            </div>
-				            <span class="fs-6">Dashboard</span>
-				        </a>
-				    </li>
-				    <li class="nav-item">
 				        <a class="nav-link d-flex align-items-center" th:href="@{/festivals}">
 				            <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
 				                <i class="fas fa-calendar-alt fa-xl"></i>
@@ -65,14 +57,6 @@ A Spring Boot application for managing food truck festivals. The application all
 				            <span class="fs-6">Addresses</span>
 				        </a>
 				    </li>
-				    <li class="nav-item">
-				        <a class="nav-link d-flex align-items-center" th:href="@{/profile}">
-				            <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
-				                <i class="fas fa-user fa-xl"></i>
-				            </div>
-				            <span class="fs-6">Profile</span>
-				        </a>
-				    </li>
 				</ul>
 		    </div>
 		</nav>
@@ -82,8 +66,8 @@ A Spring Boot application for managing food truck festivals. The application all
         <div class="d-flex flex-column" id="content-wrapper" style="margin-left: 224px;">
             <div id="content">
 				<nav class="navbar navbar-expand bg-white shadow topbar p-2 fixed-top" style="z-index: 1030; margin-left: 224px;">
-				    <div class="container-fluid">
-				        <h3 class="m-0">Dashboard &gt; Vendor overview</h3>
+				    <div class="container-fluid pe-2">
+				        <h3 class="m-0" th:text="#{vendortabletitle}">Dashboard &gt; Vendor overview</h3>
 				        <div class="d-flex align-items-center justify-content-end gap-3">
 							
 							  <!-- Name + role (hide on small screens) -->
@@ -97,13 +81,15 @@ A Spring Boot application for managing food truck festivals. The application all
 								</th:block>
 								
 							  </div>
-							
-							  <!-- Avatar -->
-							  <img class="rounded-circle" th:src="@{/assets/img/avatars/avatar1.jpeg}" src="/assets/img/avatars/avatar1.jpeg" alt="Profile picture of [[${username}]]" width="47" height="47" loading="lazy" style="object-fit:cover;"/>
-							
+														
 							  <!-- Divider (Bootstrap 5 vertical rule) -->
 							  <div class="vr d-none d-sm-inline mx-1"></div>
-							
+								<a class="btn btn-sm btn-outline-secondary"
+								   th:href="@{?lang=${#locale.language == 'en' ? 'nl' : 'en'}}"
+								   th:text="${#locale.language == 'en' ? 'Nederlands' : 'English'}">
+								  Toggle
+								</a>
+
 							  <!-- Logout -->
 							  <form th:action="@{/logout}" method="post" class="m-0">
 							    <input class="btn btn-primary" type="submit" value="Logout">

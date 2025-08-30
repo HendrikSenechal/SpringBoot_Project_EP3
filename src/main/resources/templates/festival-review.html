@@ -32,103 +32,56 @@ A Spring Boot application for managing food truck festivals. The application all
   </head>
   <body class="h-100" style="background-color: #f8f9fc;" id="page-top">
     <div id="wrapper">
-      <nav
-        class="navbar align-items-start p-0 sidebar sidebar-dark accordion bg-gradient-primary navbar-dark"
-      >
+    <nav class="navbar align-items-start p-0 sidebar sidebar-dark accordion bg-gradient-primary navbar-dark">
         <div class="container-fluid d-flex flex-column p-0">
-          <a
-            class="navbar-brand d-flex justify-content-center align-items-center m-0 sidebar-brand"
-            href="#"
-          >
-            <div class="sidebar-brand-icon">
-              <div
-                class="d-flex align-items-center justify-content-center me-2 ms-2"
-                style="width: 30px;"
-              >
-                <i class="fas fa-pepper-hot"></i>
-              </div>
-            </div>
-            <div class="mx-3 sidebar-brand-text">
-              <span>FOODIE APP</span>
-            </div>
-          </a>
-          <hr class="my-0 sidebar-divider" />
-          <ul class="navbar-nav text-light fs-5" id="accordionSidebar">
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center" th:href="@{/dashboard}">
-                <div
-                  class="d-flex align-items-center justify-content-center me-2 ms-2"
-                  style="width: 30px;"
-                >
-                  <i class="fas fa-tachometer-alt fa-xl"></i>
+            <a class="navbar-brand d-flex justify-content-center align-items-center m-0 sidebar-brand" href="#">
+                <div class="sidebar-brand-icon">
+                    <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+                        <i class="fas fa-pepper-hot"></i>
+                    </div>
                 </div>
-                <span class="fs-6">Dashboard</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link d-flex active align-items-center"
-                th:href="@{/festivals}"
-              >
-                <div
-                  class="d-flex align-items-center justify-content-center me-2 ms-2"
-                  style="width: 30px;"
-                >
-                  <i class="fas fa-calendar-alt fa-xl"></i>
-                </div>
-                <span class="fs-6">Festival</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center" th:href="@{/vendors}">
-                <div
-                  class="d-flex align-items-center justify-content-center me-2 ms-2"
-                  style="width: 30px;"
-                >
-                  <i class="fas fa-truck fa-xl"></i>
-                </div>
-                <span class="fs-6">Vendor</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center" th:href="@{/addresses}">
-                <div
-                  class="d-flex align-items-center justify-content-center me-2 ms-2"
-                  style="width: 30px;"
-                >
-                  <i class="fa-solid fa-map-location-dot"></i>
-                  </i>
-                </div>
-                <span class="fs-6">Addresses</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center" th:href="@{/profile}">
-                <div
-                  class="d-flex align-items-center justify-content-center me-2 ms-2"
-                  style="width: 30px;"
-                >
-                  <i class="fas fa-user fa-xl"></i>
-                </div>
-                <span class="fs-6">Profile</span>
-              </a>
-            </li>
-          </ul>
+                <div class="mx-3 sidebar-brand-text"><span>FOODIE APP</span></div>
+            </a>
+            <hr class="my-0 sidebar-divider">
+            <ul class="navbar-nav text-light fs-5" id="accordionSidebar">
+                <li class="nav-item">
+                    <a class="nav-link d-flex active align-items-center" th:href="@{/festivals}">
+                        <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+                            <i class="fas fa-calendar-alt fa-xl"></i>
+                        </div>
+                        <span class="fs-6">Festival</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center" th:href="@{/vendors}">
+                        <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+                            <i class="fas fa-truck fa-xl"></i>
+                        </div>
+                        <span class="fs-6">Vendor</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center" th:href="@{/addresses}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                        <div class="d-flex align-items-center justify-content-center me-2 ms-2" style="width: 30px;">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </div>
+                        <span class="fs-6">Addresses</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-      </nav>
-      <div class="d-flex flex-column" id="content-wrapper" style="margin-left: 224px;">
+    </nav>
+
+    <div class="d-flex flex-column" id="content-wrapper" style="margin-left: 224px;">
         <div id="content">
-          <nav
-            class="navbar navbar-expand bg-white shadow topbar p-2 fixed-top"
-            style="z-index: 1030; margin-left: 224px;"
-          >
-            <div class="container-fluid">
-              <h3 class="m-0">
+            <nav class="navbar navbar-expand bg-white shadow topbar p-2 fixed-top" style="z-index: 1030; margin-left: 224px;">
+                <div class="container-fluid pe-2">
+<h3 class="m-0">
                 Dashboard &gt; Festival overview &gt;
                 <span th:text="${festival.name}">Festival name</span>
                 > Reviews
-              </h3>
-              <div class="d-flex align-items-center justify-content-end gap-3">
+              </h3>                            <!-- Topbar user block -->
+							<div class="d-flex align-items-center justify-content-end gap-3">
 							
 							  <!-- Name + role (hide on small screens) -->
 							  <div class="text-end d-none d-lg-block">							  
@@ -142,9 +95,6 @@ A Spring Boot application for managing food truck festivals. The application all
 								
 							  </div>
 							
-							  <!-- Avatar -->
-							  <img class="rounded-circle" th:src="@{/assets/img/avatars/avatar1.jpeg}" src="/assets/img/avatars/avatar1.jpeg" alt="Profile picture of [[${username}]]" width="47" height="47" loading="lazy" style="object-fit:cover;"/>
-							
 							  <!-- Divider (Bootstrap 5 vertical rule) -->
 							  <div class="vr d-none d-sm-inline mx-1"></div>
 							
@@ -155,8 +105,9 @@ A Spring Boot application for managing food truck festivals. The application all
 							  </form>
 							
 							</div>
-            </div>
-          </nav>
+
+                </div>
+            </nav>
           <div class="container-fluid pt-4 mt-4" style="margin-right: 320px;">
             <div class="card border-0 shadow-md m-4 p-1">
               <div class="card-body d-flex align-items-center justify-content-between">

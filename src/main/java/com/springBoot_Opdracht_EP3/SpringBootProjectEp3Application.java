@@ -9,9 +9,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import security.MyUserDetailsService;
 import services.AddressService;
@@ -20,16 +22,17 @@ import services.CategoryService;
 import services.CategoryServiceImpl;
 import services.FestivalService;
 import services.FestivalServiceImpl;
-import services.RegistrationService;
-import services.RegistrationServiceImpl;
 import services.MyUserService;
 import services.MyUserServiceImpl;
+import services.RegistrationService;
+import services.RegistrationServiceImpl;
 import services.VendorService;
 import services.VendorServiceImpl;
 
-@SpringBootApplication(scanBasePackages = { "com.springBoot_Opdracht_EP3", "repository", "domain", "security", "rest" })
-@EnableJpaRepositories("repository")
+@SpringBootApplication(scanBasePackages = { "com.springBoot_Opdracht_EP3", "com.springBoot_Opdracht_EP3", "repository",
+		"domain", "security", "rest" })
 @EntityScan("entity")
+@EnableJpaRepositories(basePackages = "repository")
 public class SpringBootProjectEp3Application implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
@@ -79,8 +82,15 @@ public class SpringBootProjectEp3Application implements WebMvcConfigurer {
 
 	@Bean
 	LocaleResolver localeResolver() {
-		CookieLocaleResolver slr = new CookieLocaleResolver();
+		SessionLocaleResolver slr = new SessionLocaleResolver();
 		slr.setDefaultLocale(Locale.ENGLISH);
 		return slr;
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+		localeChangeInterceptor.setParamName("lang");
+		registry.addInterceptor(localeChangeInterceptor);
 	}
 }

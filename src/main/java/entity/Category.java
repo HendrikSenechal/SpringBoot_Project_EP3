@@ -38,7 +38,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = { "id", "festivalsOfCategory", "vendorsOfCategory" })
 @ToString(exclude = { "id", "festivalsOfCategory", "vendorsOfCategory" })
