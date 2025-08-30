@@ -82,6 +82,17 @@ A Spring Boot application for managing food truck festivals. The application all
 							
 							  <!-- Divider (Bootstrap 5 vertical rule) -->
 							  <div class="vr d-none d-sm-inline mx-1"></div>
+							  
+							  <a class="btn btn-outline-secondary"
+								   th:href="@{/?lang=nl}"
+								   th:if="${#locale.language != 'nl'}">
+								  Nederlands
+								</a>
+								<a class="btn btn-outline-secondary"
+								   th:href="@{/?lang=en}"
+								   th:if="${#locale.language != 'en'}">
+								  English
+								</a>
 							
 							  <!-- Logout -->
 							  <form th:action="@{/logout}" method="post" class="m-0">
